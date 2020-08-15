@@ -92,12 +92,11 @@
         android:layout_height="wrap_content"
         android:background="@drawable/card_default"
         android:orientation="vertical"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:padding="10dp">
 
       <ImageView
-          android:src="@mipmap/ic_launcher_foreground"
           android:layout_width="match_parent"
           android:layout_height="80dp"
           android:scaleType="fitCenter"
@@ -110,7 +109,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:textColor="@color/textPrimary"
-          android:textSize="22sp"
+          android:textSize="18sp"
           android:gravity="center"
           android:layout_margin="10dp"/>
 
@@ -155,7 +154,7 @@
               android:contentDescription="@string/logo"/>
 
           <TextView
-              android:text="@string/app_name"
+              android:text="Send"
               android:layout_width="0dp"
               android:layout_height="70dp"
               android:layout_weight="1"
@@ -199,7 +198,7 @@
               android:contentDescription="@string/logo"/>
 
           <TextView
-              android:text="@string/app_name"
+              android:text="Receive"
               android:layout_width="0dp"
               android:layout_height="70dp"
               android:layout_weight="1"
@@ -243,7 +242,7 @@
               android:contentDescription="@string/logo"/>
 
           <TextView
-              android:text="@string/app_name"
+              android:text="Upgrade"
               android:layout_width="0dp"
               android:layout_height="70dp"
               android:layout_weight="1"
@@ -287,7 +286,7 @@
               android:contentDescription="@string/logo"/>
 
           <TextView
-              android:text="@string/app_name"
+              android:text="DogeChain"
               android:layout_width="0dp"
               android:layout_height="70dp"
               android:layout_weight="1"
@@ -331,7 +330,7 @@
               android:contentDescription="@string/logo"/>
 
           <TextView
-              android:text="@string/app_name"
+              android:text="Register"
               android:layout_width="0dp"
               android:layout_height="70dp"
               android:layout_weight="1"
@@ -375,7 +374,7 @@
               android:contentDescription="@string/logo"/>
 
           <TextView
-              android:text="@string/app_name"
+              android:text="Report"
               android:layout_width="0dp"
               android:layout_height="70dp"
               android:layout_weight="1"
@@ -398,6 +397,186 @@
 
       </LinearLayout>
       <!--      /Report-->
+
+      <!--      Network-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+          <ImageView
+              android:src="@mipmap/ic_launcher_foreground"
+              android:layout_width="70dp"
+              android:layout_height="70dp"
+              android:layout_marginEnd="5dp"
+              android:contentDescription="@string/logo"/>
+
+          <TextView
+              android:text="Network"
+              android:layout_width="0dp"
+              android:layout_height="70dp"
+              android:layout_weight="1"
+              android:textColor="@color/White"
+              android:textSize="24sp"
+              android:textStyle="bold"
+              android:layout_marginStart="5dp"
+              android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
+
+      </LinearLayout>
+      <!--      /Network-->
+
+      <!--      SendPin-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+          <ImageView
+              android:src="@mipmap/ic_launcher_foreground"
+              android:layout_width="70dp"
+              android:layout_height="70dp"
+              android:layout_marginEnd="5dp"
+              android:contentDescription="@string/logo"/>
+
+          <TextView
+              android:text="@string/app_name"
+              android:layout_width="0dp"
+              android:layout_height="70dp"
+              android:layout_weight="1"
+              android:textColor="@color/White"
+              android:textSize="24sp"
+              android:textStyle="bold"
+              android:layout_marginStart="5dp"
+              android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
+
+      </LinearLayout>
+      <!--      /SendPin-->
+
+      <!--      Automatic Trade-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+          <ImageView
+              android:src="@mipmap/ic_launcher_foreground"
+              android:layout_width="70dp"
+              android:layout_height="70dp"
+              android:layout_marginEnd="5dp"
+              android:contentDescription="@string/logo"/>
+
+          <TextView
+              android:text="@string/app_name"
+              android:layout_width="0dp"
+              android:layout_height="70dp"
+              android:layout_weight="1"
+              android:textColor="@color/White"
+              android:textSize="24sp"
+              android:textStyle="bold"
+              android:layout_marginStart="5dp"
+              android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
+
+      </LinearLayout>
+      <!--      /Automatic Trade-->
+
+      <!--      Manual Trade-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+          <ImageView
+              android:src="@mipmap/ic_launcher_foreground"
+              android:layout_width="70dp"
+              android:layout_height="70dp"
+              android:layout_marginEnd="5dp"
+              android:contentDescription="@string/logo"/>
+
+          <TextView
+              android:text="@string/app_name"
+              android:layout_width="0dp"
+              android:layout_height="70dp"
+              android:layout_weight="1"
+              android:textColor="@color/White"
+              android:textSize="24sp"
+              android:textStyle="bold"
+              android:layout_marginStart="5dp"
+              android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
+
+      </LinearLayout>
+      <!--      /Manual Trade-->
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="50dp"/>
 
     </LinearLayout>
 
