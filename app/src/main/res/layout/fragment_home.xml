@@ -6,38 +6,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragment.HomeFragment"
-    android:orientation="vertical"
-    android:background="@color/background">
+    android:orientation="vertical">
 
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/colorPrimaryDark"
+      android:background="@color/Link"
       android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="5dp"
+        android:padding="10dp"
         android:gravity="center">
 
       <ImageView
-          android:src="@mipmap/ic_launcher_foreground"
-          android:layout_width="50dp"
-          android:layout_height="50dp"
-          android:scaleType="fitCenter"
-          app:srcCompat="@mipmap/ic_launcher_foreground"
-          android:contentDescription="@string/logo"/>
-
-      <TextView
-          android:text="@string/app_name"
+          android:src="@drawable/logo_ii_landscape_typo"
           android:layout_width="0dp"
           android:layout_height="50dp"
           android:layout_weight="1"
-          android:gravity="center"
-          android:textColor="@color/White"
-          android:textSize="22sp"/>
+          android:scaleType="fitCenter"
+          app:srcCompat="@drawable/logo_ii_landscape_typo"
+          android:contentDescription="@string/logo"/>
+
+      <Space
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"/>
 
       <ImageButton
           android:src="@drawable/ic_baseline_fullscreen"
@@ -45,43 +41,11 @@
           android:layout_height="40dp"
           android:id="@+id/imageButtonScanner"
           android:background="@color/Link"
-          android:tint="@color/White"
+          android:tint="@color/colorPrimary"
           android:scaleType="fitCenter"
           android:contentDescription="@string/icon"/>
 
     </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"/>
-
-    <TextView
-        android:text="@string/dogearn_wallet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/textPrimary"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="5dp"/>
-
-    <TextView
-        android:id="@+id/textViewWallet"
-        android:text="@string/wallet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/textPrimary"
-        android:textSize="14sp"
-        android:background="@drawable/edit_text_mode_2"
-        android:gravity="center"
-        app:drawableRightCompat="@drawable/ic_baseline"
-        app:drawableTint="@color/White"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"/>
 
     <Space
         android:layout_width="match_parent"
@@ -90,17 +54,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/card_default"
+        android:background="@drawable/card_default_2"
         android:orientation="vertical"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:padding="10dp">
+        android:padding="25dp"
+        android:elevation="20dp">
 
       <ImageView
           android:layout_width="match_parent"
-          android:layout_height="80dp"
+          android:layout_height="50dp"
           android:scaleType="fitCenter"
-          app:srcCompat="@mipmap/ic_launcher_foreground"
+          app:srcCompat="@drawable/logo_doge_pop"
           android:contentDescription="@string/logo"/>
 
       <TextView
@@ -108,10 +73,54 @@
           android:text="@string/example_doge"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:textColor="@color/textPrimary"
+          android:textColor="@color/textSecondary"
           android:textSize="18sp"
           android:gravity="center"
           android:layout_margin="10dp"/>
+
+      <ProgressBar
+          style="?android:attr/progressBarStyleHorizontal"
+          android:layout_width="match_parent"
+          android:layout_height="25dp"
+          android:id="@+id/progressBar"
+          android:progressDrawable="@drawable/progress_bar"
+          android:max="100"
+          android:progress="50"
+          android:indeterminate="false"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="20dp"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center">
+
+        <TextView
+            android:id="@+id/textViewTotalPin"
+            android:text="@string/pin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/textSecondary"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/textViewGrade"
+            android:text="@string/grade"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/textSecondary"
+            android:textAlignment="center"/>
+
+      </LinearLayout>
 
     </LinearLayout>
 
@@ -126,453 +135,235 @@
       android:layout_height="10dp"/>
 
   <ScrollView
+      android:background="@drawable/card_default_3"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginEnd="20dp"
+      android:padding="10dp"
+      android:elevation="25dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-      <!--      send-->
       <LinearLayout
+          android:id="@+id/linearLayoutSendDoge"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="vertical">
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/send"/>
+
+        <TextView
+            android:text="@string/send_doge"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-          <ImageView
-              android:src="@mipmap/ic_launcher_foreground"
-              android:layout_width="70dp"
-              android:layout_height="70dp"
-              android:layout_marginEnd="5dp"
-              android:contentDescription="@string/logo"/>
-
-          <TextView
-              android:text="Send"
-              android:layout_width="0dp"
-              android:layout_height="70dp"
-              android:layout_weight="1"
-              android:textColor="@color/White"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:layout_marginStart="5dp"
-              android:gravity="center_vertical"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorAccent"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
 
       </LinearLayout>
-      <!--      /send-->
 
-      <!--      receive-->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
       <LinearLayout
+          android:id="@+id/linearLayoutReceivedDoge"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="vertical">
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/received"/>
+
+        <TextView
+            android:text="@string/received_doge"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-          <ImageView
-              android:src="@mipmap/ic_launcher_foreground"
-              android:layout_width="70dp"
-              android:layout_height="70dp"
-              android:layout_marginEnd="5dp"
-              android:contentDescription="@string/logo"/>
-
-          <TextView
-              android:text="Receive"
-              android:layout_width="0dp"
-              android:layout_height="70dp"
-              android:layout_weight="1"
-              android:textColor="@color/White"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:layout_marginStart="5dp"
-              android:gravity="center_vertical"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorAccent"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
 
       </LinearLayout>
-      <!--      /receive-->
 
-      <!--      upgrade-->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
       <LinearLayout
+          android:id="@+id/linearLayoutUpgradeAccount"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="vertical">
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/upgrade"/>
+
+        <TextView
+            android:text="@string/upgrade_account"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-          <ImageView
-              android:src="@mipmap/ic_launcher_foreground"
-              android:layout_width="70dp"
-              android:layout_height="70dp"
-              android:layout_marginEnd="5dp"
-              android:contentDescription="@string/logo"/>
-
-          <TextView
-              android:text="Upgrade"
-              android:layout_width="0dp"
-              android:layout_height="70dp"
-              android:layout_weight="1"
-              android:textColor="@color/White"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:layout_marginStart="5dp"
-              android:gravity="center_vertical"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorAccent"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
 
       </LinearLayout>
-      <!--      /upgrade-->
 
-      <!--      dogeChain-->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
       <LinearLayout
+          android:id="@+id/linearLayoutRegisterAccount"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="vertical">
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/register"/>
+
+        <TextView
+            android:text="@string/register_account"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-          <ImageView
-              android:src="@mipmap/ic_launcher_foreground"
-              android:layout_width="70dp"
-              android:layout_height="70dp"
-              android:layout_marginEnd="5dp"
-              android:contentDescription="@string/logo"/>
-
-          <TextView
-              android:text="DogeChain"
-              android:layout_width="0dp"
-              android:layout_height="70dp"
-              android:layout_weight="1"
-              android:textColor="@color/White"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:layout_marginStart="5dp"
-              android:gravity="center_vertical"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorAccent"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
 
       </LinearLayout>
-      <!--      /dogeChain-->
 
-      <!--      Register-->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
       <LinearLayout
+          android:id="@+id/linearLayoutReport"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="vertical">
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/report"/>
+
+        <TextView
+            android:text="@string/report"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-          <ImageView
-              android:src="@mipmap/ic_launcher_foreground"
-              android:layout_width="70dp"
-              android:layout_height="70dp"
-              android:layout_marginEnd="5dp"
-              android:contentDescription="@string/logo"/>
-
-          <TextView
-              android:text="Register"
-              android:layout_width="0dp"
-              android:layout_height="70dp"
-              android:layout_weight="1"
-              android:textColor="@color/White"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:layout_marginStart="5dp"
-              android:gravity="center_vertical"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorAccent"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
 
       </LinearLayout>
-      <!--      /Register-->
 
-      <!--      Report-->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
       <LinearLayout
+          android:id="@+id/linearLayoutNetwork"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="vertical">
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/network"/>
+
+        <TextView
+            android:text="@string/network"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-          <ImageView
-              android:src="@mipmap/ic_launcher_foreground"
-              android:layout_width="70dp"
-              android:layout_height="70dp"
-              android:layout_marginEnd="5dp"
-              android:contentDescription="@string/logo"/>
-
-          <TextView
-              android:text="Report"
-              android:layout_width="0dp"
-              android:layout_height="70dp"
-              android:layout_weight="1"
-              android:textColor="@color/White"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:layout_marginStart="5dp"
-              android:gravity="center_vertical"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorAccent"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
 
       </LinearLayout>
-      <!--      /Report-->
 
-      <!--      Network-->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
       <LinearLayout
+          android:id="@+id/linearLayoutSendPin"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="vertical">
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/send_pin"/>
+
+        <TextView
+            android:text="@string/register_account"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-          <ImageView
-              android:src="@mipmap/ic_launcher_foreground"
-              android:layout_width="70dp"
-              android:layout_height="70dp"
-              android:layout_marginEnd="5dp"
-              android:contentDescription="@string/logo"/>
-
-          <TextView
-              android:text="Network"
-              android:layout_width="0dp"
-              android:layout_height="70dp"
-              android:layout_weight="1"
-              android:textColor="@color/White"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:layout_marginStart="5dp"
-              android:gravity="center_vertical"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorAccent"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
 
       </LinearLayout>
-      <!--      /Network-->
 
-      <!--      SendPin-->
-      <LinearLayout
+      <View
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-          <ImageView
-              android:src="@mipmap/ic_launcher_foreground"
-              android:layout_width="70dp"
-              android:layout_height="70dp"
-              android:layout_marginEnd="5dp"
-              android:contentDescription="@string/logo"/>
-
-          <TextView
-              android:text="@string/app_name"
-              android:layout_width="0dp"
-              android:layout_height="70dp"
-              android:layout_weight="1"
-              android:textColor="@color/White"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:layout_marginStart="5dp"
-              android:gravity="center_vertical"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorAccent"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
-
-      </LinearLayout>
-      <!--      /SendPin-->
-
-      <!--      Automatic Trade-->
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-          <ImageView
-              android:src="@mipmap/ic_launcher_foreground"
-              android:layout_width="70dp"
-              android:layout_height="70dp"
-              android:layout_marginEnd="5dp"
-              android:contentDescription="@string/logo"/>
-
-          <TextView
-              android:text="@string/app_name"
-              android:layout_width="0dp"
-              android:layout_height="70dp"
-              android:layout_weight="1"
-              android:textColor="@color/White"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:layout_marginStart="5dp"
-              android:gravity="center_vertical"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorAccent"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
-
-      </LinearLayout>
-      <!--      /Automatic Trade-->
-
-      <!--      Manual Trade-->
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-          <ImageView
-              android:src="@mipmap/ic_launcher_foreground"
-              android:layout_width="70dp"
-              android:layout_height="70dp"
-              android:layout_marginEnd="5dp"
-              android:contentDescription="@string/logo"/>
-
-          <TextView
-              android:text="@string/app_name"
-              android:layout_width="0dp"
-              android:layout_height="70dp"
-              android:layout_weight="1"
-              android:textColor="@color/White"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:layout_marginStart="5dp"
-              android:gravity="center_vertical"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorAccent"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
-
-      </LinearLayout>
-      <!--      /Manual Trade-->
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
 
       <Space
           android:layout_width="match_parent"

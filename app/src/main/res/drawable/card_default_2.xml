@@ -2,20 +2,44 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:state_enabled="false">
     <shape android:padding="10dp" android:shape="rectangle">
-      <solid android:color="@color/colorPrimaryDark" />
-      <corners android:radius="20dp"/>
+      <corners
+          android:topLeftRadius="20dp"
+          android:bottomRightRadius="20dp"
+          android:bottomLeftRadius="40dp"
+          android:topRightRadius="40dp"/>
+      <gradient
+          android:angle="270"
+          android:endColor="@color/colorPrimaryDark"
+          android:startColor="@color/colorPrimaryLight"
+          android:type="linear"/>
     </shape>
   </item>
   <item android:state_pressed="true">
     <shape android:shape="rectangle" android:padding="10dp">
-      <solid android:color="@color/colorPrimaryDark"/>
-      <corners android:radius="20dp"/>
+      <corners
+          android:topLeftRadius="20dp"
+          android:bottomRightRadius="20dp"
+          android:bottomLeftRadius="40dp"
+          android:topRightRadius="40dp"/>
+      <gradient
+          android:angle="270"
+          android:endColor="@color/colorPrimaryDark"
+          android:startColor="@color/colorPrimaryLight"
+          android:type="linear"/>
     </shape>
   </item>
   <item>
     <shape android:shape="rectangle" android:padding="10dp">
-      <solid android:color="@color/colorPrimary"/>
-      <corners android:radius="20dp"/>
+      <corners
+          android:topLeftRadius="10dp"
+          android:bottomRightRadius="10dp"
+          android:bottomLeftRadius="40dp"
+          android:topRightRadius="40dp"/>
+      <gradient
+          android:angle="270"
+          android:endColor="@color/colorPrimaryDark"
+          android:startColor="@color/colorPrimaryLight"
+          android:type="linear"/>
     </shape>
   </item>
 </selector>
