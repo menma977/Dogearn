@@ -2,14 +2,12 @@
   <string name="app_name">dogearn</string>
   <string name="logo">Logo</string>
   <string name="login">Login</string>
-  <string name="enter_username">Enter Username</string>
+  <string name="enter_username">Enter Whatsapp or e-mail</string>
   <string name="enter_password">Enter Password</string>
   <string name="version">Build Version</string>
   <string name="dogearn_wallet">Dogearn Wallet</string>
   <string name="wallet">Wallet</string>
   <string name="example_doge">0.00000000 DOGE</string>
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="icon">Icon</string>
   <string name="login_account">Login Account</string>
   <string name="dont_have_account">Dont have account ?</string>

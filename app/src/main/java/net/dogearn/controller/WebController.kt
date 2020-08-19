@@ -14,6 +14,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 class WebController {
+  @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
   class Post(private var targetUrl: String, private var token: String, private var body: HashMap<String, String>) : AsyncTask<Void, Void, JSONObject>() {
     override fun doInBackground(vararg params: Void?): JSONObject {
       return try {
@@ -21,7 +22,7 @@ class WebController {
         val mediaType: MediaType = "application/x-www-form-urlencoded".toMediaType()
         val body = MapToJson().map(body).toRequestBody(mediaType)
         val request = Request.Builder()
-        request.url(Url.web() + targetUrl)
+        request.url(Url.web() + targetUrl.replace(".", "/"))
         request.post(body)
         if (token.isNotEmpty()) {
           request.addHeader("Authorization", "Bearer $token")
@@ -36,7 +37,11 @@ class WebController {
             JSONObject().put("code", 200).put("data", convertJSON)
           }
           else -> {
-            JSONObject().put("code", 500).put("data", convertJSON)
+            if (convertJSON.toString().contains("errors")) {
+              JSONObject().put("code", 500).put("data", convertJSON.getJSONObject("errors").getJSONArray(convertJSON.getJSONObject("errors").names()[0].toString())[0])
+            } else {
+              JSONObject().put("code", 500).put("data", convertJSON)
+            }
           }
         }
       } catch (e: Exception) {
@@ -47,19 +52,19 @@ class WebController {
 
   class Get(private var targetUrl: String, private var token: String) : AsyncTask<Void, Void, JSONObject>() {
     override fun doInBackground(vararg p0: Void?): JSONObject {
-      val client = OkHttpClient().newBuilder().build()
-      val request = Request.Builder()
-      request.url(Url.web() + targetUrl)
-      request.method("GET", null)
-      if (token.isNotEmpty()) {
-        request.addHeader("Authorization", "Bearer $token")
-      }
-      request.addHeader("X-Requested-With", "XMLHttpRequest")
-      val response = client.newCall(request.build()).execute()
-      val input = BufferedReader(InputStreamReader(response.body!!.byteStream()))
-      val inputData: String = input.readLine()
-      val convertJSON = JSONObject(inputData)
       return try {
+        val client = OkHttpClient().newBuilder().build()
+        val request = Request.Builder()
+        request.url(Url.web() + targetUrl.replace(".", "/"))
+        request.method("GET", null)
+        if (token.isNotEmpty()) {
+          request.addHeader("Authorization", "Bearer $token")
+        }
+        request.addHeader("X-Requested-With", "XMLHttpRequest")
+        val response = client.newCall(request.build()).execute()
+        val input = BufferedReader(InputStreamReader(response.body!!.byteStream()))
+        val inputData: String = input.readLine()
+        val convertJSON = JSONObject(inputData)
         if (response.isSuccessful) {
           JSONObject().put("code", 200).put("data", convertJSON)
         } else {
