@@ -37,10 +37,16 @@ class WebController {
             JSONObject().put("code", 200).put("data", convertJSON)
           }
           else -> {
-            if (convertJSON.toString().contains("errors")) {
-              JSONObject().put("code", 500).put("data", convertJSON.getJSONObject("errors").getJSONArray(convertJSON.getJSONObject("errors").names()[0].toString())[0])
-            } else {
-              JSONObject().put("code", 500).put("data", convertJSON)
+            when {
+              convertJSON.toString().contains("errors") -> {
+                JSONObject().put("code", 500).put("data", convertJSON.getJSONObject("errors").getJSONArray(convertJSON.getJSONObject("errors").names()[0].toString())[0])
+              }
+              convertJSON.toString().contains("message") -> {
+                JSONObject().put("code", 500).put("data", convertJSON.getString("message"))
+              }
+              else -> {
+                JSONObject().put("code", 500).put("data", convertJSON)
+              }
             }
           }
         }
@@ -51,6 +57,7 @@ class WebController {
   }
 
   class Get(private var targetUrl: String, private var token: String) : AsyncTask<Void, Void, JSONObject>() {
+    @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     override fun doInBackground(vararg p0: Void?): JSONObject {
       return try {
         val client = OkHttpClient().newBuilder().build()
@@ -68,7 +75,17 @@ class WebController {
         if (response.isSuccessful) {
           JSONObject().put("code", 200).put("data", convertJSON)
         } else {
-          JSONObject().put("code", 500).put("data", convertJSON)
+          when {
+            convertJSON.toString().contains("errors") -> {
+              JSONObject().put("code", 500).put("data", convertJSON.getJSONObject("errors").getJSONArray(convertJSON.getJSONObject("errors").names()[0].toString())[0])
+            }
+            convertJSON.toString().contains("message") -> {
+              JSONObject().put("code", 500).put("data", convertJSON.getString("message"))
+            }
+            else -> {
+              JSONObject().put("code", 500).put("data", convertJSON)
+            }
+          }
         }
       } catch (e: Exception) {
         JSONObject().put("code", 500).put("data", e.message)

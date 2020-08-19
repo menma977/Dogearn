@@ -22,4 +22,14 @@
   <string name="send_doge">Send Doge</string>
   <string name="pin">Pin</string>
   <string name="grade">Grade</string>
+  <string name="sign_up">Sign Up</string>
+  <string name="email">Email</string>
+  <string name="whatsapp_number">WhatsApp Number</string>
+  <string name="confirmation_password">Confirmation Password</string>
+  <string name="password">Password</string>
+  <string name="transaction_password">Transaction Password</string>
+  <string name="confirm_transaction_password">Confirm Transaction Password</string>
+  <string name="if_indonesia">example : 6281210000000</string>
+  <string name="already_have_an_account">already have an account ?</string>
+  <string name="sponsor">Sponsor</string>
 </resources>

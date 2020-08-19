@@ -47,8 +47,8 @@ class LoginActivity : AppCompatActivity() {
     login = findViewById(R.id.buttonLogin)
     register = findViewById(R.id.textViewRegister)
 
-    username.setText("6281211610807")
-    password.setText("admin")
+    username.setText("nier.vae@gmail.com")
+    password.setText("123456789")
 
     login.setOnClickListener {
       if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
@@ -59,6 +59,11 @@ class LoginActivity : AppCompatActivity() {
       } else {
         doRequestPermission()
       }
+    }
+
+    register.setOnClickListener {
+      goTo = Intent(this, RegisterFnActivity::class.java)
+      startActivity(goTo)
     }
   }
 
