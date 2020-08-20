@@ -7,9 +7,11 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import net.dogearn.MainActivity
 import net.dogearn.R
 import net.dogearn.config.BackgroundGetDataUser
 import net.dogearn.config.BackgroundServiceBalance
@@ -20,10 +22,12 @@ import net.dogearn.controller.WebController
 import net.dogearn.model.Setting
 import net.dogearn.model.User
 import net.dogearn.view.fragment.HomeFragment
+import net.dogearn.view.fragment.SettingFragment
 import org.json.JSONObject
 import java.math.BigDecimal
 import java.util.*
 import kotlin.concurrent.schedule
+import kotlin.system.exitProcess
 
 class NavigationActivity : AppCompatActivity() {
   private lateinit var user: User
@@ -37,6 +41,7 @@ class NavigationActivity : AppCompatActivity() {
   private lateinit var setting: ImageButton
   private lateinit var intentServiceGetDataUser: Intent
   private lateinit var intentServiceBalance: Intent
+  private lateinit var goTo: Intent
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -50,18 +55,16 @@ class NavigationActivity : AppCompatActivity() {
     home = findViewById(R.id.buttonHome)
     dogeChain = findViewById(R.id.buttonDogeChain)
     setting = findViewById(R.id.buttonSetting)
-    //set Default Fragment
-    val fragment = HomeFragment()
-    addFragment(fragment)
+
+    loading.openDialog()
 
     setNavigation()
     getBalance()
-    getDataUser()
   }
 
   override fun onStart() {
     super.onStart()
-    Timer().schedule(100) {
+    Timer().schedule(1000) {
       intentServiceBalance = Intent(applicationContext, BackgroundServiceBalance::class.java)
       startService(intentServiceBalance)
 
@@ -70,12 +73,12 @@ class NavigationActivity : AppCompatActivity() {
       intentServiceGetDataUser = Intent(applicationContext, BackgroundGetDataUser::class.java)
       startService(intentServiceGetDataUser)
 
-      LocalBroadcastManager.getInstance(applicationContext).registerReceiver(broadcastReceiverWeb, IntentFilter("net.dogearn.web"))
+      LocalBroadcastManager.getInstance(applicationContext).registerReceiver(broadcastReceiverWebLogout, IntentFilter("net.dogearn.web.logout"))
     }
   }
 
   override fun onStop() {
-    LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiverWeb)
+    LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiverWebLogout)
     LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiverDoge)
     stopService(intentServiceBalance)
     stopService(intentServiceGetDataUser)
@@ -88,23 +91,22 @@ class NavigationActivity : AppCompatActivity() {
     super.onBackPressed()
   }
 
-  private var broadcastReceiverWeb: BroadcastReceiver = object : BroadcastReceiver() {
+  private var broadcastReceiverWebLogout: BroadcastReceiver = object : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-      user.setString("wallet", intent.getSerializableExtra("wallet") as String)
-      user.setString("gradeLevel", intent.getStringExtra("gradeLevel") as String)
-      user.setInteger("pin", intent.getIntExtra("pin", 0))
-      user.setInteger("isUserWin", intent.getIntExtra("isWin", 0))
-      user.setString("progressGrade", intent.getStringExtra("progressGrade") as String)
+      if (intent.getBooleanExtra("isLogout", false)) {
+        onLogout()
+      }
     }
   }
   private var broadcastReceiverDoge: BroadcastReceiver = object : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
       balanceValue = intent.getSerializableExtra("balanceValue") as BigDecimal
+      user.setString("balanceValue", balanceValue.toPlainString())
+      user.setString("balanceText", "${BitCoinFormat().decimalToDoge(balanceValue).toPlainString()} DOGE")
     }
   }
 
   private fun getBalance() {
-    loading.openDialog()
     Timer().schedule(1000) {
       val body = HashMap<String, String>()
       body["a"] = "GetBalance"
@@ -115,41 +117,76 @@ class NavigationActivity : AppCompatActivity() {
       response = DogeController(body).execute().get()
       if (response.getInt("code") == 200) {
         balanceValue = response.getJSONObject("data")["Balance"].toString().toBigDecimal()
+        user.setString("balanceValue", balanceValue.toPlainString())
         user.setString("balanceText", "${BitCoinFormat().decimalToDoge(balanceValue).toPlainString()} DOGE")
-        runOnUiThread {
-          loading.closeDialog()
-        }
+        getDataUser()
       } else {
-        user.setString("balanceText", "ERROR 404")
+        user.setString("balanceValue", "0")
+        user.setString("balanceText", "ERROR 500")
         runOnUiThread {
           loading.closeDialog()
+          exitProcess(1)
         }
       }
     }
   }
 
   private fun getDataUser() {
-    loading.openDialog()
     Timer().schedule(1000) {
       response = WebController.Get("user.show", user.getString("token")).execute().get()
       if (response.getInt("code") == 200) {
         user.setString("wallet", response.getJSONObject("data").getJSONObject("user").getString("wallet"))
-        if (response.getJSONObject("data").getString("grade") == "null") {
-          user.setString("grade", "0")
-          user.setString("gradeLevel", "Grade 0")
+        user.setString("phone", response.getJSONObject("data").getJSONObject("user").getString("phone"))
+        user.setString("email", response.getJSONObject("data").getJSONObject("user").getString("email"))
+        if (response.getJSONObject("data").getString("grade") == "0" || response.getJSONObject("data").getString("grade") == "null") {
+          user.setString("gradeTarget", "0")
+          user.setString("gradeLevel", "0")
         } else {
-          user.setString("grade", response.getJSONObject("data").getJSONObject("grade").getString("price"))
-          user.setInteger("gradeLevel", response.getJSONObject("data").getJSONObject("grade").getInt("id"))
+          user.setString("gradeTarget", response.getJSONObject("data").getString("gradeTarget"))
+          user.setString("gradeLevel", response.getJSONObject("data").getJSONObject("grade").getString("id"))
         }
         user.setInteger("pin", response.getJSONObject("data").getInt("pin"))
         user.setInteger("isUserWin", response.getJSONObject("data").getInt("isUserWin"))
         user.setString("progressGrade", response.getJSONObject("data").getString("progressGrade"))
+        user.setInteger("onQueue", response.getJSONObject("data").getInt("onQueue"))
+
         runOnUiThread {
+          //set Default Fragment
+          val fragment = HomeFragment()
+          addFragment(fragment)
           loading.closeDialog()
         }
       } else {
-        runOnUiThread {
+        if (response.getString("data").contains("Unauthenticated.")) {
+          onLogout()
+        } else {
+          runOnUiThread {
+            Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_SHORT).show()
+            loading.closeDialog()
+          }
+        }
+      }
+    }
+  }
+
+  private fun onLogout() {
+    Timer().schedule(100) {
+      response = WebController.Get("user.logout", user.getString("token")).execute().get()
+      if (response.getInt("code") == 200) {
+        user.clear()
+        config.clear()
+        goTo = Intent(applicationContext, MainActivity::class.java)
+        loading.closeDialog()
+        startActivity(goTo)
+        finishAffinity()
+      } else {
+        if (response.getString("data").contains("Unauthenticated.")) {
+          user.clear()
+          config.clear()
+          goTo = Intent(applicationContext, MainActivity::class.java)
           loading.closeDialog()
+          startActivity(goTo)
+          finishAffinity()
         }
       }
     }
@@ -162,7 +199,7 @@ class NavigationActivity : AppCompatActivity() {
     }
 
     setting.setOnClickListener {
-      val fragment = HomeFragment()
+      val fragment = SettingFragment()
       addFragment(fragment)
     }
   }

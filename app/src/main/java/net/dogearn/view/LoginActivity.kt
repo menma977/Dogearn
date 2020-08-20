@@ -47,8 +47,8 @@ class LoginActivity : AppCompatActivity() {
     login = findViewById(R.id.buttonLogin)
     register = findViewById(R.id.textViewRegister)
 
-    username.setText("nier.vae@gmail.com")
-    password.setText("123456789")
+//    username.setText("6282257960075")
+//    password.setText("g0g2343")
 
     login.setOnClickListener {
       if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
@@ -84,7 +84,6 @@ class LoginActivity : AppCompatActivity() {
           body["phone"] = username.text.toString()
           body["password"] = password.text.toString()
           response = WebController.Post("login", "", body).execute().get()
-          println(response)
           if (response.getInt("code") == 200) {
             user.setString("token", response.getJSONObject("data").getString("token"))
             user.setString("wallet", response.getJSONObject("data").getString("wallet"))
@@ -114,7 +113,6 @@ class LoginActivity : AppCompatActivity() {
       body["Totp"] = "''"
       Timer().schedule(100) {
         response = DogeController(body).execute().get()
-        println(response)
         if (response["code"] == 200) {
           user.setString("key", response.getJSONObject("data")["SessionCookie"].toString())
           goTo = Intent(applicationContext, NavigationActivity::class.java)

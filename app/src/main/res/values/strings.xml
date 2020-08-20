@@ -32,4 +32,15 @@
   <string name="if_indonesia">example : 6281210000000</string>
   <string name="already_have_an_account">already have an account ?</string>
   <string name="sponsor">Sponsor</string>
+  <string name="logout">Logout</string>
+  <string name="buy">Upgrade Now</string>
+  <string name="upgrade_to">Upgrade To</string>
+  <string name="edit_password_title">Edit Password</string>
+  <string name="edit_password">Edit Password (Optional)</string>
+  <string name="edit_password_transaction">Edit Password Transaction (Optional)</string>
+  <string name="automatic_stake">Automatic Stake</string>
+  <string name="manual_stake">Manual Stake</string>
+  <string name="enter_code_from_email">Enter code from Email</string>
+  <string name="send_code_to_email">Send Code To Email</string>
+  <string name="save">Save</string>
 </resources>

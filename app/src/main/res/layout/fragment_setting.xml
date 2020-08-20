@@ -5,53 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.HomeFragment"
+    tools:context=".view.fragment.SettingFragment"
     android:orientation="vertical">
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:padding="10dp"
-      android:gravity="center">
-
-    <ImageView
-        android:src="@drawable/logo_ii_landscape_typo"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/logo_ii_landscape_typo"
-        android:contentDescription="@string/logo"/>
-
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-
-    <ImageButton
-        android:src="@drawable/send"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/imageButtonSend"
-        android:background="@color/Link"
-        android:scaleType="fitCenter"
-        android:contentDescription="@string/icon"/>
-
-    <ImageButton
-        android:src="@drawable/received"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/imageButtonReceived"
-        android:background="@color/Link"
-        android:scaleType="fitCenter"
-        android:contentDescription="@string/icon"/>
-
-  </LinearLayout>
 
   <Space
       android:layout_width="match_parent"
-      android:layout_height="20dp"/>
+      android:layout_height="10dp"/>
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -60,109 +19,33 @@
       android:orientation="vertical"
       android:layout_marginStart="15dp"
       android:layout_marginEnd="15dp"
-      android:padding="10dp"
-      android:elevation="20dp">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/logo_doge_pop"
-        android:contentDescription="@string/logo"/>
+      android:padding="25dp"
+      android:elevation="20dp"
+      android:gravity="center">
 
     <TextView
-        android:id="@+id/textViewBalance"
-        android:text="@string/example_doge"
-        android:layout_width="match_parent"
+        android:id="@+id/textViewPhone"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/textSecondary"
         android:textSize="18sp"
-        android:gravity="center"/>
+        android:gravity="center"
+        app:drawableStartCompat="@drawable/ic_baseline_phone"
+        app:drawableTint="@color/White"/>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="20dp">
-
-      <ProgressBar
-          style="?android:attr/progressBarStyleHorizontal"
-          android:layout_width="match_parent"
-          android:layout_height="25dp"
-          android:id="@+id/progressBar"
-          android:progressDrawable="@drawable/progress_bar"
-          android:max="100"
-          android:progress="50"
-          android:indeterminate="false"/>
-
-      <TextView
-          android:id="@+id/textViewRemainingBalance"
-          android:text="@string/example_doge"
-          android:background="@color/Link"
-          android:textColor="@color/colorPrimaryDark"
-          android:textStyle="bold"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_alignParentStart="true"
-          android:layout_alignParentEnd="true"
-          android:gravity="center"
-          android:textSize="10sp"
-          tools:ignore="SmallSp"
-          android:layout_alignParentBottom="true"
-          android:layout_marginBottom="3dp"
-          android:layout_marginTop="3dp"
-          android:layout_alignParentTop="true"
-          android:layout_marginStart="0dp"
-          android:layout_marginEnd="0dp"/>
-
-    </RelativeLayout>
+        android:layout_height="5dp"/>
 
     <TextView
-        android:id="@+id/textViewTargetBalance"
-        android:text="@string/example_doge"
-        android:layout_width="match_parent"
+        android:id="@+id/textViewEmail"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="10sp"
         android:textColor="@color/textSecondary"
-        android:textAlignment="textEnd"
-        tools:ignore="SmallSp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-      <TextView
-          android:id="@+id/textViewTotalPin"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textSize="10sp"
-          android:gravity="center_vertical"
-          android:textColor="@color/colorPrimaryAdd2"
-          android:drawablePadding="1dp"
-          tools:ignore="SmallSp"
-          app:drawableStartCompat="@drawable/ic_baseline_fiber_pin"
-          app:drawableTint="@color/colorPrimaryAdd2"
-          android:elevation="20dp"/>
-
-      <TextView
-          android:id="@+id/textViewGrade"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textSize="10sp"
-          android:gravity="center_vertical"
-          android:textColor="@color/colorPrimaryAdd2"
-          android:drawablePadding="1dp"
-          tools:ignore="SmallSp"
-          app:drawableStartCompat="@drawable/ic_baseline_emoji_events"
-          app:drawableTint="@color/colorPrimaryAdd2"
-          android:elevation="20dp"/>
-
-    </LinearLayout>
+        android:textSize="18sp"
+        android:gravity="center"
+        app:drawableStartCompat="@drawable/ic_baseline_email"
+        app:drawableTint="@color/White"/>
 
   </LinearLayout>
 
@@ -183,6 +66,68 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+      <LinearLayout
+          android:id="@+id/linearLayoutLogout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/logout"/>
+
+        <TextView
+            android:text="@string/logout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutReceivedDoge"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/received"/>
+
+        <TextView
+            android:text="@string/received_doge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
 
       <LinearLayout
           android:id="@+id/linearLayoutUpgradeAccount"
@@ -309,7 +254,7 @@
           android:background="@color/Dark"/>
 
       <LinearLayout
-          android:id="@+id/linearLayoutEditPassword"
+          android:id="@+id/linearLayoutSendPin"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="horizontal"
@@ -323,7 +268,7 @@
             app:srcCompat="@drawable/send_pin"/>
 
         <TextView
-            android:text="@string/edit_password_title"
+            android:text="@string/register_account"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -338,67 +283,10 @@
           android:layout_width="match_parent"
           android:layout_height="1dp"
           android:background="@color/Dark"/>
-
-      <LinearLayout
-          android:id="@+id/linearLayoutManualStake"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="center"
-          tools:ignore="UseCompoundDrawables">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/manual_trade"/>
-
-        <TextView
-            android:text="@string/manual_stake"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="19sp"
-            android:textColor="@color/textColorCustom"
-            android:layout_marginStart="10dp"/>
-
-      </LinearLayout>
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:background="@color/Dark"/>
-
-      <LinearLayout
-          android:id="@+id/linearLayoutAutomaticStake"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="center"
-          tools:ignore="UseCompoundDrawables">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/automatic_trade"/>
-
-        <TextView
-            android:text="@string/automatic_stake"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="19sp"
-            android:textColor="@color/textColorCustom"
-            android:layout_marginStart="10dp"/>
-
-      </LinearLayout>
 
       <Space
           android:layout_width="match_parent"
-          android:layout_height="20dp"/>
+          android:layout_height="50dp"/>
 
     </LinearLayout>
 

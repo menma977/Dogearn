@@ -45,5 +45,14 @@ dependencies {
     implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
-    implementation 'me.dm7.barcodescanner:zxing:1.9'
+
+    /**
+     * @new dependencies* barcode Scanner
+     */
+    implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+
+    /**
+     * @new dependencies* barcode Generator
+     */
+    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
 }

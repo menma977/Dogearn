@@ -15,6 +15,31 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
+    <activity android:name=".view.menu.ReceivedActivity">
+    </activity>
+    <activity android:name=".view.menu.SendBalanceActivity">
+    </activity>
+    <activity
+        android:name=".view.menu.EditPasswordActivity"
+        android:label="Edit Password">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
+    </activity>
+    <activity
+        android:name=".view.menu.RegisterActivity"
+        android:label="Register Account">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
+    </activity>
+    <activity
+        android:name=".view.menu.UpgradeAccountActivity"
+        android:label="Upgrade Account">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
+    </activity>
 
     <service android:name=".config.BackgroundGetDataUser"/>
     <service android:name=".config.BackgroundServiceBalance"/>

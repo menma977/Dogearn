@@ -6,6 +6,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import net.dogearn.controller.DogeController
 import net.dogearn.model.User
 import org.json.JSONObject
+import java.lang.Thread.sleep
 import java.math.BigDecimal
 import java.math.MathContext
 
@@ -39,23 +40,28 @@ class BackgroundServiceBalance : IntentService("BackgroundServiceBalance") {
     val trigger = Object()
 
     synchronized(trigger) {
-      startBackgroundService = true
       while (true) {
         val delta = System.currentTimeMillis() - time
         if (delta >= 5000) {
           time = System.currentTimeMillis()
           val privateIntent = Intent()
           if (startBackgroundService) {
-            response = DogeController(body).execute().get()
-            if (response.getInt("code") == 200) {
-              balanceValue = response.getJSONObject("data")["Balance"].toString().toBigDecimal()
-              privateIntent.putExtra("balanceValue", balanceValue)
-              privateIntent.putExtra("balance", "${bitCoinFormat.decimalToDoge(balanceValue).toPlainString()} DOGE")
+            try {
+              response = DogeController(body).execute().get()
+              if (response.getInt("code") == 200) {
+                balanceValue = response.getJSONObject("data")["Balance"].toString().toBigDecimal()
+                privateIntent.putExtra("balanceValue", balanceValue)
+                //privateIntent.putExtra("balance", "${bitCoinFormat.decimalToDoge(balanceValue).toPlainString()} DOGE")
 
-              privateIntent.action = "net.dogearn.doge"
-              LocalBroadcastManager.getInstance(this).sendBroadcast(privateIntent)
-            } else {
-              trigger.wait(60000)
+                user.setString("balanceText", "${bitCoinFormat.decimalToDoge(balanceValue).toPlainString()} DOGE")
+
+                privateIntent.action = "net.dogearn.doge"
+                LocalBroadcastManager.getInstance(this).sendBroadcast(privateIntent)
+              } else {
+                sleep(60000)
+              }
+            }catch (E:Exception) {
+              sleep(60000)
             }
           } else {
             break
@@ -63,6 +69,11 @@ class BackgroundServiceBalance : IntentService("BackgroundServiceBalance") {
         }
       }
     }
+  }
+
+  override fun onCreate() {
+    startBackgroundService = true
+    super.onCreate()
   }
 
   override fun onDestroy() {
