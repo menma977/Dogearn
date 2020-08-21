@@ -216,6 +216,6 @@ class NavigationActivity : AppCompatActivity() {
   private fun addFragment(fragment: Fragment) {
     supportFragmentManager.beginTransaction().setCustomAnimations(
       R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out
-    ).replace(R.id.contentFragment, fragment, fragment.javaClass.simpleName).commit()
+    ).replace(R.id.contentFragment, fragment, fragment.javaClass.simpleName).addToBackStack("back").commit()
   }
 }

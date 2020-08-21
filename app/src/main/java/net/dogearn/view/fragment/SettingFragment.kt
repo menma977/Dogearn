@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -32,6 +33,7 @@ class SettingFragment : Fragment() {
   private lateinit var user: User
   private lateinit var setting: Setting
   private lateinit var goTo: Intent
+  private lateinit var imageBack: ImageView
   private lateinit var phone: TextView
   private lateinit var email: TextView
   private lateinit var logout: LinearLayout
@@ -48,6 +50,7 @@ class SettingFragment : Fragment() {
     user = User(parentActivity)
     setting = Setting(parentActivity)
 
+    imageBack = root.findViewById(R.id.imageViewBack)
     phone = root.findViewById(R.id.textViewPhone)
     email = root.findViewById(R.id.textViewEmail)
     logout = root.findViewById(R.id.linearLayoutLogout)
@@ -69,6 +72,10 @@ class SettingFragment : Fragment() {
 
     logout.setOnClickListener {
       onLogout()
+    }
+
+    imageBack.setOnClickListener {
+      parentActivity.supportFragmentManager.popBackStack()
     }
 
     return root
