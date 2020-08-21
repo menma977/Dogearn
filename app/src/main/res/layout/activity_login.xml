@@ -115,27 +115,50 @@
       android:layout_width="match_parent"
       android:layout_height="25dp"/>
 
-  <TextView
-      android:text="@string/dont_have_account"
+  <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:gravity="center"
-      android:textStyle="bold"
-      android:textColor="@color/textSecondary"/>
+      android:orientation="horizontal"
+      android:baselineAligned="false">
 
-  <Space
-      android:layout_width="match_parent"
-      android:layout_height="10dp"/>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-  <TextView
-      android:id="@+id/textViewRegister"
-      android:text="@string/register"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:textStyle="bold"
-      android:textSize="19sp"
-      android:textColor="@color/colorPrimaryLight"/>
+      <TextView
+          android:id="@+id/textViewRegister"
+          android:text="@string/register"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:textStyle="bold"
+          android:textSize="19sp"
+          android:textColor="@color/colorPrimaryLight"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+      <TextView
+          android:id="@+id/textViewForgotPassword"
+          android:text="@string/forgot_password"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:textStyle="bold"
+          android:textSize="14sp"
+          android:textColor="@color/colorPrimaryLight"/>
+
+    </LinearLayout>
+
+  </LinearLayout>
 
   <Space
       android:layout_width="match_parent"

@@ -9,10 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import net.dogearn.R
@@ -29,6 +26,7 @@ class HomeFragment : Fragment() {
   private lateinit var user: User
   private lateinit var goTo: Intent
   private lateinit var bitCoinFormat: BitCoinFormat
+  private lateinit var imageDoge: ImageView
   private lateinit var balance: TextView
   private lateinit var pin: TextView
   private lateinit var grade: TextView
@@ -37,15 +35,15 @@ class HomeFragment : Fragment() {
   private lateinit var progressBar: ProgressBar
   private lateinit var balanceValue: BigDecimal
   private lateinit var sendBalance: ImageButton
-  private lateinit var receivedBalance: ImageButton
   private lateinit var upgradeAccount: LinearLayout
   private lateinit var registerAccount: LinearLayout
-  private lateinit var editPassword: LinearLayout
+  private lateinit var sendPin: LinearLayout
   private var isOnQueue: Boolean = true
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val root = inflater.inflate(R.layout.fragment_home, container, false)
 
+    imageDoge = root.findViewById(R.id.imageViewLogoDoge)
     balance = root.findViewById(R.id.textViewBalance)
     pin = root.findViewById(R.id.textViewTotalPin)
     grade = root.findViewById(R.id.textViewGrade)
@@ -53,10 +51,9 @@ class HomeFragment : Fragment() {
     targetBalance = root.findViewById(R.id.textViewTargetBalance)
     progressBar = root.findViewById(R.id.progressBar)
     sendBalance = root.findViewById(R.id.imageButtonSend)
-    receivedBalance = root.findViewById(R.id.imageButtonReceived)
     upgradeAccount = root.findViewById(R.id.linearLayoutUpgradeAccount)
     registerAccount = root.findViewById(R.id.linearLayoutRegisterAccount)
-    editPassword = root.findViewById(R.id.linearLayoutEditPassword)
+    sendPin = root.findViewById(R.id.linearLayoutSendPin)
 
     parentActivity = activity as NavigationActivity
 
@@ -89,7 +86,17 @@ class HomeFragment : Fragment() {
       startActivity(goTo)
     }
 
-    receivedBalance.setOnClickListener {
+    sendPin.setOnClickListener {
+      goTo = Intent(parentActivity, SendPinActivity::class.java)
+      startActivity(goTo)
+    }
+
+    imageDoge.setOnClickListener {
+      goTo = Intent(parentActivity, ReceivedActivity::class.java)
+      startActivity(goTo)
+    }
+
+    balance.setOnClickListener {
       goTo = Intent(parentActivity, ReceivedActivity::class.java)
       startActivity(goTo)
     }
@@ -104,11 +111,6 @@ class HomeFragment : Fragment() {
 
     registerAccount.setOnClickListener {
       goTo = Intent(parentActivity, RegisterActivity::class.java)
-      startActivity(goTo)
-    }
-
-    editPassword.setOnClickListener {
-      goTo = Intent(parentActivity, EditPasswordActivity::class.java)
       startActivity(goTo)
     }
 

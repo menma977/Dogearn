@@ -72,31 +72,6 @@
       <EditText
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:inputType="phone"
-          android:ems="10"
-          android:id="@+id/editTextTextPhone"
-          android:background="@drawable/edit_text_mode_3"
-          android:hint="@string/whatsapp_number"
-          android:autofillHints="@string/enter_username"
-          android:drawablePadding="10dp"
-          android:textColor="@color/colorPrimaryDark"
-          android:gravity="center"/>
-
-      <TextView
-          android:text="@string/if_indonesia"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:textSize="12sp"
-          android:gravity="center"
-          android:textColor="@color/colorPrimary"/>
-
-      <Space
-          android:layout_width="match_parent"
-          android:layout_height="10dp"/>
-
-      <EditText
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
           android:inputType="textEmailAddress"
           android:ems="10"
           android:id="@+id/editTextTextEmail"
@@ -114,6 +89,31 @@
       <EditText
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:inputType="phone"
+          android:ems="10"
+          android:id="@+id/editTextTextPhone"
+          android:background="@drawable/edit_text_mode_3"
+          android:hint="@string/whatsapp_number"
+          android:autofillHints="@string/enter_username"
+          android:drawablePadding="10dp"
+          android:textColor="@color/colorPrimaryDark"
+          android:gravity="center"/>
+
+      <TextView
+          android:text="@string/if_indonesia"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="12sp"
+          android:gravity="end"
+          android:textColor="@color/colorPrimary"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <EditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
           android:inputType="textPassword"
           android:ems="10"
           android:id="@+id/editTextPassword"
@@ -122,6 +122,14 @@
           android:autofillHints="@string/enter_password"
           android:textColor="@color/colorPrimaryDark"
           android:gravity="center"/>
+
+      <TextView
+          android:text="@string/password_must_be_minimum_6_characters"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="12sp"
+          android:gravity="end"
+          android:textColor="@color/colorPrimary"/>
 
       <Space
           android:layout_width="match_parent"
@@ -155,7 +163,16 @@
           android:drawablePadding="10dp"
           android:textColor="@color/colorPrimaryDark"
           android:gravity="center"
-          tools:ignore="TextFields"/>
+          tools:ignore="TextFields"
+          android:maxLength="4"/>
+
+      <TextView
+          android:text="@string/secondary_password_must_be_character_number"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="12sp"
+          android:gravity="end"
+          android:textColor="@color/colorPrimary"/>
 
       <Space
           android:layout_width="match_parent"
@@ -173,7 +190,8 @@
           android:drawablePadding="10dp"
           android:textColor="@color/colorPrimaryDark"
           android:gravity="center"
-          tools:ignore="TextFields"/>
+          tools:ignore="TextFields"
+          android:maxLength="4"/>
 
       <Space
           android:layout_width="match_parent"

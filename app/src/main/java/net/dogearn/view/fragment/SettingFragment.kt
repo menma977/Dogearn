@@ -20,6 +20,8 @@ import net.dogearn.controller.WebController
 import net.dogearn.model.Setting
 import net.dogearn.model.User
 import net.dogearn.view.NavigationActivity
+import net.dogearn.view.menu.EditPasswordActivity
+import net.dogearn.view.menu.EditSecondaryPasswordActivity
 import org.json.JSONObject
 import java.util.*
 import kotlin.concurrent.schedule
@@ -28,12 +30,14 @@ class SettingFragment : Fragment() {
   private lateinit var loading: Loading
   private lateinit var parentActivity: NavigationActivity
   private lateinit var user: User
-  private lateinit var setting : Setting
+  private lateinit var setting: Setting
   private lateinit var goTo: Intent
   private lateinit var phone: TextView
   private lateinit var email: TextView
   private lateinit var logout: LinearLayout
   private lateinit var response: JSONObject
+  private lateinit var editPassword: LinearLayout
+  private lateinit var editSecondaryPassword: LinearLayout
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val root = inflater.inflate(R.layout.fragment_setting, container, false)
@@ -47,9 +51,21 @@ class SettingFragment : Fragment() {
     phone = root.findViewById(R.id.textViewPhone)
     email = root.findViewById(R.id.textViewEmail)
     logout = root.findViewById(R.id.linearLayoutLogout)
+    editPassword = root.findViewById(R.id.linearLayoutEditPassword)
+    editSecondaryPassword = root.findViewById(R.id.linearLayoutEditSecondaryPassword)
 
     phone.text = user.getString("phone")
     email.text = user.getString("email")
+
+    editPassword.setOnClickListener {
+      goTo = Intent(parentActivity, EditPasswordActivity::class.java)
+      startActivity(goTo)
+    }
+
+    editSecondaryPassword.setOnClickListener {
+      goTo = Intent(parentActivity, EditSecondaryPasswordActivity::class.java)
+      startActivity(goTo)
+    }
 
     logout.setOnClickListener {
       onLogout()

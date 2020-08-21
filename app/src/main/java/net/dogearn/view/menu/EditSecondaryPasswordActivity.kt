@@ -1,8 +1,8 @@
 package net.dogearn.view.menu
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import net.dogearn.R
 import net.dogearn.config.Loading
 import net.dogearn.controller.WebController
@@ -11,7 +11,7 @@ import org.json.JSONObject
 import java.util.*
 import kotlin.concurrent.schedule
 
-class EditPasswordActivity : AppCompatActivity() {
+class EditSecondaryPasswordActivity : AppCompatActivity() {
   private lateinit var loading: Loading
   private lateinit var user: User
   private lateinit var response: JSONObject
@@ -19,8 +19,8 @@ class EditPasswordActivity : AppCompatActivity() {
   private lateinit var waitTimeText: TextView
   private lateinit var sendCodeToEmail: ImageButton
   private lateinit var codeText: EditText
-  private lateinit var passwordText: EditText
-  private lateinit var passwordConfirmText: EditText
+  private lateinit var passwordTransactionText: EditText
+  private lateinit var passwordTransactionConfirmText: EditText
   private lateinit var update: Button
   private var time: Long = 0
   private var delta: Long = 0
@@ -29,7 +29,7 @@ class EditPasswordActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_edit_password)
+    setContentView(R.layout.activity_edit_secondary_password)
 
     loading = Loading(this)
     user = User(this)
@@ -38,8 +38,8 @@ class EditPasswordActivity : AppCompatActivity() {
     waitTimeText = findViewById(R.id.textViewWaitTime)
     sendCodeToEmail = findViewById(R.id.imageButtonSendCodeToEmail)
     codeText = findViewById(R.id.editTextCode)
-    passwordText = findViewById(R.id.editTextPassword)
-    passwordConfirmText = findViewById(R.id.editTextPasswordConfirmation)
+    passwordTransactionText = findViewById(R.id.editTextTextTransactionPassword)
+    passwordTransactionConfirmText = findViewById(R.id.editTextTextConfirmTransactionPassword)
     update = findViewById(R.id.buttonUpdate)
 
     update.visibility = Button.GONE
@@ -103,8 +103,8 @@ class EditPasswordActivity : AppCompatActivity() {
     loading.openDialog()
     Timer().schedule(1000) {
       val body = HashMap<String, String>()
-      body["password"] = passwordText.text.toString()
-      body["password_confirmation"] = passwordConfirmText.text.toString()
+      body["transaction_password"] = passwordTransactionText.text.toString()
+      body["transaction_password_confirmation"] = passwordTransactionConfirmText.text.toString()
       response = WebController.Post("user.update", user.getString("token"), body).execute().get()
       if (response.getInt("code") == 200) {
         try {

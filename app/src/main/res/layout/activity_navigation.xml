@@ -50,7 +50,7 @@
           android:contentDescription="@string/icon"/>
 
       <TextView
-          android:text="@string/app_name"
+          android:text="@string/home"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:textAlignment="center"
@@ -104,7 +104,7 @@
           android:contentDescription="@string/icon"/>
 
       <TextView
-          android:text="@string/app_name"
+          android:text="@string/info"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:textAlignment="center"

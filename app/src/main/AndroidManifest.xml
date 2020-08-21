@@ -15,50 +15,93 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
-    <activity android:name=".view.menu.ReceivedActivity">
+
+    <service android:name=".config.BackgroundGetDataUser"/>
+    <service android:name=".config.BackgroundServiceBalance"/>
+
+    <activity
+        android:name=".view.ForgotActivity"
+        android:label="Forgot Password"
+        android:screenOrientation="portrait">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".MainActivity"/>
     </activity>
-    <activity android:name=".view.menu.SendBalanceActivity">
+    <activity
+        android:name=".view.menu.SendPinActivity"
+        android:label="Send Pin"
+        android:configChanges="orientation|screenSize">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".MainActivity"/>
+    </activity>
+    <activity
+        android:name=".view.menu.ReceivedActivity"
+        android:label="Deposit DOGE"
+        android:configChanges="orientation|screenSize">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".MainActivity"/>
+    </activity>
+    <activity
+        android:name=".view.menu.SendBalanceActivity"
+        android:label="Send DOGE"
+        android:configChanges="orientation|screenSize">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".MainActivity"/>
+    </activity>
+    <activity
+        android:name=".view.menu.EditSecondaryPasswordActivity"
+        android:label="@string/edit_password_transaction"
+        android:configChanges="orientation|screenSize">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
     </activity>
     <activity
         android:name=".view.menu.EditPasswordActivity"
-        android:label="Edit Password">
+        android:label="Edit Password"
+        android:configChanges="orientation|screenSize">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
     </activity>
     <activity
         android:name=".view.menu.RegisterActivity"
-        android:label="Register Account">
+        android:label="Register Account"
+        android:configChanges="orientation|screenSize">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
     </activity>
     <activity
         android:name=".view.menu.UpgradeAccountActivity"
-        android:label="Upgrade Account">
+        android:label="Upgrade Account"
+        android:configChanges="orientation|screenSize">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
     </activity>
-
-    <service android:name=".config.BackgroundGetDataUser"/>
-    <service android:name=".config.BackgroundServiceBalance"/>
-
     <activity
         android:name=".view.NavigationActivity"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:screenOrientation="portrait">
     </activity>
     <activity
         android:name=".view.RegisterFnActivity"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:screenOrientation="portrait">
     </activity>
     <activity
         android:name=".view.LoginActivity"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:screenOrientation="portrait">
     </activity>
     <activity
         android:name=".MainActivity"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:screenOrientation="portrait">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ForgotActivity"
+    android:background="@drawable/background"
+    android:gravity="center"
+    android:orientation="vertical">
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="150dp"
+      android:contentDescription="@string/logo"
+      app:srcCompat="@drawable/logo_ii_squard_typo"/>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/card_default"
+      android:layout_margin="20dp"
+      android:padding="10dp"
+      android:orientation="vertical"
+      android:elevation="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:id="@+id/textViewNumber1"
+          android:layout_weight="1"
+          android:gravity="end"
+          android:textColor="@color/colorPrimaryDark"/>
+
+      <Space
+          android:layout_width="10dp"
+          android:layout_height="wrap_content"/>
+
+      <TextView
+          android:text="@string/added"
+          android:layout_width="10dp"
+          android:layout_height="wrap_content"
+          android:textSize="20sp"
+          android:textColor="@color/textPrimary"/>
+
+      <Space
+          android:layout_width="10dp"
+          android:layout_height="wrap_content"/>
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:id="@+id/textViewNumber2"
+          android:layout_weight="1"
+          android:gravity="start"
+          android:textColor="@color/colorPrimaryDark"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:hint="@string/input_results"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextCount"
+        android:background="@drawable/edit_text_mode_3"
+        android:gravity="center"
+        android:importantForAutofill="no"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/editTextTextEmailAddress"
+        android:background="@drawable/edit_text_mode_3"
+        android:hint="@string/email"
+        android:gravity="center"
+        android:autofillHints="@string/email"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <Button
+        android:text="@string/send_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSend"
+        android:background="@drawable/button_success"
+        android:textColor="@color/textSecondary"/>
+
+  </LinearLayout>
+
+</LinearLayout>

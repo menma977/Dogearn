@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
   private lateinit var password: EditText
   private lateinit var login: Button
   private lateinit var register: TextView
+  private lateinit var forgotPassword: TextView
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -46,9 +47,7 @@ class LoginActivity : AppCompatActivity() {
     password = findViewById(R.id.editTextPassword)
     login = findViewById(R.id.buttonLogin)
     register = findViewById(R.id.textViewRegister)
-
-//    username.setText("6282257960075")
-//    password.setText("g0g2343")
+    forgotPassword = findViewById(R.id.textViewForgotPassword)
 
     login.setOnClickListener {
       if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
@@ -63,6 +62,11 @@ class LoginActivity : AppCompatActivity() {
 
     register.setOnClickListener {
       goTo = Intent(this, RegisterFnActivity::class.java)
+      startActivity(goTo)
+    }
+
+    forgotPassword.setOnClickListener {
+      goTo = Intent(this, ForgotActivity::class.java)
       startActivity(goTo)
     }
   }
@@ -118,7 +122,7 @@ class LoginActivity : AppCompatActivity() {
           goTo = Intent(applicationContext, NavigationActivity::class.java)
           runOnUiThread {
             startActivity(goTo)
-            finish()
+            finishAffinity()
             loading.closeDialog()
           }
         } else {

@@ -38,15 +38,6 @@
         android:scaleType="fitCenter"
         android:contentDescription="@string/icon"/>
 
-    <ImageButton
-        android:src="@drawable/received"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/imageButtonReceived"
-        android:background="@color/Link"
-        android:scaleType="fitCenter"
-        android:contentDescription="@string/icon"/>
-
   </LinearLayout>
 
   <Space
@@ -64,6 +55,7 @@
       android:elevation="20dp">
 
     <ImageView
+        android:id="@+id/imageViewLogoDoge"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:scaleType="fitCenter"
@@ -247,6 +239,37 @@
           android:background="@color/Dark"/>
 
       <LinearLayout
+          android:id="@+id/linearLayoutSendPin"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/received"/>
+
+        <TextView
+            android:text="@string/send_pin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
+      <LinearLayout
           android:id="@+id/linearLayoutReport"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -293,37 +316,6 @@
 
         <TextView
             android:text="@string/network"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="19sp"
-            android:textColor="@color/textColorCustom"
-            android:layout_marginStart="10dp"/>
-
-      </LinearLayout>
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:background="@color/Dark"/>
-
-      <LinearLayout
-          android:id="@+id/linearLayoutEditPassword"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="center"
-          tools:ignore="UseCompoundDrawables">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/send_pin"/>
-
-        <TextView
-            android:text="@string/edit_password_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

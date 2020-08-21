@@ -35,9 +35,6 @@ class RegisterActivity : AppCompatActivity() {
     register = findViewById(R.id.buttonRegister)
     message = findViewById(R.id.textViewMessage)
 
-    phone.setText("6282257960078")
-    email.setText("putra.lvika@gmail.com")
-
     register.setOnClickListener {
       onRegister()
     }
@@ -55,7 +52,7 @@ class RegisterActivity : AppCompatActivity() {
       phone.requestFocus()
     } else {
       Timer().schedule(100) {
-        val passwordValue = randomPassword(7)
+        val passwordValue = randomPassword()
         val passwordTransactionValue = (1000..9999).random().toString()
         val body = HashMap<String, String>()
         body["sponsor"] = user.getString("phone")
@@ -89,11 +86,11 @@ class RegisterActivity : AppCompatActivity() {
     finish()
   }
 
-  private fun randomPassword(size: Int): String {
+  private fun randomPassword(): String {
     val source = "0123456789dogearn"
     val random = Random()
-    val stringBuilder = StringBuilder(size)
-    for (i in 0 until size) {
+    val stringBuilder = StringBuilder(7)
+    for (i in 0 until 7) {
       stringBuilder.append(source[random.nextInt(source.length)])
     }
     return stringBuilder.toString()

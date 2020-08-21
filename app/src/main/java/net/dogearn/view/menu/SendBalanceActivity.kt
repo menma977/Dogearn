@@ -1,9 +1,6 @@
 package net.dogearn.view.menu
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +12,7 @@ import net.dogearn.config.BackgroundServiceBalance
 import net.dogearn.config.BitCoinFormat
 import net.dogearn.config.Loading
 import net.dogearn.controller.DogeController
+import net.dogearn.controller.WebController
 import net.dogearn.model.User
 import org.json.JSONObject
 import java.math.BigDecimal
@@ -29,12 +27,15 @@ class SendBalanceActivity : AppCompatActivity(), ZXingScannerView.ResultHandler 
   private lateinit var frameScanner: FrameLayout
   private lateinit var scannerEngine: ZXingScannerView
   private lateinit var wallet: String
+  private lateinit var userBalance: TextView
   private lateinit var balanceText: EditText
   private lateinit var sendDoge: Button
-  private lateinit var walletText: TextView
+  private lateinit var walletText: EditText
+  private lateinit var secondaryPasswordText: EditText
   private lateinit var intentServiceBalance: Intent
   private lateinit var balanceValue: BigDecimal
   private var isHasCode = false
+  private var isStart = true
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -44,63 +45,76 @@ class SendBalanceActivity : AppCompatActivity(), ZXingScannerView.ResultHandler 
     loading = Loading(this)
     bitCoinFormat = BitCoinFormat()
 
-    walletText = findViewById(R.id.textViewWallet)
+    userBalance = findViewById(R.id.textViewBalance)
+    walletText = findViewById(R.id.editTextWallet)
     frameScanner = findViewById(R.id.frameLayoutScanner)
     balanceText = findViewById(R.id.editTextBalance)
+    secondaryPasswordText = findViewById(R.id.editTextSecondaryPassword)
     sendDoge = findViewById(R.id.buttonSend)
 
     initScannerView()
 
     frameScanner.setOnClickListener {
-      wallet = ""
-      walletText.text = ""
-      balanceText.setText("")
-      sendDoge.visibility = Button.GONE
-      scannerEngine.resumeCameraPreview(this)
+      if (isStart) {
+        scannerEngine.startCamera()
+        isStart = false
+      }
     }
 
     sendDoge.setOnClickListener {
-      onSendDoge()
+      validatePassword()
     }
 
-    sendDoge.visibility = Button.GONE
-    balanceText.hint = user.getString("balanceText")
+    userBalance.text = user.getString("balanceText")
     balanceValue = user.getString("balanceValue").toBigDecimal()
   }
 
-  private fun onSendDoge() {
-    val balanceToSend = balanceText.text.toString().replace(".", "").replace(",", "")
-    if (balanceToSend.toBigDecimal() > balanceValue) {
-      Toast.makeText(this, "your balance is insufficient", Toast.LENGTH_SHORT).show()
+  private fun validatePassword() {
+    loading.openDialog()
+    if (balanceText.text.isEmpty()) {
+      Toast.makeText(this, "balance cant not be empty", Toast.LENGTH_SHORT).show()
+      loading.closeDialog()
     } else {
-      loading.openDialog()
       Timer().schedule(1000) {
         val body = HashMap<String, String>()
-        body["a"] = "Withdraw"
-        body["s"] = user.getString("key")
-        body["Amount"] = balanceToSend
-        body["Address"] = wallet
-        body["Totp"] = "0"
-        body["Currency"] = "doge"
-        response = DogeController(body).execute().get()
+        body["secondaryPassword"] = secondaryPasswordText.text.toString()
+        response = WebController.Post("user.password.validator", user.getString("token"), body).execute().get()
+        println(response)
         if (response.getInt("code") == 200) {
           runOnUiThread {
-            try {
-              Toast.makeText(applicationContext, "wait until the doge balance is received", Toast.LENGTH_LONG).show()
-            } catch (e: Exception) {
-              Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
-            }
-            wallet = ""
-            walletText.text = ""
-            balanceText.setText("")
-            sendDoge.visibility = Button.GONE
-            loading.closeDialog()
+            onSendDoge()
           }
         } else {
           runOnUiThread {
-            Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_SHORT).show()
             loading.closeDialog()
           }
+        }
+      }
+    }
+  }
+
+  private fun onSendDoge() {
+    Timer().schedule(1000) {
+      val body = HashMap<String, String>()
+      body["a"] = "Withdraw"
+      body["s"] = user.getString("key")
+      body["Amount"] = balanceText.text.toString()
+      body["Address"] = wallet
+      body["Totp"] = "0"
+      body["Currency"] = "doge"
+      response = DogeController(body).execute().get()
+      println(response)
+      if (response.getInt("code") == 200) {
+        runOnUiThread {
+          Toast.makeText(applicationContext, "wait until the doge balance is received", Toast.LENGTH_LONG).show()
+          loading.closeDialog()
+          finish()
+        }
+      } else {
+        runOnUiThread {
+          Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_LONG).show()
+          loading.closeDialog()
         }
       }
     }
@@ -114,7 +128,6 @@ class SendBalanceActivity : AppCompatActivity(), ZXingScannerView.ResultHandler 
   }
 
   override fun onStart() {
-    scannerEngine.startCamera()
     super.onStart()
 
     intentServiceBalance = Intent(applicationContext, BackgroundServiceBalance::class.java)
@@ -132,11 +145,9 @@ class SendBalanceActivity : AppCompatActivity(), ZXingScannerView.ResultHandler 
     if (rawResult?.text?.isNotEmpty()!!) {
       isHasCode = true
       wallet = rawResult.text.toString()
-      walletText.text = wallet
-      sendDoge.visibility = Button.VISIBLE
+      walletText.setText(wallet)
     } else {
       isHasCode = false
-      sendDoge.visibility = Button.GONE
     }
   }
 
@@ -145,7 +156,7 @@ class SendBalanceActivity : AppCompatActivity(), ZXingScannerView.ResultHandler 
       balanceValue = intent.getSerializableExtra("balanceValue") as BigDecimal
       user.setString("balanceValue", balanceValue.toPlainString())
       user.setString("balanceText", "${BitCoinFormat().decimalToDoge(balanceValue).toPlainString()} DOGE")
-      balanceText.hint = user.getString("balanceText")
+      userBalance.text = user.getString("balanceText")
     }
   }
 

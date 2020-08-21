@@ -134,6 +134,23 @@
 
     </LinearLayout>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:ems="10"
+        android:id="@+id/editTextSecondaryPassword"
+        android:background="@drawable/edit_text_mode"
+        android:drawableStart="@drawable/ic_baseline_lock_open"
+        android:drawableTint="@color/White"
+        android:textColor="@color/colorPrimary"
+        android:autofillHints="@string/doge_format"
+        android:drawablePadding="10dp"
+        tools:ignore="LabelFor"
+        android:hint="@string/transaction_password"
+        android:textColorHint="@color/Dark"
+        android:maxLength="4"/>
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp"/>

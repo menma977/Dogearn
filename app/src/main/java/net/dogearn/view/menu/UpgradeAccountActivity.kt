@@ -33,6 +33,7 @@ class UpgradeAccountActivity : AppCompatActivity() {
   private lateinit var gradeText: TextView
   private lateinit var gradePrice: TextView
   private lateinit var requestPin: TextView
+  private lateinit var secondaryPassword: TextView
   private lateinit var syncData: LinearLayout
   private lateinit var buy: Button
   private lateinit var balanceValue: BigDecimal
@@ -62,6 +63,7 @@ class UpgradeAccountActivity : AppCompatActivity() {
     gradeText = findViewById(R.id.textViewGrade)
     gradePrice = findViewById(R.id.textViewGradePrice)
     requestPin = findViewById(R.id.textViewRequestPin)
+    secondaryPassword = findViewById(R.id.editTextSecondaryPassword)
     syncData = findViewById(R.id.linearLayoutSyncData)
     balanceText = findViewById(R.id.textViewBalance)
 
@@ -83,6 +85,13 @@ class UpgradeAccountActivity : AppCompatActivity() {
   private fun onBuy() {
     Timer().schedule(2500) {
       when {
+        secondaryPassword.text.isEmpty() -> {
+          runOnUiThread {
+            Toast.makeText(applicationContext, "Secondary Password is required", Toast.LENGTH_SHORT).show()
+            secondaryPassword.requestFocus()
+            loading.closeDialog()
+          }
+        }
         gradeValue >= gradeValueMax -> {
           runOnUiThread {
             Toast.makeText(applicationContext, "You are in max upgrade", Toast.LENGTH_SHORT).show()
@@ -99,6 +108,7 @@ class UpgradeAccountActivity : AppCompatActivity() {
           val body = HashMap<String, String>()
           body["grade"] = idValueServer.toString()
           body["balance"] = balanceValue.toPlainString()
+          body["secondaryPassword"] = secondaryPassword.text.toString()
           response = WebController.Post("grade.store", user.getString("token"), body).execute().get()
           if (response.getInt("code") == 200) {
             runOnUiThread {
@@ -111,7 +121,7 @@ class UpgradeAccountActivity : AppCompatActivity() {
             }
           } else {
             runOnUiThread {
-              Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_SHORT).show()
+              Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_LONG).show()
               loading.closeDialog()
             }
           }

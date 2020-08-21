@@ -46,14 +46,6 @@ class RegisterFnActivity : AppCompatActivity() {
     message = findViewById(R.id.textViewMessage)
     login = findViewById(R.id.textViewLogin)
 
-    sponsor.setText("6281211610808")
-    phone.setText("6281211610809")
-    email.setText("nier.vae@gmail.com")
-    password.setText("123456789")
-    passwordConfirmation.setText("123456789")
-    transactionPassword.setText("123456789")
-    confirmTransactionPassword.setText("123456789")
-
     register.setOnClickListener {
       onRegister()
     }
@@ -62,6 +54,11 @@ class RegisterFnActivity : AppCompatActivity() {
       goTo = Intent(this, LoginActivity::class.java)
       startActivity(goTo)
     }
+  }
+
+  override fun onBackPressed() {
+    super.onBackPressed()
+    finish()
   }
 
   private fun onRegister() {
@@ -98,10 +95,10 @@ class RegisterFnActivity : AppCompatActivity() {
       Toast.makeText(this, "confirm transaction password confirmation cannot be empty", Toast.LENGTH_SHORT).show()
       loading.closeDialog()
       confirmTransactionPassword.requestFocus()
-    } else if (passwordConfirmation.text.toString() != confirmTransactionPassword.text.toString()) {
+    } else if (transactionPassword.text.toString() != confirmTransactionPassword.text.toString()) {
       Toast.makeText(this, "transaction password you entered does not match", Toast.LENGTH_SHORT).show()
       loading.closeDialog()
-      passwordConfirmation.requestFocus()
+      transactionPassword.requestFocus()
     } else {
       Timer().schedule(100) {
         val body = HashMap<String, String>()
@@ -118,6 +115,7 @@ class RegisterFnActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, response.getJSONObject("data").getString("message"), Toast.LENGTH_LONG).show()
             message.text = response.getJSONObject("data").getString("message")
             loading.closeDialog()
+            finish()
           }
         } else {
           runOnUiThread {

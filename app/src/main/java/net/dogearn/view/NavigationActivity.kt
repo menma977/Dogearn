@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.Toast
@@ -201,6 +202,13 @@ class NavigationActivity : AppCompatActivity() {
     setting.setOnClickListener {
       val fragment = SettingFragment()
       addFragment(fragment)
+    }
+
+    dogeChain.setOnClickListener {
+      val uri = "https://dogechain.info/address/${user.getString("wallet")}"
+      goTo = Intent(Intent.ACTION_VIEW)
+      goTo.data = Uri.parse(uri)
+      startActivity(goTo)
     }
   }
 
