@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
   private lateinit var upgradeAccount: LinearLayout
   private lateinit var registerAccount: LinearLayout
   private lateinit var sendPin: LinearLayout
+  private lateinit var network: LinearLayout
   private var isOnQueue: Boolean = true
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,6 +55,7 @@ class HomeFragment : Fragment() {
     upgradeAccount = root.findViewById(R.id.linearLayoutUpgradeAccount)
     registerAccount = root.findViewById(R.id.linearLayoutRegisterAccount)
     sendPin = root.findViewById(R.id.linearLayoutSendPin)
+    network = root.findViewById(R.id.linearLayoutNetwork)
 
     parentActivity = activity as NavigationActivity
 
@@ -111,6 +113,11 @@ class HomeFragment : Fragment() {
 
     registerAccount.setOnClickListener {
       goTo = Intent(parentActivity, RegisterActivity::class.java)
+      startActivity(goTo)
+    }
+
+    network.setOnClickListener {
+      goTo = Intent(parentActivity, NetworkActivity::class.java)
       startActivity(goTo)
     }
 

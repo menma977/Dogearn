@@ -19,6 +19,15 @@
     <service android:name=".config.BackgroundGetDataUser"/>
     <service android:name=".config.BackgroundServiceBalance"/>
 
+
+    <activity
+        android:name=".view.menu.NetworkActivity"
+        android:label="Network"
+        android:screenOrientation="portrait">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".MainActivity"/>
+    </activity>
     <activity
         android:name=".view.ForgotActivity"
         android:label="Forgot Password"
@@ -29,79 +38,79 @@
     </activity>
     <activity
         android:name=".view.menu.SendPinActivity"
-        android:label="Send Pin"
-        android:configChanges="orientation|screenSize">
+        android:configChanges="orientation|screenSize"
+        android:label="Send Pin">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".MainActivity"/>
     </activity>
     <activity
         android:name=".view.menu.ReceivedActivity"
-        android:label="Deposit DOGE"
-        android:configChanges="orientation|screenSize">
+        android:configChanges="orientation|screenSize"
+        android:label="Deposit DOGE">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".MainActivity"/>
     </activity>
     <activity
         android:name=".view.menu.SendBalanceActivity"
-        android:label="Send DOGE"
-        android:configChanges="orientation|screenSize">
+        android:configChanges="orientation|screenSize"
+        android:label="Send DOGE">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".MainActivity"/>
     </activity>
     <activity
         android:name=".view.menu.EditSecondaryPasswordActivity"
-        android:label="@string/edit_password_transaction"
-        android:configChanges="orientation|screenSize">
+        android:configChanges="orientation|screenSize"
+        android:label="@string/edit_password_transaction">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
     </activity>
     <activity
         android:name=".view.menu.EditPasswordActivity"
-        android:label="Edit Password"
-        android:configChanges="orientation|screenSize">
+        android:configChanges="orientation|screenSize"
+        android:label="Edit Password">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
     </activity>
     <activity
         android:name=".view.menu.RegisterActivity"
-        android:label="Register Account"
-        android:configChanges="orientation|screenSize">
+        android:configChanges="orientation|screenSize"
+        android:label="Register Account">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
     </activity>
     <activity
         android:name=".view.menu.UpgradeAccountActivity"
-        android:label="Upgrade Account"
-        android:configChanges="orientation|screenSize">
+        android:configChanges="orientation|screenSize"
+        android:label="Upgrade Account">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
     </activity>
     <activity
         android:name=".view.NavigationActivity"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:screenOrientation="portrait">
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar">
     </activity>
     <activity
         android:name=".view.RegisterFnActivity"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:screenOrientation="portrait">
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar">
     </activity>
     <activity
         android:name=".view.LoginActivity"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:screenOrientation="portrait">
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar">
     </activity>
     <activity
         android:name=".MainActivity"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:screenOrientation="portrait">
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
