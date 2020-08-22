@@ -6,7 +6,10 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
+import android.view.View
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import net.dogearn.MainActivity
 import net.dogearn.R
@@ -44,6 +47,7 @@ class UpgradeAccountActivity : AppCompatActivity() {
   private var pinValueServer: Int = 0
   private lateinit var intentServiceGetDataUser: Intent
   private lateinit var intentServiceBalance: Intent
+  private lateinit var container: LinearLayout
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -66,6 +70,7 @@ class UpgradeAccountActivity : AppCompatActivity() {
     secondaryPassword = findViewById(R.id.editTextSecondaryPassword)
     syncData = findViewById(R.id.linearLayoutSyncData)
     balanceText = findViewById(R.id.textViewBalance)
+    container = findViewById(R.id.linearLayoutDataContent)
 
     balanceText.text = user.getString("balanceText")
     pinText.text = pinValue.toString()
@@ -131,9 +136,15 @@ class UpgradeAccountActivity : AppCompatActivity() {
   }
 
   private fun upgradeSet(type: Int) {
+    val linearLayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+    linearLayoutParams.setMargins(10, 10, 10, 10)
+    val descriptionParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+    val line = LinearLayout.LayoutParams(10, LinearLayout.LayoutParams.WRAP_CONTENT)
+
     loading.openDialog()
     Timer().schedule(1000) {
       response = WebController.Get("grade.create", user.getString("token")).execute().get()
+      println(response)
       if (response.getInt("code") == 200) {
         val idValue = response.getJSONObject("data").getJSONObject("grade").getString("id")
         val gradeValue = response.getJSONObject("data").getJSONObject("grade").getString("price")
@@ -144,6 +155,39 @@ class UpgradeAccountActivity : AppCompatActivity() {
         gradeValueMax = idValue.toInt()
 
         runOnUiThread {
+          val dataGrabber = response.getJSONObject("data").getJSONArray("dataQueue")
+          for (i in 0 until dataGrabber.length()) {
+            runOnUiThread {
+              //body container
+              val containerLinearLayout = LinearLayout(applicationContext)
+              containerLinearLayout.layoutParams = linearLayoutParams
+              containerLinearLayout.gravity = Gravity.CENTER
+              containerLinearLayout.orientation = LinearLayout.VERTICAL
+              containerLinearLayout.setBackgroundResource(R.drawable.card_default)
+              containerLinearLayout.setPadding(10, 10, 10, 10)
+              containerLinearLayout.elevation = 20F
+              //description in sub container 1
+              val user = TextView(applicationContext)
+              user.layoutParams = descriptionParams
+              user.text = dataGrabber.getJSONObject(i).getString("user")
+              user.setTextColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
+              user.gravity = Gravity.CENTER
+              containerLinearLayout.addView(user)
+              val value = TextView(applicationContext)
+              value.layoutParams = descriptionParams
+              value.text = "${bitCoinFormat.decimalToDoge(dataGrabber.getJSONObject(i).getString("value").toBigDecimal()).toPlainString()} DOGE"
+              value.setTextColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
+              value.gravity = Gravity.CENTER
+              containerLinearLayout.addView(value)
+              //set container to parent container
+              container.addView(containerLinearLayout)
+              val wrapLine = View(applicationContext)
+              wrapLine.layoutParams = line
+              wrapLine.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.Dark))
+              container.addView(wrapLine)
+            }
+          }
+
           upgradeTo.text = "Upgrade To Level $idValue"
           gradePrice.text = "Request DOGE : ${bitCoinFormat.decimalToDoge(BigDecimal(gradeValue)).toInt()}"
           requestPin.text = "Request Pin : $pinValue"

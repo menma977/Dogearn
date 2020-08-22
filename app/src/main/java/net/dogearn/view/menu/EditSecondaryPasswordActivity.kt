@@ -103,30 +103,35 @@ class EditSecondaryPasswordActivity : AppCompatActivity() {
 
   private fun onUpdatePassword() {
     loading.openDialog()
-    Timer().schedule(1000) {
-      val body = HashMap<String, String>()
-      body["transaction_password"] = passwordTransactionText.text.toString()
-      body["transaction_password_confirmation"] = passwordTransactionConfirmText.text.toString()
-      response = WebController.Post("user.update", user.getString("token"), body).execute().get()
-      if (response.getInt("code") == 200) {
-        try {
-          runOnUiThread {
-            Toast.makeText(applicationContext, response.getJSONObject("data").getString("message"), Toast.LENGTH_LONG).show()
-            loading.closeDialog()
-            finish()
+    if (code == codeText.text.toString()) {
+      Timer().schedule(1000) {
+        val body = HashMap<String, String>()
+        body["transaction_password"] = passwordTransactionText.text.toString()
+        body["transaction_password_confirmation"] = passwordTransactionConfirmText.text.toString()
+        response = WebController.Post("user.update", user.getString("token"), body).execute().get()
+        if (response.getInt("code") == 200) {
+          try {
+            runOnUiThread {
+              Toast.makeText(applicationContext, response.getJSONObject("data").getString("message"), Toast.LENGTH_LONG).show()
+              loading.closeDialog()
+              finish()
+            }
+          } catch (e: Exception) {
+            runOnUiThread {
+              Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
+              loading.closeDialog()
+            }
           }
-        } catch (e: Exception) {
+        } else {
           runOnUiThread {
-            Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_LONG).show()
             loading.closeDialog()
           }
-        }
-      } else {
-        runOnUiThread {
-          Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_LONG).show()
-          loading.closeDialog()
         }
       }
+    } else {
+      Toast.makeText(this, "Wrong Code", Toast.LENGTH_SHORT).show()
+      loading.closeDialog()
     }
   }
 }

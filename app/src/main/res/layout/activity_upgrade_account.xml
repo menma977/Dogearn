@@ -165,4 +165,33 @@
 
   </LinearLayout>
 
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="10dp"/>
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:background="@drawable/card_default_3"
+          android:layout_marginTop="10dp"
+          android:layout_marginStart="20dp"
+          android:layout_marginEnd="20dp"
+          android:padding="10dp"
+          android:elevation="10dp"
+          android:id="@+id/linearLayoutDataContent"/>
+
+    </LinearLayout>
+
+  </ScrollView>
+
 </LinearLayout>
