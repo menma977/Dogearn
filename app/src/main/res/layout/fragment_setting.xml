@@ -98,37 +98,6 @@
         android:orientation="vertical">
 
       <LinearLayout
-          android:id="@+id/linearLayoutLogout"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="center"
-          tools:ignore="UseCompoundDrawables">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/logout"/>
-
-        <TextView
-            android:text="@string/logout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="19sp"
-            android:textColor="@color/textColorCustom"
-            android:layout_marginStart="10dp"/>
-
-      </LinearLayout>
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:background="@color/Dark"/>
-
-      <LinearLayout
           android:id="@+id/linearLayoutEditPassword"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -171,10 +140,72 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/send_pin"/>
+            app:srcCompat="@drawable/edit_password"/>
 
         <TextView
             android:text="@string/edit_password_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutEditPhone"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/phone"/>
+
+        <TextView
+            android:text="@string/edit_phone_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutLogout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/logout"/>
+
+        <TextView
+            android:text="@string/logout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

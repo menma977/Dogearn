@@ -80,19 +80,21 @@ class EditPasswordActivity : AppCompatActivity() {
       Timer().schedule(1000) {
         time = System.currentTimeMillis()
         response = WebController.Get("user.edit", user.getString("token")).execute().get()
-        if (response.getInt("code") == 200) {
-          try {
-            code = response.getJSONObject("data").getString("code")
-            runOnUiThread {
-              update.visibility = Button.VISIBLE
+        runOnUiThread {
+          if (response.getInt("code") == 200) {
+            try {
+              code = response.getJSONObject("data").getString("code")
+              runOnUiThread {
+                update.visibility = Button.VISIBLE
+              }
+            } catch (e: Exception) {
+              Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
             }
-          } catch (e: Exception) {
-            Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
+          } else {
+            Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_LONG).show()
           }
-        } else {
-          Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_LONG).show()
+          loading.closeDialog()
         }
-        loading.closeDialog()
       }
     } else {
       Toast.makeText(this, "wait up to ${delta / 1000} seconds", Toast.LENGTH_SHORT).show()

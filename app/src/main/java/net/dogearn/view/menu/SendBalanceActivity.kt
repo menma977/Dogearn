@@ -79,7 +79,6 @@ class SendBalanceActivity : AppCompatActivity(), ZXingScannerView.ResultHandler 
         val body = HashMap<String, String>()
         body["secondaryPassword"] = secondaryPasswordText.text.toString()
         response = WebController.Post("user.password.validator", user.getString("token"), body).execute().get()
-        println(response)
         if (response.getInt("code") == 200) {
           runOnUiThread {
             onSendDoge()
@@ -95,16 +94,16 @@ class SendBalanceActivity : AppCompatActivity(), ZXingScannerView.ResultHandler 
   }
 
   private fun onSendDoge() {
+    val doge = balanceText.text.toString().toBigDecimal()
     Timer().schedule(1000) {
       val body = HashMap<String, String>()
       body["a"] = "Withdraw"
       body["s"] = user.getString("key")
-      body["Amount"] = balanceText.text.toString()
-      body["Address"] = wallet
+      body["Amount"] =  bitCoinFormat.dogeToDecimal(doge).toPlainString()
+      body["Address"] = walletText.text.toString()
       body["Totp"] = "0"
       body["Currency"] = "doge"
       response = DogeController(body).execute().get()
-      println(response)
       if (response.getInt("code") == 200) {
         runOnUiThread {
           Toast.makeText(applicationContext, "wait until the doge balance is received", Toast.LENGTH_LONG).show()

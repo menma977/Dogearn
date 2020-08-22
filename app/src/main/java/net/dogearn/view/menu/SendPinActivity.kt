@@ -77,7 +77,7 @@ class SendPinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         loading.openDialog()
         Timer().schedule(1000) {
           val body = HashMap<String, String>()
-          body["wallet"] = wallet
+          body["wallet"] = walletText.text.toString()
           body["pin"] = pinAmountText.text.toString()
           body["secondaryPassword"] = secondaryPassword.text.toString()
           response = WebController.Post("pin.store", user.getString("token"), body).execute().get()

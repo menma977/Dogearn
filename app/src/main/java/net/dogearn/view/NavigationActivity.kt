@@ -23,6 +23,7 @@ import net.dogearn.controller.WebController
 import net.dogearn.model.Setting
 import net.dogearn.model.User
 import net.dogearn.view.fragment.HomeFragment
+import net.dogearn.view.fragment.InfoFragment
 import net.dogearn.view.fragment.SettingFragment
 import org.json.JSONObject
 import java.math.BigDecimal
@@ -39,6 +40,7 @@ class NavigationActivity : AppCompatActivity() {
   private lateinit var balanceValue: BigDecimal
   private lateinit var home: ImageButton
   private lateinit var dogeChain: ImageButton
+  private lateinit var info: ImageButton
   private lateinit var setting: ImageButton
   private lateinit var intentServiceGetDataUser: Intent
   private lateinit var intentServiceBalance: Intent
@@ -56,6 +58,7 @@ class NavigationActivity : AppCompatActivity() {
     home = findViewById(R.id.buttonHome)
     dogeChain = findViewById(R.id.buttonDogeChain)
     setting = findViewById(R.id.buttonSetting)
+    info = findViewById(R.id.buttonInfo)
 
     loading.openDialog()
 
@@ -150,9 +153,9 @@ class NavigationActivity : AppCompatActivity() {
         user.setInteger("isUserWin", response.getJSONObject("data").getInt("isUserWin"))
         user.setString("progressGrade", response.getJSONObject("data").getString("progressGrade"))
         user.setInteger("onQueue", response.getJSONObject("data").getInt("onQueue"))
+        user.setString("phoneSponsor", response.getJSONObject("data").getString("phoneSponsor"))
 
         runOnUiThread {
-          //set Default Fragment
           val fragment = HomeFragment()
           addFragment(fragment)
           loading.closeDialog()
@@ -209,6 +212,11 @@ class NavigationActivity : AppCompatActivity() {
       goTo = Intent(Intent.ACTION_VIEW)
       goTo.data = Uri.parse(uri)
       startActivity(goTo)
+    }
+
+    info.setOnClickListener {
+      val fragment = InfoFragment()
+      addFragment(fragment)
     }
   }
 

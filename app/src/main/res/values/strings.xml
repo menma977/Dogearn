@@ -63,4 +63,12 @@
   <string name="retype_new_password">Retype New Password</string>
   <string name="info">Info</string>
   <string name="home">Home</string>
+  <string name="history_pin">History Pin</string>
+  <string name="history_grade">History Grade</string>
+  <string name="history_doge">History Doge</string>
+  <string name="edit_phone_number">Edit Phone Number</string>
+  <string name="new_phone_number">New Phone Number</string>
+  <string name="retype_phone_number">Retype Phone Number</string>
+  <string name="balance">Balance</string>
+  <string name="whatsapp_sponsor">Whatsapp Sponsor</string>
 </resources>

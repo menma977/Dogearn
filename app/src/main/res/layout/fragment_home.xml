@@ -270,7 +270,7 @@
           android:background="@color/Dark"/>
 
       <LinearLayout
-          android:id="@+id/linearLayoutReport"
+          android:id="@+id/linearLayoutHistoryPin"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="horizontal"
@@ -281,10 +281,72 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/report"/>
+            app:srcCompat="@drawable/history_pin"/>
 
         <TextView
-            android:text="@string/report"
+            android:text="@string/history_pin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutHistoryGrade"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/history_grade"/>
+
+        <TextView
+            android:text="@string/history_grade"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutHistoryDoge"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/history_doge"/>
+
+        <TextView
+            android:text="@string/history_doge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

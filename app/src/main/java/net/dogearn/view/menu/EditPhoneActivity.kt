@@ -11,7 +11,7 @@ import org.json.JSONObject
 import java.util.*
 import kotlin.concurrent.schedule
 
-class EditSecondaryPasswordActivity : AppCompatActivity() {
+class EditPhoneActivity : AppCompatActivity() {
   private lateinit var loading: Loading
   private lateinit var user: User
   private lateinit var response: JSONObject
@@ -19,8 +19,8 @@ class EditSecondaryPasswordActivity : AppCompatActivity() {
   private lateinit var waitTimeText: TextView
   private lateinit var sendCodeToEmail: ImageButton
   private lateinit var codeText: EditText
-  private lateinit var passwordTransactionText: EditText
-  private lateinit var passwordTransactionConfirmText: EditText
+  private lateinit var phoneText: EditText
+  private lateinit var phoneConfirmText: EditText
   private lateinit var update: Button
   private var time: Long = 0
   private var delta: Long = 0
@@ -29,7 +29,7 @@ class EditSecondaryPasswordActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_edit_secondary_password)
+    setContentView(R.layout.activity_edit_phone)
 
     loading = Loading(this)
     user = User(this)
@@ -38,8 +38,8 @@ class EditSecondaryPasswordActivity : AppCompatActivity() {
     waitTimeText = findViewById(R.id.textViewWaitTime)
     sendCodeToEmail = findViewById(R.id.imageButtonSendCodeToEmail)
     codeText = findViewById(R.id.editTextCode)
-    passwordTransactionText = findViewById(R.id.editTextTextTransactionPassword)
-    passwordTransactionConfirmText = findViewById(R.id.editTextTextConfirmTransactionPassword)
+    phoneText = findViewById(R.id.editTextPhone)
+    phoneConfirmText = findViewById(R.id.editTextPhoneConfirmation)
     update = findViewById(R.id.buttonUpdate)
 
     update.visibility = Button.GONE
@@ -49,7 +49,7 @@ class EditSecondaryPasswordActivity : AppCompatActivity() {
     }
 
     update.setOnClickListener {
-      onUpdatePassword()
+      onUpdatePhone()
     }
 
     Timer().schedule(0, 1000) {
@@ -101,12 +101,12 @@ class EditSecondaryPasswordActivity : AppCompatActivity() {
     }
   }
 
-  private fun onUpdatePassword() {
+  private fun onUpdatePhone() {
     loading.openDialog()
     Timer().schedule(1000) {
       val body = HashMap<String, String>()
-      body["transaction_password"] = passwordTransactionText.text.toString()
-      body["transaction_password_confirmation"] = passwordTransactionConfirmText.text.toString()
+      body["phone"] = phoneText.text.toString()
+      body["phoneConfirm"] = phoneConfirmText.text.toString()
       response = WebController.Post("user.update", user.getString("token"), body).execute().get()
       if (response.getInt("code") == 200) {
         try {

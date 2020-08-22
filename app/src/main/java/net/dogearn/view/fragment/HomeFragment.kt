@@ -39,6 +39,11 @@ class HomeFragment : Fragment() {
   private lateinit var registerAccount: LinearLayout
   private lateinit var sendPin: LinearLayout
   private lateinit var network: LinearLayout
+  private lateinit var historyPin: LinearLayout
+  private lateinit var historyGrade: LinearLayout
+  private lateinit var historyDoge: LinearLayout
+  private lateinit var manualBot: LinearLayout
+  private lateinit var autoBot: LinearLayout
   private var isOnQueue: Boolean = true
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -56,6 +61,11 @@ class HomeFragment : Fragment() {
     registerAccount = root.findViewById(R.id.linearLayoutRegisterAccount)
     sendPin = root.findViewById(R.id.linearLayoutSendPin)
     network = root.findViewById(R.id.linearLayoutNetwork)
+    historyPin = root.findViewById(R.id.linearLayoutHistoryPin)
+    historyGrade = root.findViewById(R.id.linearLayoutHistoryGrade)
+    historyDoge = root.findViewById(R.id.linearLayoutHistoryDoge)
+    manualBot = root.findViewById(R.id.linearLayoutManualStake)
+    autoBot = root.findViewById(R.id.linearLayoutAutomaticStake)
 
     parentActivity = activity as NavigationActivity
 
@@ -119,6 +129,29 @@ class HomeFragment : Fragment() {
     network.setOnClickListener {
       goTo = Intent(parentActivity, NetworkActivity::class.java)
       startActivity(goTo)
+    }
+
+    historyPin.setOnClickListener {
+      goTo = Intent(parentActivity, HistoryPinActivity::class.java)
+      startActivity(goTo)
+    }
+
+    historyGrade.setOnClickListener {
+      goTo = Intent(parentActivity, HistoryGradeActivity::class.java)
+      startActivity(goTo)
+    }
+
+    historyDoge.setOnClickListener {
+      goTo = Intent(parentActivity, HistoryDogeActivity::class.java)
+      startActivity(goTo)
+    }
+
+    manualBot.setOnClickListener {
+      Toast.makeText(parentActivity, "under Constructor", Toast.LENGTH_SHORT).show()
+    }
+
+    autoBot.setOnClickListener {
+      Toast.makeText(parentActivity, "under Constructor", Toast.LENGTH_SHORT).show()
     }
 
     validateQueue()

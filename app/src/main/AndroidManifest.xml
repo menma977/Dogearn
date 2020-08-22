@@ -15,11 +15,36 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
+    <activity android:name=".view.menu.EditPhoneActivity">
+    </activity>
 
     <service android:name=".config.BackgroundGetDataUser"/>
     <service android:name=".config.BackgroundServiceBalance"/>
 
-
+    <activity
+        android:name=".view.menu.HistoryGradeActivity"
+        android:configChanges="orientation|screenSize"
+        android:label="History Grade">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
+    </activity>
+    <activity
+        android:name=".view.menu.HistoryDogeActivity"
+        android:configChanges="orientation|screenSize"
+        android:label="History Doge">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
+    </activity>
+    <activity
+        android:name=".view.menu.HistoryPinActivity"
+        android:configChanges="orientation|screenSize"
+        android:label="history Pin">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
+    </activity>
     <activity
         android:name=".view.menu.NetworkActivity"
         android:label="Network"

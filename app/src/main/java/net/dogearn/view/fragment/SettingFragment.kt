@@ -22,6 +22,7 @@ import net.dogearn.model.Setting
 import net.dogearn.model.User
 import net.dogearn.view.NavigationActivity
 import net.dogearn.view.menu.EditPasswordActivity
+import net.dogearn.view.menu.EditPhoneActivity
 import net.dogearn.view.menu.EditSecondaryPasswordActivity
 import org.json.JSONObject
 import java.util.*
@@ -40,6 +41,7 @@ class SettingFragment : Fragment() {
   private lateinit var response: JSONObject
   private lateinit var editPassword: LinearLayout
   private lateinit var editSecondaryPassword: LinearLayout
+  private lateinit var editPhone: LinearLayout
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val root = inflater.inflate(R.layout.fragment_setting, container, false)
@@ -56,6 +58,7 @@ class SettingFragment : Fragment() {
     logout = root.findViewById(R.id.linearLayoutLogout)
     editPassword = root.findViewById(R.id.linearLayoutEditPassword)
     editSecondaryPassword = root.findViewById(R.id.linearLayoutEditSecondaryPassword)
+    editPhone = root.findViewById(R.id.linearLayoutEditPhone)
 
     phone.text = user.getString("phone")
     email.text = user.getString("email")
@@ -67,6 +70,11 @@ class SettingFragment : Fragment() {
 
     editSecondaryPassword.setOnClickListener {
       goTo = Intent(parentActivity, EditSecondaryPasswordActivity::class.java)
+      startActivity(goTo)
+    }
+
+    editPhone.setOnClickListener {
+      goTo = Intent(parentActivity, EditPhoneActivity::class.java)
       startActivity(goTo)
     }
 

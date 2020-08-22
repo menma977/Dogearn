@@ -44,7 +44,7 @@
           android:id="@+id/buttonHome"
           android:layout_width="50dp"
           android:layout_height="50dp"
-          app:srcCompat="@drawable/manual_trade"
+          app:srcCompat="@drawable/home"
           android:scaleType="fitCenter"
           android:background="@color/Link"
           android:contentDescription="@string/icon"/>
@@ -98,7 +98,7 @@
           android:id="@+id/buttonInfo"
           android:layout_width="50dp"
           android:layout_height="50dp"
-          app:srcCompat="@drawable/manual_trade"
+          app:srcCompat="@drawable/info_user"
           android:scaleType="fitCenter"
           android:background="@color/Link"
           android:contentDescription="@string/icon"/>

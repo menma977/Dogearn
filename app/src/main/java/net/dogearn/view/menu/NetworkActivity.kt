@@ -27,8 +27,6 @@ class NetworkActivity : AppCompatActivity() {
 
     webView = findViewById(R.id.webViewContent)
 
-    println(user.getString("token"))
-
     loadHtml()
   }
 
@@ -42,7 +40,7 @@ class NetworkActivity : AppCompatActivity() {
         runOnUiThread {
           webView.settings.javaScriptEnabled = true
           webView.loadData(response.getString("data"), "text/html", "UTF-8")
-          webView.loadDataWithBaseURL(Url.web()+"binary/api", response.getString("data"), "text/html", "UTF-8", null)
+          webView.loadDataWithBaseURL(Url.web() + "binary/api", response.getString("data"), "text/html", "UTF-8", null)
           loading.closeDialog()
         }
       }
