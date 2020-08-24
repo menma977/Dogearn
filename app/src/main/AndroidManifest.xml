@@ -15,16 +15,37 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
-    <activity android:name=".view.menu.EditPhoneActivity">
-    </activity>
 
     <service android:name=".config.BackgroundGetDataUser"/>
     <service android:name=".config.BackgroundServiceBalance"/>
 
+
+    <activity
+        android:name=".view.menu.HistoryOutActivity"
+        android:label="DOGEARN Outgoing">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
+    </activity>
+    <activity
+        android:name=".view.menu.HistoryInActivity"
+        android:label="DOGEARN Ingoing">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
+    </activity>
+    <activity
+        android:name=".view.menu.EditPhoneActivity"
+        android:label="Edit Phone Number">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
+    </activity>
+
     <activity
         android:name=".view.menu.HistoryGradeActivity"
         android:configChanges="orientation|screenSize"
-        android:label="History Grade">
+        android:label="History Grade Level">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
@@ -40,7 +61,7 @@
     <activity
         android:name=".view.menu.HistoryPinActivity"
         android:configChanges="orientation|screenSize"
-        android:label="history Pin">
+        android:label="History Pin">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>

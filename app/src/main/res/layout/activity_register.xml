@@ -51,18 +51,18 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="phone"
+        android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editTextTextPhone"
+        android:id="@+id/editTextTextEmail"
         android:background="@drawable/edit_text_mode_3"
-        android:hint="@string/phone_number_user"
+        android:hint="@string/email_user"
         android:autofillHints="@string/enter_username"
         android:drawablePadding="10dp"
         android:textColor="@color/colorPrimaryDark"
         android:gravity="center"/>
 
     <TextView
-        android:text="@string/if_indonesia"
+        android:text="@string/example_yourmail_mail_com"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="12sp"
@@ -76,18 +76,18 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
+        android:inputType="phone"
         android:ems="10"
-        android:id="@+id/editTextTextEmail"
+        android:id="@+id/editTextTextPhone"
         android:background="@drawable/edit_text_mode_3"
-        android:hint="@string/email_user"
+        android:hint="@string/phone_number_user"
         android:autofillHints="@string/enter_username"
         android:drawablePadding="10dp"
         android:textColor="@color/colorPrimaryDark"
         android:gravity="center"/>
 
     <TextView
-        android:text="@string/example_yourmail_mail_com"
+        android:text="@string/if_indonesia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="12sp"
@@ -114,11 +114,12 @@
         android:layout_height="10dp"/>
 
     <TextView
+        android:text="@string/description_register"
         android:id="@+id/textViewMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/Info"/>
+        android:textColor="@color/colorPrimary"/>
 
   </LinearLayout>
 

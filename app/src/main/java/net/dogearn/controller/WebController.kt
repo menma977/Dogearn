@@ -12,13 +12,14 @@ import okhttp3.Response
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.util.concurrent.TimeUnit
 
 class WebController {
   @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
   class Post(private var targetUrl: String, private var token: String, private var body: HashMap<String, String>) : AsyncTask<Void, Void, JSONObject>() {
     override fun doInBackground(vararg params: Void?): JSONObject {
       return try {
-        val client = OkHttpClient.Builder().build()
+        val client = OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS).writeTimeout(30, TimeUnit.SECONDS).readTimeout(30, TimeUnit.SECONDS).build()
         val mediaType: MediaType = "application/x-www-form-urlencoded".toMediaType()
         val body = MapToJson().map(body).toRequestBody(mediaType)
         val request = Request.Builder()
@@ -60,7 +61,7 @@ class WebController {
     @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     override fun doInBackground(vararg p0: Void?): JSONObject {
       return try {
-        val client = OkHttpClient().newBuilder().build()
+        val client = OkHttpClient().newBuilder().connectTimeout(30, TimeUnit.SECONDS).writeTimeout(30, TimeUnit.SECONDS).readTimeout(30, TimeUnit.SECONDS).build()
         val request = Request.Builder()
         request.url(Url.web() + targetUrl.replace(".", "/"))
         request.method("GET", null)
@@ -96,7 +97,7 @@ class WebController {
   class PostWebView(private var targetUrl: String, private var token: String, private var body: HashMap<String, String>) : AsyncTask<Void, Void, JSONObject>() {
     override fun doInBackground(vararg params: Void?): JSONObject {
       return try {
-        val client = OkHttpClient.Builder().build()
+        val client = OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS).writeTimeout(30, TimeUnit.SECONDS).readTimeout(30, TimeUnit.SECONDS).build()
         val mediaType: MediaType = "application/x-www-form-urlencoded".toMediaType()
         val body = MapToJson().map(body).toRequestBody(mediaType)
         val request = Request.Builder()

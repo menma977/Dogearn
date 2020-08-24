@@ -42,6 +42,8 @@ class HomeFragment : Fragment() {
   private lateinit var historyPin: LinearLayout
   private lateinit var historyGrade: LinearLayout
   private lateinit var historyDoge: LinearLayout
+  private lateinit var historyDogeIn: LinearLayout
+  private lateinit var historyDogeOut: LinearLayout
   private lateinit var manualBot: LinearLayout
   private lateinit var autoBot: LinearLayout
   private var isOnQueue: Boolean = true
@@ -64,6 +66,8 @@ class HomeFragment : Fragment() {
     historyPin = root.findViewById(R.id.linearLayoutHistoryPin)
     historyGrade = root.findViewById(R.id.linearLayoutHistoryGrade)
     historyDoge = root.findViewById(R.id.linearLayoutHistoryDoge)
+    historyDogeIn = root.findViewById(R.id.linearLayoutHistoryDogeIn)
+    historyDogeOut = root.findViewById(R.id.linearLayoutHistoryDogeOut)
     manualBot = root.findViewById(R.id.linearLayoutManualStake)
     autoBot = root.findViewById(R.id.linearLayoutAutomaticStake)
 
@@ -146,12 +150,22 @@ class HomeFragment : Fragment() {
       startActivity(goTo)
     }
 
+    historyDogeIn.setOnClickListener {
+      goTo = Intent(parentActivity, HistoryInActivity::class.java)
+      startActivity(goTo)
+    }
+
+    historyDogeOut.setOnClickListener {
+      goTo = Intent(parentActivity, HistoryOutActivity::class.java)
+      startActivity(goTo)
+    }
+
     manualBot.setOnClickListener {
-      Toast.makeText(parentActivity, "under Constructor", Toast.LENGTH_SHORT).show()
+      Toast.makeText(parentActivity, "Under Constructor", Toast.LENGTH_SHORT).show()
     }
 
     autoBot.setOnClickListener {
-      Toast.makeText(parentActivity, "under Constructor", Toast.LENGTH_SHORT).show()
+      Toast.makeText(parentActivity, "Under Constructor", Toast.LENGTH_SHORT).show()
     }
 
     validateQueue()
@@ -163,9 +177,13 @@ class HomeFragment : Fragment() {
     if (isOnQueue) {
       sendBalance.visibility = ImageButton.GONE
       upgradeAccount.visibility = LinearLayout.GONE
+      manualBot.visibility = ImageButton.GONE
+      autoBot.visibility = LinearLayout.GONE
     } else {
       sendBalance.visibility = ImageButton.VISIBLE
       upgradeAccount.visibility = LinearLayout.VISIBLE
+      manualBot.visibility = ImageButton.VISIBLE
+      autoBot.visibility = LinearLayout.VISIBLE
     }
   }
 

@@ -91,7 +91,7 @@
 
       <Space
           android:layout_width="match_parent"
-          android:layout_height="10dp"/>
+          android:layout_height="50dp"/>
 
       <LinearLayout
           android:id="@+id/linearLayoutWallet"
@@ -291,8 +291,7 @@
             android:textSize="14sp"
             android:textColor="@color/colorPrimary"
             android:gravity="end"
-            app:drawableRightCompat="@drawable/ic_baseline_phone"
-            app:drawableTint="@color/colorPrimary"/>
+            app:drawableStartCompat="@drawable/phone_small"/>
 
       </LinearLayout>
 

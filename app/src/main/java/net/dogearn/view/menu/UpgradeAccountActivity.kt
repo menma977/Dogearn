@@ -155,43 +155,43 @@ class UpgradeAccountActivity : AppCompatActivity() {
         gradeValueMax = idValue.toInt()
 
         runOnUiThread {
-          val dataGrabber = response.getJSONObject("data").getJSONArray("dataQueue")
-          for (i in 0 until dataGrabber.length()) {
-            runOnUiThread {
-              //body container
-              val containerLinearLayout = LinearLayout(applicationContext)
-              containerLinearLayout.layoutParams = linearLayoutParams
-              containerLinearLayout.gravity = Gravity.CENTER
-              containerLinearLayout.orientation = LinearLayout.VERTICAL
-              containerLinearLayout.setBackgroundResource(R.drawable.card_default)
-              containerLinearLayout.setPadding(10, 10, 10, 10)
-              containerLinearLayout.elevation = 20F
-              //description in sub container 1
-              val user = TextView(applicationContext)
-              user.layoutParams = descriptionParams
-              user.text = dataGrabber.getJSONObject(i).getString("user")
-              user.setTextColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
-              user.gravity = Gravity.CENTER
-              containerLinearLayout.addView(user)
-              val value = TextView(applicationContext)
-              value.layoutParams = descriptionParams
-              value.text = "${bitCoinFormat.decimalToDoge(dataGrabber.getJSONObject(i).getString("value").toBigDecimal()).toPlainString()} DOGE"
-              value.setTextColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
-              value.gravity = Gravity.CENTER
-              containerLinearLayout.addView(value)
-              //set container to parent container
-              container.addView(containerLinearLayout)
-              val wrapLine = View(applicationContext)
-              wrapLine.layoutParams = line
-              wrapLine.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.Dark))
-              container.addView(wrapLine)
-            }
-          }
-
-          upgradeTo.text = "Upgrade To Level $idValue"
-          gradePrice.text = "Request DOGE : ${bitCoinFormat.decimalToDoge(BigDecimal(gradeValue)).toInt()}"
-          requestPin.text = "Request Pin : $pinValue"
           if (type == 0) {
+            val dataGrabber = response.getJSONObject("data").getJSONArray("dataQueue")
+            for (i in 0 until dataGrabber.length()) {
+              runOnUiThread {
+                //body container
+                val containerLinearLayout = LinearLayout(applicationContext)
+                containerLinearLayout.layoutParams = linearLayoutParams
+                containerLinearLayout.gravity = Gravity.CENTER
+                containerLinearLayout.orientation = LinearLayout.VERTICAL
+                containerLinearLayout.setBackgroundResource(R.drawable.card_default)
+                containerLinearLayout.setPadding(10, 10, 10, 10)
+                containerLinearLayout.elevation = 20F
+                //description in sub container 1
+                val user = TextView(applicationContext)
+                user.layoutParams = descriptionParams
+                user.text = dataGrabber.getJSONObject(i).getString("user")
+                user.setTextColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
+                user.gravity = Gravity.CENTER
+                containerLinearLayout.addView(user)
+                val value = TextView(applicationContext)
+                value.layoutParams = descriptionParams
+                value.text = "${bitCoinFormat.decimalToDoge(dataGrabber.getJSONObject(i).getString("value").toBigDecimal()).toPlainString()} DOGE"
+                value.setTextColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
+                value.gravity = Gravity.CENTER
+                containerLinearLayout.addView(value)
+                //set container to parent container
+                container.addView(containerLinearLayout)
+                val wrapLine = View(applicationContext)
+                wrapLine.layoutParams = line
+                wrapLine.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.Dark))
+                container.addView(wrapLine)
+              }
+            }
+
+            upgradeTo.text = "Upgrade To Level $idValue"
+            gradePrice.text = "Request DOGE : ${bitCoinFormat.decimalToDoge(BigDecimal(gradeValue)).toInt()}"
+            requestPin.text = "Request Pin : $pinValue"
             loading.closeDialog()
           } else {
             onBuy()

@@ -12,14 +12,13 @@ import androidx.core.content.ContextCompat
 import net.dogearn.R
 import net.dogearn.config.BitCoinFormat
 import net.dogearn.config.Loading
-import net.dogearn.controller.WebController
+import net.dogearn.controller.DogeController
 import net.dogearn.model.User
 import org.json.JSONObject
-import java.math.BigDecimal
 import java.util.*
 import kotlin.concurrent.schedule
 
-class HistoryGradeActivity : AppCompatActivity() {
+class HistoryOutActivity : AppCompatActivity() {
   private lateinit var container: LinearLayout
   private lateinit var user: User
   private lateinit var loading: Loading
@@ -28,7 +27,7 @@ class HistoryGradeActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_history_grade)
+    setContentView(R.layout.activity_history_out)
 
     user = User(this)
     loading = Loading(this)
@@ -45,16 +44,24 @@ class HistoryGradeActivity : AppCompatActivity() {
     val linearLayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
     linearLayoutParams.setMargins(10, 10, 10, 10)
     val iconImageParams = LinearLayout.LayoutParams(50, 50)
-    val descriptionParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
-    val totalDogeParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
+    val addressParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
+    val balanceParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
     val dateParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
     val line = LinearLayout.LayoutParams(10, LinearLayout.LayoutParams.WRAP_CONTENT)
 
     Timer().schedule(1000) {
-      response = WebController.Get("grade", user.getString("token")).execute().get()
+      val body = HashMap<String, String>()
+      body["a"] = "GetWithdrawals"
+      body["s"] = user.getString("key")
+      response = DogeController(body).execute().get()
       if (response.getInt("code") == 200) {
-        val dataGrabber = response.getJSONObject("data").getJSONArray("gradeHistory")
-        for (i in 0 until dataGrabber.length()) {
+        val dataGrabber = response.getJSONObject("data").getJSONArray("Transfers")
+        val length = if (dataGrabber.length() > 50) {
+          50
+        } else {
+          dataGrabber.length() - 1
+        }
+        for (i in length downTo 0) {
           runOnUiThread {
             //body container
             val containerLinearLayout = LinearLayout(applicationContext)
@@ -77,52 +84,26 @@ class HistoryGradeActivity : AppCompatActivity() {
             //image in sub container 1
             val imageIcon = ImageView(applicationContext)
             imageIcon.layoutParams = iconImageParams
-            if (dataGrabber.getJSONObject(i).getString("debit").toBigDecimal() == BigDecimal(0)) {
-              imageIcon.setImageResource(R.drawable.output)
-            } else {
-              imageIcon.setImageResource(R.drawable.input)
-            }
+            imageIcon.setImageResource(R.drawable.input)
             containerLinearLayoutSub1.addView(imageIcon)
             //description in sub container 1
-            val description = TextView(applicationContext)
-            description.layoutParams = descriptionParams
-            val textDescription = if (dataGrabber.getJSONObject(i).getString("debit").toBigDecimal() == BigDecimal(0)) {
-              "${
-                dataGrabber.getJSONObject(i).getString("email")
-              } Send: ${
-                bitCoinFormat.decimalToDoge(dataGrabber.getJSONObject(i).getString("credit").toBigDecimal()).toPlainString()
-              } Upgrade Level: ${
-                dataGrabber.getJSONObject(i).getInt("upgrade_level")
-              }"
-            } else {
-              "${
-                dataGrabber.getJSONObject(i).getString("email")
-              } Received: ${
-                bitCoinFormat.decimalToDoge(dataGrabber.getJSONObject(i).getString("debit").toBigDecimal()).toPlainString()
-              } Upgrade Level: ${
-                dataGrabber.getJSONObject(i).getInt("upgrade_level")
-              }"
-            }
-            description.text = textDescription
-            description.setTextColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
-            description.gravity = Gravity.START
-            containerLinearLayoutSub1.addView(description)
+            val address = TextView(applicationContext)
+            address.layoutParams = addressParams
+            address.text = dataGrabber.getJSONObject(i).getString("Address")
+            address.setTextColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
+            address.gravity = Gravity.START
+            containerLinearLayoutSub1.addView(address)
             //pin sub container 2
-            val doge = TextView(applicationContext)
-            doge.layoutParams = totalDogeParams
-            if (dataGrabber.getJSONObject(i).getString("debit").toBigDecimal() == BigDecimal(0)) {
-              doge.text = "Amount: -${bitCoinFormat.decimalToDoge(dataGrabber.getJSONObject(i).getString("credit").toBigDecimal()).toPlainString()} DOGE"
-              doge.setTextColor(ContextCompat.getColor(applicationContext, R.color.Danger))
-            } else {
-              doge.text = "Amount: +${bitCoinFormat.decimalToDoge(dataGrabber.getJSONObject(i).getString("debit").toBigDecimal()).toPlainString()} DOGE"
-              doge.setTextColor(ContextCompat.getColor(applicationContext, R.color.Success))
-            }
-            doge.gravity = Gravity.CENTER
-            containerLinearLayoutSub2.addView(doge)
+            val balance = TextView(applicationContext)
+            balance.layoutParams = balanceParams
+            balance.text = "Amount: -${bitCoinFormat.decimalToDoge(dataGrabber.getJSONObject(i).getString("Value").toBigDecimal()).toPlainString()} DOGE"
+            balance.setTextColor(ContextCompat.getColor(applicationContext, R.color.Danger))
+            balance.gravity = Gravity.CENTER
+            containerLinearLayoutSub2.addView(balance)
             //date in sub container 2
             val date = TextView(applicationContext)
             date.layoutParams = dateParams
-            date.text = dataGrabber.getJSONObject(i).getString("date")
+            date.text = dataGrabber.getJSONObject(i).getString("Completed")
             date.setTextColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
             date.gravity = Gravity.CENTER
             containerLinearLayoutSub2.addView(date)

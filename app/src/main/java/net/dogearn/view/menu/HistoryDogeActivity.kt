@@ -88,7 +88,7 @@ class HistoryDogeActivity : AppCompatActivity() {
             //pin sub container 2
             val pin = TextView(applicationContext)
             pin.layoutParams = totalPinParams
-            pin.text = "Amount: ${bitCoinFormat.decimalToDoge(dataGrabber.getJSONObject(i).getString("total").toBigDecimal())} DOGE"
+            pin.text = "Amount: ${bitCoinFormat.decimalToDoge(dataGrabber.getJSONObject(i).getString("total").toBigDecimal()).toPlainString()} DOGE"
             pin.setTextColor(ContextCompat.getColor(applicationContext, R.color.Danger))
             pin.gravity = Gravity.CENTER
             containerLinearLayoutSub2.addView(pin)

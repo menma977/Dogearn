@@ -53,7 +53,7 @@
   <string name="secondary_password_must_be_character_number">Secondary password must be 4 character number</string>
   <string name="destination_wallet">Destination Wallet</string>
   <string name="amount">Amount</string>
-  <string name="example_yourmail_mail_com">example: yourmail@mail.com</string>
+  <string name="example_yourmail_mail_com">example: email@mail.com</string>
   <string name="email_user">Email</string>
   <string name="phone_number_user">Phone Number</string>
   <string name="send_pin">Send Pin</string>
@@ -64,11 +64,14 @@
   <string name="info">Info</string>
   <string name="home">Home</string>
   <string name="history_pin">History Pin</string>
-  <string name="history_grade">History Grade</string>
+  <string name="history_grade">History Grade Level</string>
   <string name="history_doge">History Doge</string>
+  <string name="history_doge_in">History Doge Ingoing</string>
+  <string name="history_doge_out">History Doge Outgoing</string>
   <string name="edit_phone_number">Edit Phone Number</string>
   <string name="new_phone_number">New Phone Number</string>
   <string name="retype_phone_number">Retype Phone Number</string>
   <string name="balance">Balance</string>
-  <string name="whatsapp_sponsor">Whatsapp Sponsor</string>
+  <string name="whatsapp_sponsor">Contact Sponsor</string>
+  <string name="description_register">Registration requires confirmation that will be entered in the registered email, If within 24 hours of not confirming the registration will be deleted, please re-register</string>
 </resources>

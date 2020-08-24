@@ -22,8 +22,7 @@ import java.util.concurrent.TimeUnit
 class DogeController(private var body: HashMap<String, String>) : AsyncTask<Void, Void, JSONObject>() {
   override fun doInBackground(vararg params: Void?): JSONObject {
     return try {
-      val client = OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS).readTimeout(30, TimeUnit.SECONDS).build()
+      val client = OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS).writeTimeout(30, TimeUnit.SECONDS).readTimeout(30, TimeUnit.SECONDS).build()
       val mediaType: MediaType = "application/x-www-form-urlencoded".toMediaType()
       val body = MapToJson().map(body).toRequestBody(mediaType)
       val request: Request = Request.Builder().url(Url.doge()).post(body).build()
