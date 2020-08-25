@@ -3,13 +3,11 @@ package net.dogearn.view
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 import net.dogearn.R
 import net.dogearn.config.Loading
@@ -31,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
   private lateinit var username: EditText
   private lateinit var password: EditText
   private lateinit var login: Button
+  private lateinit var newApp: Button
   private lateinit var register: TextView
   private lateinit var forgotPassword: TextView
 
@@ -46,8 +45,36 @@ class LoginActivity : AppCompatActivity() {
     username = findViewById(R.id.editTextTextUsername)
     password = findViewById(R.id.editTextPassword)
     login = findViewById(R.id.buttonLogin)
+    newApp = findViewById(R.id.buttonNewApp)
     register = findViewById(R.id.textViewRegister)
     forgotPassword = findViewById(R.id.textViewForgotPassword)
+
+
+    if (intent.getBooleanExtra("isUpdate", false)) {
+      login.visibility = Button.GONE
+      newApp.visibility = Button.VISIBLE
+      version.text = intent.getStringExtra("version")
+    } else {
+      login.visibility = Button.VISIBLE
+      newApp.visibility = Button.GONE
+      version.text = intent.getStringExtra("version")
+    }
+
+    if (intent.getBooleanExtra("lock", true)) {
+      username.isEnabled = false
+      password.isEnabled = false
+      login.visibility = Button.GONE
+      register.visibility = LinearLayout.GONE
+      forgotPassword.visibility = LinearLayout.GONE
+      version.text = intent.getStringExtra("version")
+    } else {
+      username.isEnabled = true
+      password.isEnabled = true
+      login.visibility = Button.VISIBLE
+      register.visibility = LinearLayout.VISIBLE
+      forgotPassword.visibility = LinearLayout.VISIBLE
+      version.text = intent.getStringExtra("version")
+    }
 
     login.setOnClickListener {
       if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
@@ -68,6 +95,14 @@ class LoginActivity : AppCompatActivity() {
     forgotPassword.setOnClickListener {
       goTo = Intent(this, ForgotActivity::class.java)
       startActivity(goTo)
+    }
+
+    newApp.setOnClickListener {
+      user.clear()
+      setting.clear()
+      goTo = Intent(Intent.ACTION_VIEW, Uri.parse("https://dogearn.net/download/dogearn.apk"))
+      startActivity(goTo)
+      finish()
     }
   }
 

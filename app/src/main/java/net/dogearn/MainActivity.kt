@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
   private fun isNotLogin() {
     goTo.putExtra("lock", false)
     goTo.putExtra("isUpdate", false)
-    goTo.putExtra("version", BuildConfig.VERSION_CODE.toString())
+    goTo.putExtra("version", "Version ${BuildConfig.VERSION_CODE}")
     startActivity(goTo)
     finish()
   }
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     setting.clear()
     goTo.putExtra("lock", true)
     goTo.putExtra("isUpdate", true)
-    goTo.putExtra("version", response.getJSONObject("data").getString("version"))
+    goTo.putExtra("version", "New Version ${response.getJSONObject("data").getString("version")}")
     startActivity(goTo)
     finish()
   }
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
     setting.clear()
     goTo.putExtra("lock", true)
     goTo.putExtra("isUpdate", false)
-    goTo.putExtra("version", BuildConfig.VERSION_CODE.toString())
+    goTo.putExtra("version", "problematic connection. please close the app and reopen it to continue")
     startActivity(goTo)
     finish()
   }

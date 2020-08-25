@@ -45,7 +45,7 @@
     <activity
         android:name=".view.menu.HistoryGradeActivity"
         android:configChanges="orientation|screenSize"
-        android:label="History Grade Level">
+        android:label="History LOT">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
@@ -133,7 +133,7 @@
     <activity
         android:name=".view.menu.UpgradeAccountActivity"
         android:configChanges="orientation|screenSize"
-        android:label="Upgrade Account">
+        android:label="Upgrade LOT">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>

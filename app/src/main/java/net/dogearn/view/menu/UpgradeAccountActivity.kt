@@ -144,7 +144,6 @@ class UpgradeAccountActivity : AppCompatActivity() {
     loading.openDialog()
     Timer().schedule(1000) {
       response = WebController.Get("grade.create", user.getString("token")).execute().get()
-      println(response)
       if (response.getInt("code") == 200) {
         val idValue = response.getJSONObject("data").getJSONObject("grade").getString("id")
         val gradeValue = response.getJSONObject("data").getJSONObject("grade").getString("price")

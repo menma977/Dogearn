@@ -252,7 +252,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/received"/>
+            app:srcCompat="@drawable/sendpin"/>
 
         <TextView
             android:text="@string/send_pin"

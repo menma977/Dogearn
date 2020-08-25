@@ -89,7 +89,7 @@ class HistoryOutActivity : AppCompatActivity() {
             //description in sub container 1
             val address = TextView(applicationContext)
             address.layoutParams = addressParams
-            address.text = dataGrabber.getJSONObject(i).getString("Address")
+            address.text = dataGrabber.getJSONObject(i).getString("Address").replace("XFER", "Internal EARN")
             address.setTextColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
             address.gravity = Gravity.START
             containerLinearLayoutSub1.addView(address)
