@@ -54,6 +54,7 @@ class HistoryGradeActivity : AppCompatActivity() {
       response = WebController.Get("grade", user.getString("token")).execute().get()
       if (response.getInt("code") == 200) {
         val dataGrabber = response.getJSONObject("data").getJSONArray("gradeHistory")
+        println(dataGrabber)
         for (i in 0 until dataGrabber.length()) {
           runOnUiThread {
             //body container
@@ -91,16 +92,20 @@ class HistoryGradeActivity : AppCompatActivity() {
                 dataGrabber.getJSONObject(i).getString("email")
               } Send: ${
                 bitCoinFormat.decimalToDoge(dataGrabber.getJSONObject(i).getString("credit").toBigDecimal()).toPlainString()
-              } Upgrade Level: ${
+              } DOGE Upgrade LOT: ${
                 dataGrabber.getJSONObject(i).getInt("upgrade_level")
+              } To : ${
+                dataGrabber.getJSONObject(i).getString("emailTarget")
               }"
             } else {
               "${
                 dataGrabber.getJSONObject(i).getString("email")
               } Received: ${
                 bitCoinFormat.decimalToDoge(dataGrabber.getJSONObject(i).getString("debit").toBigDecimal()).toPlainString()
-              } Upgrade Level: ${
+              } DOGE Upgrade LOT: ${
                 dataGrabber.getJSONObject(i).getInt("upgrade_level")
+              } From : ${
+                dataGrabber.getJSONObject(i).getString("emailTarget")
               }"
             }
             description.text = textDescription
