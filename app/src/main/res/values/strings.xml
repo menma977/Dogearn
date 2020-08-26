@@ -66,8 +66,8 @@
   <string name="history_pin">History Pin</string>
   <string name="history_grade">History LOT</string>
   <string name="history_doge">History Doge</string>
-  <string name="history_doge_in">History Doge Ingoing</string>
-  <string name="history_doge_out">History Doge Outgoing</string>
+  <string name="history_doge_in">History Doge Income</string>
+  <string name="history_doge_out">History Doge Outgo</string>
   <string name="edit_phone_number">Edit Phone Number</string>
   <string name="new_phone_number">New Phone Number</string>
   <string name="retype_phone_number">Retype Phone Number</string>
