@@ -23,6 +23,7 @@ import net.dogearn.controller.WebController
 import net.dogearn.model.Setting
 import net.dogearn.model.User
 import net.dogearn.view.fragment.HomeFragment
+import net.dogearn.view.fragment.HomeNoProgressBarFragment
 import net.dogearn.view.fragment.InfoFragment
 import net.dogearn.view.fragment.SettingFragment
 import org.json.JSONObject
@@ -156,8 +157,13 @@ class NavigationActivity : AppCompatActivity() {
         user.setString("phoneSponsor", response.getJSONObject("data").getString("phoneSponsor"))
 
         runOnUiThread {
-          val fragment = HomeFragment()
-          addFragment(fragment)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val fragment = HomeFragment()
+            addFragment(fragment)
+          } else {
+            val fragment = HomeNoProgressBarFragment()
+            addFragment(fragment)
+          }
           loading.closeDialog()
         }
       } else {
@@ -198,8 +204,13 @@ class NavigationActivity : AppCompatActivity() {
 
   private fun setNavigation() {
     home.setOnClickListener {
-      val fragment = HomeFragment()
-      addFragment(fragment)
+      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        val fragment = HomeFragment()
+        addFragment(fragment)
+      } else {
+        val fragment = HomeNoProgressBarFragment()
+        addFragment(fragment)
+      }
     }
 
     setting.setOnClickListener {

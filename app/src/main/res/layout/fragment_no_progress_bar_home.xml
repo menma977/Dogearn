@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.HomeFragment"
+    android:orientation="vertical">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:padding="10dp"
+      android:gravity="center">
+
+    <ImageView
+        android:src="@drawable/logo_ii_landscape_typo"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/logo_ii_landscape_typo"
+        android:contentDescription="@string/logo"/>
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <ImageButton
+        android:src="@drawable/send"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/imageButtonSend"
+        android:background="@color/Link"
+        android:scaleType="fitCenter"
+        android:contentDescription="@string/icon"/>
+
+  </LinearLayout>
+
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="20dp"/>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/card_default_2"
+      android:orientation="vertical"
+      android:layout_marginStart="15dp"
+      android:layout_marginEnd="15dp"
+      android:padding="10dp"
+      android:elevation="20dp">
+
+    <ImageView
+        android:id="@+id/imageViewLogoDoge"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/logo_doge_pop"
+        android:contentDescription="@string/logo"/>
+
+    <TextView
+        android:id="@+id/textViewBalance"
+        android:text="@string/example_doge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textSecondary"
+        android:textSize="18sp"
+        android:gravity="center"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+      <TextView
+          android:id="@+id/textViewRemainingBalance"
+          android:text="@string/example_doge"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:textStyle="bold"
+          android:textSize="10sp"
+          android:textColor="@color/textSecondary"
+          android:textAlignment="textStart"
+          tools:ignore="SmallSp"/>
+
+      <TextView
+          android:id="@+id/textViewTargetBalance"
+          android:text="@string/example_doge"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:textStyle="bold"
+          android:textSize="10sp"
+          android:textColor="@color/textSecondary"
+          android:textAlignment="textEnd"
+          tools:ignore="SmallSp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+      <TextView
+          android:id="@+id/textViewTotalPin"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="10sp"
+          android:gravity="center_vertical"
+          android:textColor="@color/colorPrimaryAdd2"
+          android:drawablePadding="1dp"
+          tools:ignore="SmallSp"
+          app:drawableStartCompat="@drawable/ic_baseline_fiber_pin"
+          app:drawableTint="@color/colorPrimaryAdd2"
+          android:elevation="20dp"
+          android:layout_marginEnd="10dp"/>
+
+      <TextView
+          android:id="@+id/textViewGrade"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="10sp"
+          android:gravity="center_vertical"
+          android:textColor="@color/colorPrimaryAdd2"
+          android:drawablePadding="1dp"
+          tools:ignore="SmallSp"
+          app:drawableStartCompat="@drawable/ic_baseline_emoji_events"
+          app:drawableTint="@color/colorPrimaryAdd2"
+          android:elevation="20dp"
+          android:layout_marginStart="10dp"/>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="20dp"/>
+
+  <ScrollView
+      android:background="@drawable/card_default_3"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginEnd="20dp"
+      android:padding="10dp"
+      android:elevation="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <LinearLayout
+          android:id="@+id/linearLayoutUpgradeAccount"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/upgrade_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Dark"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutRegisterAccount"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/register_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Dark"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutSendPin"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/send_pin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Dark"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutHistoryPin"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/history_pin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Dark"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutHistoryGrade"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/history_grade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Dark"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutHistoryDoge"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables"
+          android:visibility="gone">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/history_doge"/>
+
+        <TextView
+            android:text="@string/history_doge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:layout_marginStart="10dp"/>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"
+          android:visibility="gone"/>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutHistoryDogeIn"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/history_doge_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Dark"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutHistoryDogeOut"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/history_doge_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Dark"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutNetwork"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/network"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Dark"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutManualStake"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/manual_stake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Dark"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutAutomaticStake"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/automatic_stake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="20dp"/>
+
+    </LinearLayout>
+
+  </ScrollView>
+
+</LinearLayout>
