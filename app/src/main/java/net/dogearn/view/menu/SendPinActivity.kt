@@ -16,6 +16,7 @@ import net.dogearn.config.BitCoinFormat
 import net.dogearn.config.Loading
 import net.dogearn.controller.WebController
 import net.dogearn.model.User
+import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
 import kotlin.concurrent.schedule
@@ -25,6 +26,7 @@ class SendPinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
   private lateinit var loading: Loading
   private lateinit var bitCoinFormat: BitCoinFormat
   private lateinit var response: JSONObject
+  private lateinit var responseArray: JSONArray
   private lateinit var frameScanner: FrameLayout
   private lateinit var scannerEngine: ZXingScannerView
   private lateinit var wallet: String
@@ -62,14 +64,36 @@ class SendPinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     }
 
     sendDoge.setOnClickListener {
-      onSendDoge()
+      onSendPin()
     }
 
     pinTextView.text = user.getInteger("pin").toString()
   }
 
-  private fun onSendDoge() {
+  private fun getPin() {
+    Timer().schedule(1000) {
+      response = WebController.Get("pin.create", user.getString("token")).execute().get()
+      if (response.getInt("code") == 200) {
+        runOnUiThread {
+          responseArray = response.getJSONObject("data").getJSONArray("walletList")
+          println(responseArray)
+          loading.closeDialog()
+        }
+      } else {
+        runOnUiThread {
+          Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_LONG).show()
+          loading.closeDialog()
+          finish()
+        }
+      }
+    }
+  }
+
+  private fun onSendPin() {
     when {
+      !responseArray.toString().contains(walletText.text.toString()) -> {
+        Toast.makeText(this, "cross line is not allowed", Toast.LENGTH_SHORT).show()
+      }
       pinTextView.text.isEmpty() -> {
         Toast.makeText(this, "pin cant not be empty", Toast.LENGTH_SHORT).show()
       }
@@ -106,10 +130,13 @@ class SendPinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
   override fun onStart() {
     super.onStart()
+    loading.openDialog()
     intentServiceGetDataUser = Intent(applicationContext, BackgroundGetDataUser::class.java)
     startService(intentServiceGetDataUser)
 
     LocalBroadcastManager.getInstance(applicationContext).registerReceiver(broadcastReceiverWeb, IntentFilter("net.dogearn.web"))
+
+    getPin()
   }
 
   override fun onPause() {

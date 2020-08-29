@@ -44,6 +44,7 @@ class BackgroundGetDataUser : IntentService("BackgroundGetDataUser") {
                 user.setString("email", response.getJSONObject("data").getJSONObject("user").getString("email"))
                 user.setInteger("onQueue", response.getJSONObject("data").getInt("onQueue"))
                 user.setString("phoneSponsor", response.getJSONObject("data").getString("phoneSponsor"))
+                user.setString("dollar", response.getJSONObject("data").getString("dollar"))
 
                 privateIntent.action = "net.dogearn.web"
                 LocalBroadcastManager.getInstance(this).sendBroadcast(privateIntent)

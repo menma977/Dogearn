@@ -54,6 +54,31 @@
       android:padding="10dp"
       android:elevation="20dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+      <TextView
+          android:text="@string/dollar"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="@color/textSecondary"
+          android:textSize="14sp"
+          android:gravity="end"
+          android:layout_gravity="end"/>
+
+      <TextView
+          android:id="@+id/textViewDollar"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:textColor="@color/textSecondary"
+          android:textSize="18sp"
+          android:gravity="start"/>
+
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/imageViewLogoDoge"
         android:layout_width="match_parent"

@@ -75,4 +75,6 @@
   <string name="whatsapp_sponsor">Contact Sponsor</string>
   <string name="description_register">Registration requires confirmation that will be entered in the registered email, If within 24 hours of not confirming the registration will be deleted, please re-register</string>
   <string name="download_new_app">Download New App</string>
+  <string name="your_link_ref">Your link</string>
+  <string name="dollar">$</string>
 </resources>

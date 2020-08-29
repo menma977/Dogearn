@@ -28,11 +28,13 @@ class HomeNoProgressBarFragment : Fragment() {
   private lateinit var bitCoinFormat: BitCoinFormat
   private lateinit var imageDoge: ImageView
   private lateinit var balance: TextView
+  private lateinit var dollar: TextView
   private lateinit var pin: TextView
   private lateinit var grade: TextView
   private lateinit var balanceRemaining: TextView
   private lateinit var targetBalance: TextView
   private lateinit var balanceValue: BigDecimal
+  private lateinit var dollarValue: BigDecimal
   private lateinit var sendBalance: ImageButton
   private lateinit var upgradeAccount: LinearLayout
   private lateinit var registerAccount: LinearLayout
@@ -51,6 +53,7 @@ class HomeNoProgressBarFragment : Fragment() {
     val root = inflater.inflate(R.layout.fragment_no_progress_bar_home, container, false)
 
     imageDoge = root.findViewById(R.id.imageViewLogoDoge)
+    dollar = root.findViewById(R.id.textViewDollar)
     balance = root.findViewById(R.id.textViewBalance)
     pin = root.findViewById(R.id.textViewTotalPin)
     grade = root.findViewById(R.id.textViewGrade)
@@ -92,6 +95,9 @@ class HomeNoProgressBarFragment : Fragment() {
     pin.text = user.getInteger("pin").toString()
     grade.text = user.getString("gradeLevel")
     balanceValue = user.getString("balanceValue").toBigDecimal()
+    dollarValue = user.getString("dollar").toBigDecimal()
+    val totalDollar = bitCoinFormat.decimalToDoge(balanceValue) * dollarValue
+    dollar.text = bitCoinFormat.toDollar(totalDollar).toPlainString()
 
     sendBalance.setOnClickListener {
       goTo = Intent(parentActivity, SendBalanceActivity::class.java)
@@ -220,6 +226,9 @@ class HomeNoProgressBarFragment : Fragment() {
     override fun onReceive(context: Context, intent: Intent) {
       balance.text = user.getString("balanceText")
       balanceValue = intent.getSerializableExtra("balanceValue") as BigDecimal
+      dollarValue = user.getString("dollar").toBigDecimal()
+      val totalDollar = bitCoinFormat.decimalToDoge(balanceValue) * dollarValue
+      dollar.text = bitCoinFormat.toDollar(totalDollar).toPlainString()
     }
   }
 }

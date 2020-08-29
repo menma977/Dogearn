@@ -20,4 +20,8 @@ class BitCoinFormat {
   fun decimalToDoge(value: BigDecimal): BigDecimal {
     return decimalFormat.format(value.multiply(bigDecimalFormat).setScale(8, BigDecimal.ROUND_HALF_DOWN)).replace(",", ".").toBigDecimal()
   }
+
+  fun toDollar(value: BigDecimal): BigDecimal {
+    return value.setScale(2, BigDecimal.ROUND_HALF_DOWN)
+  }
 }

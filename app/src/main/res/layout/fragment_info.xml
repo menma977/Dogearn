@@ -105,7 +105,7 @@
             android:text="@string/wallet"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
+            android:layout_weight="0.15"
             android:textStyle="bold"
             android:textSize="14sp"
             android:textColor="@color/colorPrimary"
@@ -306,7 +306,42 @@
 
       <Space
           android:layout_width="match_parent"
-          android:layout_height="50dp"/>
+          android:layout_height="10dp"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/your_link_ref"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/colorPrimary"
+            android:gravity="start"/>
+
+        <TextView
+            android:id="@+id/textViewRef"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/colorPrimary"
+            android:gravity="end"
+            app:drawableEndCompat="@drawable/ic_baseline_file_copy"
+            app:drawableTint="@color/colorPrimary"/>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="20dp"/>
 
     </LinearLayout>
 

@@ -1,9 +1,6 @@
 package net.dogearn.view.fragment
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import net.dogearn.R
@@ -19,6 +17,8 @@ import net.dogearn.model.User
 import net.dogearn.view.NavigationActivity
 
 class InfoFragment : Fragment() {
+  private lateinit var clipboardManager: ClipboardManager
+  private lateinit var clipData: ClipData
   private lateinit var parentActivity: NavigationActivity
   private lateinit var user: User
   private lateinit var setting: Setting
@@ -30,6 +30,7 @@ class InfoFragment : Fragment() {
   private lateinit var textViewPin: TextView
   private lateinit var textViewGrade: TextView
   private lateinit var textViewSponsor: TextView
+  private lateinit var textViewLinkRef: TextView
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val root = inflater.inflate(R.layout.fragment_info, container, false)
@@ -47,8 +48,9 @@ class InfoFragment : Fragment() {
     textViewPin = root.findViewById(R.id.textViewPin)
     textViewGrade = root.findViewById(R.id.textViewGrade)
     textViewSponsor = root.findViewById(R.id.textViewSponsor)
+    textViewLinkRef = root.findViewById(R.id.textViewRef)
 
-
+    textViewLinkRef.text = "https://dogearn.net/ref/${user.getString("email")}"
     textViewEmail.text = user.getString("email")
     textViewPhone.text = user.getString("phone")
     textViewBalance.text = user.getString("balanceText")
@@ -66,6 +68,13 @@ class InfoFragment : Fragment() {
       val goTo = Intent(Intent.ACTION_VIEW)
       goTo.data = Uri.parse(url)
       startActivity(goTo)
+    }
+
+    textViewLinkRef.setOnClickListener {
+      clipboardManager = parentActivity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+      clipData = ClipData.newPlainText("Wallet", textViewLinkRef.text.toString())
+      clipboardManager.setPrimaryClip(clipData)
+      Toast.makeText(parentActivity, "Link ref has been copied", Toast.LENGTH_LONG).show()
     }
 
     return root

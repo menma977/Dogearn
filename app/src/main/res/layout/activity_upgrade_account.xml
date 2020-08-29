@@ -66,7 +66,8 @@
           tools:ignore="SmallSp"
           app:drawableStartCompat="@drawable/ic_baseline_fiber_pin"
           app:drawableTint="@color/colorPrimaryAdd2"
-          android:elevation="20dp"/>
+          android:elevation="20dp"
+          android:layout_marginEnd="10dp"/>
 
       <TextView
           android:id="@+id/textViewGrade"
@@ -79,7 +80,8 @@
           tools:ignore="SmallSp"
           app:drawableStartCompat="@drawable/ic_baseline_emoji_events"
           app:drawableTint="@color/colorPrimaryAdd2"
-          android:elevation="20dp"/>
+          android:elevation="20dp"
+          android:layout_marginStart="10dp"/>
 
     </LinearLayout>
 
