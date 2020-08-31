@@ -1,12 +1,11 @@
 package net.dogearn.view
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import net.dogearn.R
 import net.dogearn.config.Loading
 import net.dogearn.controller.WebController
@@ -15,7 +14,6 @@ import java.util.*
 import kotlin.concurrent.schedule
 
 class RegisterFnActivity : AppCompatActivity() {
-  private lateinit var goTo: Intent
   private lateinit var response: JSONObject
   private lateinit var loading: Loading
   private lateinit var sponsor: EditText
@@ -51,8 +49,7 @@ class RegisterFnActivity : AppCompatActivity() {
     }
 
     login.setOnClickListener {
-      goTo = Intent(this, LoginActivity::class.java)
-      startActivity(goTo)
+      finish()
     }
   }
 
