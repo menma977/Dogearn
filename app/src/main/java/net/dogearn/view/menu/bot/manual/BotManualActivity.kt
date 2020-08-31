@@ -32,10 +32,11 @@ class BotManualActivity : AppCompatActivity() {
   private lateinit var fundLinearLayout: LinearLayout
   private lateinit var highLinearLayout: LinearLayout
   private lateinit var resultLinearLayout: LinearLayout
+  private lateinit var statusLinearLayout: LinearLayout
   private lateinit var balance: BigDecimal
   private lateinit var payIn: BigDecimal
   private lateinit var profit: BigDecimal
-  private var high = BigDecimal(30)
+  private var high = BigDecimal(5)
   private var maxRow = 10
   private var seed = (0..99999).random().toString()
 
@@ -57,8 +58,9 @@ class BotManualActivity : AppCompatActivity() {
     fundLinearLayout = findViewById(R.id.linearLayoutFund)
     highLinearLayout = findViewById(R.id.linearLayoutHigh)
     resultLinearLayout = findViewById(R.id.linearLayoutResult)
+    statusLinearLayout = findViewById(R.id.linearLayoutStatus)
 
-    highText.text = "Possibility: ${high.toPlainString()}%"
+    highText.text = "Possibility: ${high * BigDecimal(10)}%"
     balanceText.text = intent.getStringExtra("balanceView")
     balance = intent.getStringExtra("balance")!!.toBigDecimal()
 
@@ -78,7 +80,7 @@ class BotManualActivity : AppCompatActivity() {
           highSeekBar.progress = 1
           getProgress = 1
         }
-        high = getProgress.toBigDecimal().multiply(BigDecimal(10))
+        high = getProgress.toBigDecimal()
         highText.text = "Possibility: ${getProgress * 10}%"
       }
 
@@ -102,12 +104,14 @@ class BotManualActivity : AppCompatActivity() {
       body["a"] = "PlaceBet"
       body["s"] = user.getString("key")
       body["Low"] = "0"
-      body["High"] = high.multiply(BigDecimal(10000)).toPlainString()
+      body["High"] = high.multiply(BigDecimal(10)).multiply(BigDecimal(10000)).toPlainString()
       body["PayIn"] = payIn.toPlainString()
       body["ProtocolVersion"] = "2"
       body["ClientSeed"] = seed
       body["Currency"] = "doge"
+      println(body)
       response = DogeController(body).execute().get()
+      println(response)
       if (response.getInt("code") == 200) {
         seed = response.getJSONObject("data")["Next"].toString()
         val puyOut = response.getJSONObject("data")["PayOut"].toString().toBigDecimal()
@@ -118,23 +122,24 @@ class BotManualActivity : AppCompatActivity() {
         val winBot = profit > BigDecimal(0)
 
         runOnUiThread {
-          setView("${bitCoinFormat.decimalToDoge(balance).toPlainString()} DOGE", fundLinearLayout, false, winBot)
-
           balance = balanceRemaining
           balanceText.text = "${bitCoinFormat.decimalToDoge(balanceRemaining).toPlainString()} DOGE"
 
           user.setString("balanceValue", balance.toPlainString())
           user.setString("balanceText", "${BitCoinFormat().decimalToDoge(balance).toPlainString()} DOGE")
 
-          setView(highText.text.toString(), highLinearLayout, false, winBot)
-          setView("${BitCoinFormat().decimalToDoge(balance).toPlainString()} DOGE", resultLinearLayout, false, winBot)
+          setView(payIn.toPlainString(), fundLinearLayout, false, winBot)
+          setView("${high.multiply(BigDecimal(10))}%", highLinearLayout, false, winBot)
+          setView(BitCoinFormat().decimalToDoge(balance).toPlainString(), resultLinearLayout, false, winBot)
           if (winBot) {
+            setView("WIN", statusLinearLayout, false, winBot)
             stakeButton.visibility = Button.GONE
             statusText.text = "WIN"
             statusText.setTextColor(getColor(R.color.Success))
 
             inputBalance.isEnabled = false
           } else {
+            setView("WIN", statusLinearLayout, false, winBot)
             statusText.text = "LOSE"
             statusText.setTextColor(getColor(R.color.Danger))
 
@@ -152,9 +157,10 @@ class BotManualActivity : AppCompatActivity() {
   }
 
   private fun setDefaultView() {
-    setView("Fund", fundLinearLayout, isNew = true, isWin = false)
+    setView("Fund DOGE", fundLinearLayout, isNew = true, isWin = false)
     setView("Possibility", highLinearLayout, isNew = true, isWin = false)
     setView("Result", resultLinearLayout, isNew = true, isWin = false)
+    setView("Status", statusLinearLayout, isNew = true, isWin = false)
   }
 
   private fun setView(value: String, linearLayout: LinearLayout, isNew: Boolean, isWin: Boolean) {
