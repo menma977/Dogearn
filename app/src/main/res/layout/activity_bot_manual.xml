@@ -120,7 +120,7 @@
 
       <Space
           android:layout_width="match_parent"
-          android:layout_height="10dp"/>
+          android:layout_height="20dp"/>
 
       <TextView
           android:id="@+id/textViewHigh"
@@ -134,9 +134,10 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:id="@+id/seekBarHigh"
-          android:max="9"
+          android:max="10"
           android:progress="5"
-          android:progressDrawable="@drawable/progress_bar"/>
+          android:progressDrawable="@drawable/seekbar_style"
+          android:thumb="@drawable/custom_thumb"/>
 
     </LinearLayout>
 

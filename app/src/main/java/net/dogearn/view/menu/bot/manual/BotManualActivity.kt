@@ -63,6 +63,7 @@ class BotManualActivity : AppCompatActivity() {
     highText.text = "Possibility: ${high * BigDecimal(10)}%"
     balanceText.text = intent.getStringExtra("balanceView")
     balance = intent.getStringExtra("balance")!!.toBigDecimal()
+    gradeText.text = intent.getStringExtra("grade")
 
     stakeButton.setOnClickListener {
       if (inputBalance.text.isEmpty()) {
@@ -79,6 +80,10 @@ class BotManualActivity : AppCompatActivity() {
         if (progress == 0) {
           highSeekBar.progress = 1
           getProgress = 1
+        }
+        if (progress == 10) {
+          highSeekBar.progress = 9
+          getProgress = 9
         }
         high = getProgress.toBigDecimal()
         highText.text = "Possibility: ${getProgress * 10}%"
@@ -128,9 +133,9 @@ class BotManualActivity : AppCompatActivity() {
           user.setString("balanceValue", balance.toPlainString())
           user.setString("balanceText", "${BitCoinFormat().decimalToDoge(balance).toPlainString()} DOGE")
 
-          setView(payIn.toPlainString(), fundLinearLayout, false, winBot)
+          setView(bitCoinFormat.decimalToDoge(payIn).toPlainString(), fundLinearLayout, false, winBot)
           setView("${high.multiply(BigDecimal(10))}%", highLinearLayout, false, winBot)
-          setView(BitCoinFormat().decimalToDoge(balance).toPlainString(), resultLinearLayout, false, winBot)
+          setView(BitCoinFormat().decimalToDoge(profit).toPlainString(), resultLinearLayout, false, winBot)
           if (winBot) {
             setView("WIN", statusLinearLayout, false, winBot)
             stakeButton.visibility = Button.GONE
@@ -139,12 +144,14 @@ class BotManualActivity : AppCompatActivity() {
 
             inputBalance.isEnabled = false
           } else {
-            setView("WIN", statusLinearLayout, false, winBot)
+            setView("LOSE", statusLinearLayout, false, winBot)
             statusText.text = "LOSE"
             statusText.setTextColor(getColor(R.color.Danger))
 
             inputBalance.isEnabled = true
           }
+
+          inputBalance.setText("")
           loading.closeDialog()
         }
       } else {
@@ -161,6 +168,13 @@ class BotManualActivity : AppCompatActivity() {
     setView("Possibility", highLinearLayout, isNew = true, isWin = false)
     setView("Result", resultLinearLayout, isNew = true, isWin = false)
     setView("Status", statusLinearLayout, isNew = true, isWin = false)
+
+    for (i in 0 until maxRow) {
+      setView("", fundLinearLayout, isNew = true, isWin = false)
+      setView("", highLinearLayout, isNew = true, isWin = false)
+      setView("", resultLinearLayout, isNew = true, isWin = false)
+      setView("", statusLinearLayout, isNew = true, isWin = false)
+    }
   }
 
   private fun setView(value: String, linearLayout: LinearLayout, isNew: Boolean, isWin: Boolean) {
