@@ -9,7 +9,6 @@ import net.dogearn.model.Setting
 import net.dogearn.model.User
 import net.dogearn.view.LoginActivity
 import net.dogearn.view.NavigationActivity
-import org.conscrypt.BuildConfig
 import org.json.JSONObject
 import java.util.*
 import kotlin.concurrent.schedule
