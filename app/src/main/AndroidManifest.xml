@@ -10,16 +10,20 @@
 
   <application
       android:allowBackup="false"
+      android:hardwareAccelerated="false"
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
-      android:hardwareAccelerated="false"
       android:theme="@style/AppTheme">
 
     <service android:name=".config.BackgroundGetDataUser"/>
     <service android:name=".config.BackgroundServiceBalance"/>
 
+
+    <activity
+        android:name=".view.menu.bot.manual.BotManualActivity"
+        android:theme="@style/AppTheme.NoActionBar"/>
 
     <activity
         android:name=".view.menu.HistoryOutActivity"
@@ -42,7 +46,6 @@
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
     </activity>
-
     <activity
         android:name=".view.menu.HistoryGradeActivity"
         android:configChanges="orientation|screenSize"

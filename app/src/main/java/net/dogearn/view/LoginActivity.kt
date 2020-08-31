@@ -100,7 +100,7 @@ class LoginActivity : AppCompatActivity() {
     newApp.setOnClickListener {
       user.clear()
       setting.clear()
-      goTo = Intent(Intent.ACTION_VIEW, Uri.parse("https://dogearn.net/download/dogearn.apk"))
+      goTo = Intent(Intent.ACTION_VIEW, Uri.parse("https://dogearn.net"))
       startActivity(goTo)
       finish()
     }
@@ -134,7 +134,7 @@ class LoginActivity : AppCompatActivity() {
           } else {
             runOnUiThread {
               loading.closeDialog()
-              Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_LONG).show()
+              Toast.makeText(applicationContext, response.getString("data").replace("phone", "Input"), Toast.LENGTH_LONG).show()
             }
           }
         }

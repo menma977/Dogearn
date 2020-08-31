@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.menu.bot.manual.BotManualActivity"
+    android:background="@color/colorPrimaryDark">
+
+  <LinearLayout
+      android:background="@drawable/background"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:minHeight="600dp"
+      android:orientation="vertical">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_default_2"
+        android:orientation="vertical"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:padding="10dp"
+        android:elevation="20dp">
+
+      <ImageView
+          android:id="@+id/imageViewLogoDoge"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:scaleType="fitCenter"
+          app:srcCompat="@drawable/logo_doge_pop"
+          android:contentDescription="@string/logo"/>
+
+      <TextView
+          android:id="@+id/textViewBalance"
+          android:text="@string/example_doge"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="@color/textSecondary"
+          android:textSize="18sp"
+          android:gravity="center"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center">
+
+        <TextView
+            android:id="@+id/textViewGrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorPrimaryAdd2"
+            android:drawablePadding="1dp"
+            tools:ignore="SmallSp"
+            app:drawableStartCompat="@drawable/ic_baseline_emoji_events"
+            app:drawableTint="@color/colorPrimaryAdd2"
+            android:elevation="20dp"
+            android:layout_marginStart="10dp"/>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card_default_3"
+        android:padding="10dp"
+        android:layout_margin="10dp">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewHigh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"/>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <EditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="numberDecimal"
+          android:ems="10"
+          android:id="@+id/editTextInputBalance"
+          android:background="@drawable/edit_text_mode"
+          android:drawableStart="@drawable/logo_doge_small"
+          android:drawableTint="@color/White"
+          android:textColor="@color/colorPrimary"
+          android:autofillHints="@string/doge_format"
+          android:drawablePadding="10dp"
+          tools:ignore="LabelFor"
+          android:hint="@string/amount"
+          android:textColorHint="@color/Dark"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <SeekBar
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/seekBarHigh"
+          android:max="9"
+          android:progress="3"
+          android:progressDrawable="@drawable/progress_bar"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <Button
+        android:text="@string/stake"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonStake"
+        android:background="@drawable/button_success"
+        android:elevation="10dp"
+        android:textColor="@color/textSecondary"
+        android:layout_gravity="center"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:elevation="5dp"
+        android:padding="15dp"
+        android:background="@drawable/card_default"
+        android:baselineAligned="false">
+
+      <LinearLayout
+          android:id="@+id/linearLayoutFund"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_weight="1"/>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutHigh"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_weight="1"/>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutResult"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_weight="1"/>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+</ScrollView>

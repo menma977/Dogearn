@@ -77,4 +77,15 @@
   <string name="download_new_app">Download New App</string>
   <string name="your_link_ref">Your link</string>
   <string name="dollar">$</string>
+  <string name="high_10">10</string>
+  <string name="high_20">20</string>
+  <string name="high_30">30</string>
+  <string name="high_40">40</string>
+  <string name="high_50">50</string>
+  <string name="high_60">60</string>
+  <string name="high_70">70</string>
+  <string name="high_80">80</string>
+  <string name="high_90">90</string>
+  <string name="high_100">100</string>
+  <string name="stake">Stake</string>
 </resources>

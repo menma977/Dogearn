@@ -18,6 +18,7 @@ import net.dogearn.config.Loading
 import net.dogearn.model.User
 import net.dogearn.view.NavigationActivity
 import net.dogearn.view.menu.*
+import net.dogearn.view.menu.bot.manual.BotManualActivity
 import java.math.BigDecimal
 
 class HomeNoProgressBarFragment : Fragment() {
@@ -163,7 +164,15 @@ class HomeNoProgressBarFragment : Fragment() {
     }
 
     manualBot.setOnClickListener {
-      Toast.makeText(parentActivity, "Under Constructor", Toast.LENGTH_SHORT).show()
+      if (user.getBoolean("isUserWin")) {
+        Toast.makeText(parentActivity, "Playing bots can only be once a day", Toast.LENGTH_SHORT).show()
+      } else {
+        goTo = Intent(parentActivity, BotManualActivity::class.java)
+        goTo.putExtra("balanceView", user.getString("balanceText"))
+        goTo.putExtra("balance", user.getString("balanceValue"))
+        goTo.putExtra("grade", grade.text.toString())
+        startActivity(goTo)
+      }
     }
 
     autoBot.setOnClickListener {

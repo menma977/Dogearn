@@ -38,13 +38,18 @@ class BackgroundGetDataUser : IntentService("BackgroundGetDataUser") {
 
                 user.setInteger("pin", response.getJSONObject("data").getInt("pin"))
                 user.setString("wallet", response.getJSONObject("data").getJSONObject("user").getString("wallet"))
-                user.setInteger("isUserWin", response.getJSONObject("data").getInt("isUserWin"))
                 user.setString("progressGrade", response.getJSONObject("data").getString("progressGrade"))
                 user.setString("phone", response.getJSONObject("data").getJSONObject("user").getString("phone"))
                 user.setString("email", response.getJSONObject("data").getJSONObject("user").getString("email"))
                 user.setInteger("onQueue", response.getJSONObject("data").getInt("onQueue"))
                 user.setString("phoneSponsor", response.getJSONObject("data").getString("phoneSponsor"))
                 user.setString("dollar", response.getJSONObject("data").getString("dollar"))
+                if (response.getJSONObject("data").getInt("isUserWin") == 0) {
+                  user.setBoolean("isUserWin", false)
+                } else {
+                  user.setBoolean("isUserWin", true)
+                }
+                user.setInteger("lot", response.getJSONObject("data").getInt("lot"))
 
                 privateIntent.action = "net.dogearn.web"
                 LocalBroadcastManager.getInstance(this).sendBroadcast(privateIntent)

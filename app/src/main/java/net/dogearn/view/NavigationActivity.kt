@@ -151,11 +151,16 @@ class NavigationActivity : AppCompatActivity() {
           user.setString("gradeLevel", response.getJSONObject("data").getJSONObject("grade").getString("id"))
         }
         user.setInteger("pin", response.getJSONObject("data").getInt("pin"))
-        user.setInteger("isUserWin", response.getJSONObject("data").getInt("isUserWin"))
         user.setString("progressGrade", response.getJSONObject("data").getString("progressGrade"))
         user.setInteger("onQueue", response.getJSONObject("data").getInt("onQueue"))
         user.setString("phoneSponsor", response.getJSONObject("data").getString("phoneSponsor"))
         user.setString("dollar", response.getJSONObject("data").getString("dollar"))
+        if (response.getJSONObject("data").getInt("isUserWin") == 0) {
+          user.setBoolean("isUserWin", false)
+        } else {
+          user.setBoolean("isUserWin", true)
+        }
+        user.setInteger("lot", response.getJSONObject("data").getInt("lot"))
 
         runOnUiThread {
           if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
