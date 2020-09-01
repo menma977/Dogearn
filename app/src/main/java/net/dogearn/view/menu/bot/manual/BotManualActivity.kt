@@ -11,6 +11,7 @@ import net.dogearn.R
 import net.dogearn.config.BitCoinFormat
 import net.dogearn.config.Loading
 import net.dogearn.controller.DogeController
+import net.dogearn.controller.WebController
 import net.dogearn.model.User
 import org.json.JSONObject
 import java.math.BigDecimal
@@ -36,6 +37,7 @@ class BotManualActivity : AppCompatActivity() {
   private lateinit var balance: BigDecimal
   private lateinit var payIn: BigDecimal
   private lateinit var profit: BigDecimal
+  private lateinit var startBalance: BigDecimal
   private var high = BigDecimal(5)
   private var maxRow = 10
   private var seed = (0..99999).random().toString()
@@ -64,6 +66,7 @@ class BotManualActivity : AppCompatActivity() {
     balanceText.text = intent.getStringExtra("balanceView")
     balance = intent.getStringExtra("balance")!!.toBigDecimal()
     gradeText.text = intent.getStringExtra("grade")
+    startBalance = balance
 
     stakeButton.setOnClickListener {
       if (inputBalance.text.isEmpty()) {
@@ -109,14 +112,12 @@ class BotManualActivity : AppCompatActivity() {
       body["a"] = "PlaceBet"
       body["s"] = user.getString("key")
       body["Low"] = "0"
-      body["High"] = high.multiply(BigDecimal(10)).multiply(BigDecimal(10000)).toPlainString()
+      body["High"] = (high.multiply(BigDecimal(10)).multiply(BigDecimal(10000)) - BigDecimal(600)).toPlainString()
       body["PayIn"] = payIn.toPlainString()
       body["ProtocolVersion"] = "2"
       body["ClientSeed"] = seed
       body["Currency"] = "doge"
-      println(body)
       response = DogeController(body).execute().get()
-      println(response)
       if (response.getInt("code") == 200) {
         seed = response.getJSONObject("data")["Next"].toString()
         val puyOut = response.getJSONObject("data")["PayOut"].toString().toBigDecimal()
@@ -141,6 +142,10 @@ class BotManualActivity : AppCompatActivity() {
             stakeButton.visibility = Button.GONE
             statusText.text = "WIN"
             statusText.setTextColor(getColor(R.color.Success))
+
+            body["start_balance"] = startBalance.toPlainString()
+            body["end_balance"] = balance.toPlainString()
+            response = WebController.Post("doge.store", user.getString("token"), body).execute().get()
 
             inputBalance.isEnabled = false
           } else {

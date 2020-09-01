@@ -164,14 +164,20 @@ class HomeNoProgressBarFragment : Fragment() {
     }
 
     manualBot.setOnClickListener {
-      if (user.getBoolean("isUserWin")) {
-        Toast.makeText(parentActivity, "Playing bots can only be once a day", Toast.LENGTH_SHORT).show()
-      } else {
-        goTo = Intent(parentActivity, BotManualActivity::class.java)
-        goTo.putExtra("balanceView", user.getString("balanceText"))
-        goTo.putExtra("balance", user.getString("balanceValue"))
-        goTo.putExtra("grade", grade.text.toString())
-        startActivity(goTo)
+      when {
+        user.getBoolean("isUserWin") -> {
+          Toast.makeText(parentActivity, "Playing stake can only be once a day", Toast.LENGTH_SHORT).show()
+        }
+        user.getString("gradeLevel").toInt() < user.getInteger("lot") -> {
+          Toast.makeText(parentActivity, "Minimum lot to stake is LOT ${user.getInteger("lot")}", Toast.LENGTH_SHORT).show()
+        }
+        else -> {
+          goTo = Intent(parentActivity, BotManualActivity::class.java)
+          goTo.putExtra("balanceView", user.getString("balanceText"))
+          goTo.putExtra("balance", user.getString("balanceValue"))
+          goTo.putExtra("grade", grade.text.toString())
+          startActivity(goTo)
+        }
       }
     }
 

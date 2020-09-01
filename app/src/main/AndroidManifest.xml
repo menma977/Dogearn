@@ -27,7 +27,7 @@
 
     <activity
         android:name=".view.menu.HistoryOutActivity"
-        android:label="DOGEARN Outgoing">
+        android:label="DOGEARN Outgo">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
