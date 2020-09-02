@@ -81,4 +81,6 @@
   <string name="fund">Fund</string>
   <string name="internal">Internal</string>
   <string name="external">External</string>
+  <string name="preview">Preview</string>
+  <string name="next">Next</string>
 </resources>

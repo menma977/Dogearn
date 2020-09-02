@@ -34,7 +34,7 @@
     </activity>
     <activity
         android:name=".view.menu.HistoryInActivity"
-        android:label="DOGEARN Ingoing">
+        android:label="DOGEARN Income">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>

@@ -136,7 +136,7 @@ class BotManualActivity : AppCompatActivity() {
 
           setView(bitCoinFormat.decimalToDoge(payIn).toPlainString(), fundLinearLayout, false, winBot)
           setView("${high.multiply(BigDecimal(10))}%", highLinearLayout, false, winBot)
-          setView(BitCoinFormat().decimalToDoge(profit).toPlainString(), resultLinearLayout, false, winBot)
+          setView(BitCoinFormat().decimalToDoge(balanceRemaining).toPlainString(), resultLinearLayout, false, winBot)
           if (winBot) {
             setView("WIN", statusLinearLayout, false, winBot)
             stakeButton.visibility = Button.GONE

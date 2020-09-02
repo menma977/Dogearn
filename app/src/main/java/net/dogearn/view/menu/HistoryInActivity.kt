@@ -5,10 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import net.dogearn.R
@@ -28,48 +25,79 @@ class HistoryInActivity : AppCompatActivity() {
   private lateinit var loading: Loading
   private lateinit var response: JSONObject
   private lateinit var bitCoinFormat: BitCoinFormat
+  private lateinit var previewButton: Button
+  private lateinit var nextButton: Button
+  private lateinit var tokenList: ArrayList<String>
+  private lateinit var globalToken: String
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_history_in)
 
+    tokenList = ArrayList()
     user = User(this)
     loading = Loading(this)
     bitCoinFormat = BitCoinFormat()
 
+    previewButton = findViewById(R.id.buttonPreview)
+    nextButton = findViewById(R.id.buttonNext)
     containerExternal = findViewById(R.id.linearLayoutDataContentExternal)
     containerExternal.removeAllViews()
     containerInternal = findViewById(R.id.linearLayoutDataContent)
     containerInternal.removeAllViews()
 
-    setView()
+    previewButton.isEnabled = false
+    nextButton.isEnabled = false
+
+    previewButton.setOnClickListener {
+      containerExternal.removeAllViews()
+      containerInternal.removeAllViews()
+      tokenList.removeAt(tokenList.size - 1)
+      if (tokenList.size > 1) {
+        setView(tokenList[tokenList.size - 1])
+      } else {
+        setView("")
+      }
+    }
+
+    nextButton.setOnClickListener {
+      containerExternal.removeAllViews()
+      containerInternal.removeAllViews()
+      tokenList.add(globalToken)
+      if (tokenList.isNotEmpty()) {
+        setView(tokenList[tokenList.size - 1])
+      } else {
+        setView("")
+      }
+    }
+
+    setView("")
   }
 
-  private fun setView() {
+  private fun setView(tokenDoge: String) {
     loading.openDialog()
     Timer().schedule(1000) {
       val body = HashMap<String, String>()
       body["a"] = "GetDeposits"
       body["s"] = user.getString("key")
+      body["Token"] = tokenDoge
       response = DogeController(body).execute().get()
       if (response.getInt("code") == 200) {
+        globalToken = response.getJSONObject("data").getString("Token")
         val dataGrabberExternal = response.getJSONObject("data").getJSONArray("Deposits")
         val dataGrabberInternal = response.getJSONObject("data").getJSONArray("Transfers")
-        val lengthExternal = if (dataGrabberExternal.length() > 50) {
-          50
-        } else {
-          dataGrabberExternal.length() - 1
-        }
-        val lengthInternal = if (dataGrabberInternal.length() > 50) {
-          50
-        } else {
-          dataGrabberInternal.length() - 1
-        }
+        val lengthExternal = dataGrabberExternal.length() - 1
+        val lengthInternal = dataGrabberInternal.length() - 1
 
-        setExternalView(lengthExternal, dataGrabberExternal)
-        setInternalView(lengthInternal, dataGrabberInternal)
+        runOnUiThread {
+          previewButton.isEnabled = tokenList.isNotEmpty()
+          nextButton.isEnabled = !(lengthExternal <= 0 && lengthInternal <= 0)
 
-        loading.closeDialog()
+          setExternalView(lengthExternal, dataGrabberExternal)
+          setInternalView(lengthInternal, dataGrabberInternal)
+
+          loading.closeDialog()
+        }
       } else {
         runOnUiThread {
           Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_LONG).show()
