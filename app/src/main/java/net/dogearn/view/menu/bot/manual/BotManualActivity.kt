@@ -230,6 +230,13 @@ class BotManualActivity : AppCompatActivity() {
             statusText.text = "LOSE"
             statusText.setTextColor(getColor(R.color.Danger))
 
+            defaultMaximum *= 2
+            percent = defaultMaximum
+            highSeekBar.progress = 5
+
+            maxBalance = bitCoinFormat.dogeToDecimal(bitCoinFormat.decimalToDoge(balance).multiply(percent.toBigDecimal()))
+            fundText.text = "Maximum : ${bitCoinFormat.decimalToDoge(balance).multiply(percent.toBigDecimal()).toPlainString()}"
+
             inputBalance.isEnabled = true
           }
 
