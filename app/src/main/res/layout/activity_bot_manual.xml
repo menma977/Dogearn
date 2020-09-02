@@ -94,13 +94,31 @@
           android:layout_width="match_parent"
           android:layout_height="10dp"/>
 
-      <TextView
-          android:text="@string/fund"
+      <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:gravity="start"
-          android:textColor="@color/colorPrimary"
-          android:textStyle="bold"/>
+          android:orientation="horizontal">
+
+        <TextView
+            android:text="@string/fund"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewFund"
+            android:text="@string/fund"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/Danger"
+            android:textStyle="bold"/>
+
+      </LinearLayout>
 
       <EditText
           android:layout_width="match_parent"
