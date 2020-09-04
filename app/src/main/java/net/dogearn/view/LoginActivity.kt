@@ -49,7 +49,6 @@ class LoginActivity : AppCompatActivity() {
     register = findViewById(R.id.textViewRegister)
     forgotPassword = findViewById(R.id.textViewForgotPassword)
 
-
     if (intent.getBooleanExtra("isUpdate", false)) {
       login.visibility = Button.GONE
       newApp.visibility = Button.VISIBLE
