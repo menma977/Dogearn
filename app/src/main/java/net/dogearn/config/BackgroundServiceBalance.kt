@@ -51,6 +51,7 @@ class BackgroundServiceBalance : IntentService("BackgroundServiceBalance") {
               if (response.getInt("code") == 200) {
                 balanceValue = response.getJSONObject("data")["Balance"].toString().toBigDecimal()
                 privateIntent.putExtra("balanceValue", balanceValue)
+                user.setString("balanceValue", balanceValue.toPlainString())
                 user.setString("balanceText", "${bitCoinFormat.decimalToDoge(balanceValue).toPlainString()} DOGE")
 
                 privateIntent.action = "net.dogearn.doge"

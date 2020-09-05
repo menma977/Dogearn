@@ -246,7 +246,11 @@ class HomeFragment : Fragment() {
   private var broadcastReceiverDoge: BroadcastReceiver = object : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
       balance.text = user.getString("balanceText")
-      balanceValue = intent.getSerializableExtra("balanceValue") as BigDecimal
+      try {
+        balanceValue = intent.getSerializableExtra("balanceValue") as BigDecimal
+      } catch (e: java.lang.Exception) {
+        balanceValue = user.getString("balanceValue").toBigDecimal()
+      }
       dollarValue = user.getString("dollar").toBigDecimal()
       val totalDollar = bitCoinFormat.decimalToDoge(balanceValue) * dollarValue
       dollar.text = bitCoinFormat.toDollar(totalDollar).toPlainString()
