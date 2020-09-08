@@ -91,9 +91,13 @@ class NavigationActivity : AppCompatActivity() {
   }
 
   override fun onBackPressed() {
-    stopService(intentServiceBalance)
-    stopService(intentServiceGetDataUser)
-    super.onBackPressed()
+    if (supportFragmentManager.backStackEntryCount == 1) {
+      stopService(intentServiceBalance)
+      stopService(intentServiceGetDataUser)
+      finishAffinity()
+    } else {
+      super.onBackPressed()
+    }
   }
 
   private var broadcastReceiverWebLogout: BroadcastReceiver = object : BroadcastReceiver() {
@@ -239,8 +243,16 @@ class NavigationActivity : AppCompatActivity() {
 
   @SuppressLint("PrivateResource")
   private fun addFragment(fragment: Fragment) {
-    supportFragmentManager.beginTransaction().setCustomAnimations(
-      R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out
-    ).replace(R.id.contentFragment, fragment, fragment.javaClass.simpleName).addToBackStack("back").commit()
+    val backStateName = fragment.javaClass.simpleName
+    val fragmentManager = supportFragmentManager
+    val fragmentPopped = fragmentManager.popBackStackImmediate(backStateName, 0)
+
+    if (!fragmentPopped && fragmentManager.findFragmentByTag(backStateName) == null) {
+      val fragmentTransaction = fragmentManager.beginTransaction()
+      fragmentTransaction.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+      fragmentTransaction.replace(R.id.contentFragment, fragment, backStateName)
+      fragmentTransaction.addToBackStack(backStateName)
+      fragmentTransaction.commit()
+    }
   }
 }
