@@ -45,18 +45,18 @@ class BotManualActivity : AppCompatActivity() {
   private lateinit var resultLinearLayout: LinearLayout
   private lateinit var statusLinearLayout: LinearLayout
   private lateinit var balance: BigDecimal
-  private lateinit var payIn: BigDecimal
   private lateinit var profit: BigDecimal
   private lateinit var startBalance: BigDecimal
   private lateinit var intentServiceGetDataUser: Intent
   private lateinit var intentServiceBalance: Intent
   private lateinit var goTo: Intent
+  private var payIn: BigDecimal = BigDecimal(0)
+  private var payInMultiple: BigDecimal = BigDecimal(1)
   private var high = BigDecimal(5)
   private var maxRow = 10
   private var seed = (0..99999).random().toString()
   private lateinit var percentTable: ArrayList<Double>
-  private var defaultMaximum = 0.01
-  private var percent = 0.01
+  private var percent = 1.0
   private var maxBalance = BigDecimal(0)
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,8 +89,9 @@ class BotManualActivity : AppCompatActivity() {
     balance = intent.getStringExtra("balance")!!.toBigDecimal()
     gradeText.text = intent.getStringExtra("grade")
     startBalance = balance
-    maxBalance = bitCoinFormat.dogeToDecimal(bitCoinFormat.decimalToDoge(balance).multiply(percent.toBigDecimal()))
-    fundText.text = "Maximum : ${bitCoinFormat.decimalToDoge(balance).multiply(percent.toBigDecimal()).toPlainString()}"
+    maxBalance = bitCoinFormat.dogeToDecimal(bitCoinFormat.decimalToDoge(balance).multiply(BigDecimal(0.01)))
+    fundText.text = "Maximum : ${bitCoinFormat.decimalToDoge(maxBalance).toPlainString()}"
+    payIn = balance.multiply(BigDecimal(0.01))
 
     stakeButton.setOnClickListener {
       if (inputBalance.text.isEmpty()) {
@@ -98,7 +99,7 @@ class BotManualActivity : AppCompatActivity() {
       } else {
         payIn = bitCoinFormat.dogeToDecimal(inputBalance.text.toString().toBigDecimal())
         if (payIn > maxBalance) {
-          Toast.makeText(this, "Doge you can input should not be more than ${bitCoinFormat.decimalToDoge(balance).multiply(percent.toBigDecimal()).toPlainString()}", Toast.LENGTH_LONG).show()
+          Toast.makeText(this, "Doge you can input should not be more than ${bitCoinFormat.decimalToDoge(maxBalance).toPlainString()}", Toast.LENGTH_LONG).show()
         } else {
           onBetting()
         }
@@ -117,10 +118,10 @@ class BotManualActivity : AppCompatActivity() {
           getProgress = 9
         }
         if (progress >= 0 || progress <= 10) {
-          percent = defaultMaximum * percentTable[getProgress - 1]
+          percent = percentTable[getProgress - 1]
         }
-        maxBalance = bitCoinFormat.dogeToDecimal(bitCoinFormat.decimalToDoge(balance).multiply(percent.toBigDecimal()))
-        fundText.text = "Maximum : ${bitCoinFormat.decimalToDoge(balance).multiply(percent.toBigDecimal()).toPlainString()}"
+        maxBalance = bitCoinFormat.dogeToDecimal(bitCoinFormat.decimalToDoge(payIn.multiply(percent.toBigDecimal())).multiply(payInMultiple))
+        fundText.text = "Maximum : ${bitCoinFormat.decimalToDoge(maxBalance).toPlainString()}"
         high = getProgress.toBigDecimal()
         highText.text = "Possibility: ${getProgress * 10}%"
       }
@@ -176,9 +177,6 @@ class BotManualActivity : AppCompatActivity() {
       user.setString("balanceValue", balance.toPlainString())
       user.setString("balanceText", "${BitCoinFormat().decimalToDoge(balance).toPlainString()} DOGE")
       balanceText.text = user.getString("balanceText")
-      maxBalance = bitCoinFormat.dogeToDecimal(bitCoinFormat.decimalToDoge(balance).multiply(percent.toBigDecimal()))
-      val textFund = "Maximum : ${bitCoinFormat.decimalToDoge(balance).multiply(percent.toBigDecimal()).toPlainString()}"
-      fundText.text = textFund
     }
   }
 
@@ -229,14 +227,13 @@ class BotManualActivity : AppCompatActivity() {
             setView("LOSE", statusLinearLayout, false, winBot)
             statusText.text = "LOSE"
             statusText.setTextColor(getColor(R.color.Danger))
-
-            defaultMaximum *= 2
-            percent = defaultMaximum
             highSeekBar.progress = 5
 
-            maxBalance = bitCoinFormat.dogeToDecimal(bitCoinFormat.decimalToDoge(balance).multiply(percent.toBigDecimal()))
-            fundText.text = "Maximum : ${bitCoinFormat.decimalToDoge(balance).multiply(percent.toBigDecimal()).toPlainString()}"
+            payInMultiple = BigDecimal(2)
 
+            maxBalance = bitCoinFormat.dogeToDecimal(bitCoinFormat.decimalToDoge(payIn.multiply(percent.toBigDecimal())).multiply(payInMultiple))
+            fundText.text = "Maximum : ${bitCoinFormat.decimalToDoge(maxBalance).toPlainString()}"
+            println(payInMultiple)
             inputBalance.isEnabled = true
           }
 
@@ -253,7 +250,7 @@ class BotManualActivity : AppCompatActivity() {
   }
 
   private fun setDefaultView() {
-    setView("Fund DOGE", fundLinearLayout, isNew = true, isWin = false)
+    setView("Fund", fundLinearLayout, isNew = true, isWin = false)
     setView("Possibility", highLinearLayout, isNew = true, isWin = false)
     setView("Result", resultLinearLayout, isNew = true, isWin = false)
     setView("Status", statusLinearLayout, isNew = true, isWin = false)
@@ -292,15 +289,15 @@ class BotManualActivity : AppCompatActivity() {
   }
 
   private fun setListTargetMaximum() {
-    percentTable.add(0.2)
-    percentTable.add(0.3)
+    percentTable.add(0.1)
+    percentTable.add(0.25)
     percentTable.add(0.4)
-    percentTable.add(0.5)
+    percentTable.add(0.7)
     percentTable.add(1.0)
-    percentTable.add(2.0)
-    percentTable.add(3.0)
-    percentTable.add(4.0)
-    percentTable.add(5.0)
+    percentTable.add(1.6)
+    percentTable.add(2.4)
+    percentTable.add(4.1)
+    percentTable.add(9.0)
   }
 
   private fun onLogout() {
