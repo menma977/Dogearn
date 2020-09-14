@@ -1,29 +1,25 @@
-package net.dogearn.view.fragment
+package net.dogearn.view.fragmentOld
 
-import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import net.dogearn.R
 import net.dogearn.config.BitCoinFormat
 import net.dogearn.config.Loading
 import net.dogearn.model.User
-import net.dogearn.view.NavigationActivity
+import net.dogearn.view.NavigationOldActivity
 import net.dogearn.view.menu.*
 import net.dogearn.view.menu.bot.manual.BotManualActivity
+import net.dogearn.view.menuOld.ReceivedOldActivity
 import java.math.BigDecimal
 
-class HomeNoProgressBarFragment : Fragment() {
+class HomeOldFragment : Fragment() {
   private lateinit var loading: Loading
-  private lateinit var parentActivity: NavigationActivity
+  private lateinit var parentActivity: NavigationOldActivity
   private lateinit var user: User
   private lateinit var goTo: Intent
   private lateinit var bitCoinFormat: BitCoinFormat
@@ -51,7 +47,7 @@ class HomeNoProgressBarFragment : Fragment() {
   private var isOnQueue: Boolean = true
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    val root = inflater.inflate(R.layout.fragment_no_progress_bar_home, container, false)
+    val root = inflater.inflate(R.layout.fragment_home_old, container, false)
 
     imageDoge = root.findViewById(R.id.imageViewLogoDoge)
     dollar = root.findViewById(R.id.textViewDollar)
@@ -73,7 +69,7 @@ class HomeNoProgressBarFragment : Fragment() {
     manualBot = root.findViewById(R.id.linearLayoutManualStake)
     autoBot = root.findViewById(R.id.linearLayoutAutomaticStake)
 
-    parentActivity = activity as NavigationActivity
+    parentActivity = activity as NavigationOldActivity
 
     loading = Loading(parentActivity)
     user = User(parentActivity)
@@ -91,8 +87,8 @@ class HomeNoProgressBarFragment : Fragment() {
     }
 
     balance.text = user.getString("balanceText")
-    balanceRemaining.text = "${gradeProgressValue.toPlainString()} DOGE"
-    targetBalance.text = "${gradeValue.toPlainString()} DOGE"
+    balanceRemaining.text = gradeProgressValue.toPlainString()
+    targetBalance.text = gradeValue.toPlainString()
     pin.text = user.getInteger("pin").toString()
     grade.text = user.getString("gradeLevel")
     balanceValue = user.getString("balanceValue").toBigDecimal()
@@ -111,12 +107,12 @@ class HomeNoProgressBarFragment : Fragment() {
     }
 
     imageDoge.setOnClickListener {
-      goTo = Intent(parentActivity, ReceivedActivity::class.java)
+      goTo = Intent(parentActivity, ReceivedOldActivity::class.java)
       startActivity(goTo)
     }
 
     balance.setOnClickListener {
-      goTo = Intent(parentActivity, ReceivedActivity::class.java)
+      goTo = Intent(parentActivity, ReceivedOldActivity::class.java)
       startActivity(goTo)
     }
 
@@ -201,49 +197,6 @@ class HomeNoProgressBarFragment : Fragment() {
       upgradeAccount.visibility = LinearLayout.VISIBLE
       manualBot.visibility = ImageButton.VISIBLE
       autoBot.visibility = LinearLayout.VISIBLE
-    }
-  }
-
-  /** start Broadcast */
-  override fun onResume() {
-    LocalBroadcastManager.getInstance(parentActivity.applicationContext).registerReceiver(broadcastReceiverWeb, IntentFilter("net.dogearn.web"))
-    LocalBroadcastManager.getInstance(parentActivity.applicationContext).registerReceiver(broadcastReceiverDoge, IntentFilter("net.dogearn.doge"))
-    super.onResume()
-  }
-
-  /** stop Broadcast */
-  override fun onDestroy() {
-    LocalBroadcastManager.getInstance(parentActivity.applicationContext).unregisterReceiver(broadcastReceiverWeb)
-    LocalBroadcastManager.getInstance(parentActivity.applicationContext).unregisterReceiver(broadcastReceiverDoge)
-    super.onDestroy()
-  }
-
-  /** declaration broadcastReceiver */
-  private var broadcastReceiverWeb: BroadcastReceiver = object : BroadcastReceiver() {
-    @SuppressLint("SetTextI18n")
-    override fun onReceive(context: Context, intent: Intent) {
-      val pinText = user.getInteger("pin")
-      val gradeText = user.getString("gradeLevel")
-      pin.text = pinText.toString()
-      grade.text = gradeText
-      val gradeProgressValue = bitCoinFormat.decimalToDoge(BigDecimal(user.getString("progressGrade")))
-      val gradeValue = bitCoinFormat.decimalToDoge(BigDecimal(user.getString("gradeTarget")))
-
-      isOnQueue = user.getInteger("onQueue") > 0
-
-      balanceRemaining.text = "${gradeProgressValue.toPlainString()} DOGE"
-      targetBalance.text = "${gradeValue.toPlainString()} DOGE"
-
-      validateQueue()
-    }
-  }
-  private var broadcastReceiverDoge: BroadcastReceiver = object : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
-      balance.text = user.getString("balanceText")
-      balanceValue = intent.getSerializableExtra("balanceValue") as BigDecimal
-      dollarValue = user.getString("dollar").toBigDecimal()
-      val totalDollar = bitCoinFormat.decimalToDoge(balanceValue) * dollarValue
-      dollar.text = bitCoinFormat.toDollar(totalDollar).toPlainString()
     }
   }
 }

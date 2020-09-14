@@ -1,6 +1,7 @@
 package net.dogearn
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import net.dogearn.config.BitCoinFormat
@@ -9,6 +10,7 @@ import net.dogearn.model.Setting
 import net.dogearn.model.User
 import net.dogearn.view.LoginActivity
 import net.dogearn.view.NavigationActivity
+import net.dogearn.view.NavigationOldActivity
 import org.json.JSONObject
 import java.util.*
 import kotlin.concurrent.schedule
@@ -57,9 +59,19 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun isLogin() {
-    goTo = Intent(applicationContext, NavigationActivity::class.java)
-    startActivity(goTo)
-    finish()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      runOnUiThread {
+        goTo = Intent(applicationContext, NavigationActivity::class.java)
+        startActivity(goTo)
+        finish()
+      }
+    } else {
+      runOnUiThread {
+        goTo = Intent(applicationContext, NavigationOldActivity::class.java)
+        startActivity(goTo)
+        finish()
+      }
+    }
   }
 
   private fun isNotLogin() {
@@ -75,7 +87,7 @@ class MainActivity : AppCompatActivity() {
     setting.clear()
     goTo.putExtra("lock", true)
     goTo.putExtra("isUpdate", true)
-    goTo.putExtra("version", "New Version ${response.getJSONObject("data").getString("version")}")
+    goTo.putExtra("version", "New Version ${response.getJSONObject("data").getString("version")} this Version: ${BuildConfig.VERSION_CODE}")
     startActivity(goTo)
     finish()
   }

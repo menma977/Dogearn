@@ -16,15 +16,21 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
+    <activity
+        android:name=".view.menuOld.ReceivedOldActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+    </activity>
+    <activity
+        android:name=".view.NavigationOldActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+    </activity>
 
     <service android:name=".config.BackgroundGetDataUser"/>
     <service android:name=".config.BackgroundServiceBalance"/>
 
-
     <activity
         android:name=".view.menu.bot.manual.BotManualActivity"
         android:theme="@style/AppTheme.NoActionBar"/>
-
     <activity
         android:name=".view.menu.HistoryOutActivity"
         android:label="DOGEARN Outgo">

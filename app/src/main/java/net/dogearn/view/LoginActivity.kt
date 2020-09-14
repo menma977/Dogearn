@@ -153,11 +153,21 @@ class LoginActivity : AppCompatActivity() {
         response = DogeController(body).execute().get()
         if (response["code"] == 200) {
           user.setString("key", response.getJSONObject("data")["SessionCookie"].toString())
-          goTo = Intent(applicationContext, NavigationActivity::class.java)
-          runOnUiThread {
-            startActivity(goTo)
-            finishAffinity()
-            loading.closeDialog()
+
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            goTo = Intent(applicationContext, NavigationActivity::class.java)
+            runOnUiThread {
+              startActivity(goTo)
+              finishAffinity()
+              loading.closeDialog()
+            }
+          } else {
+            goTo = Intent(applicationContext, NavigationOldActivity::class.java)
+            runOnUiThread {
+              startActivity(goTo)
+              finishAffinity()
+              loading.closeDialog()
+            }
           }
         } else {
           runOnUiThread {

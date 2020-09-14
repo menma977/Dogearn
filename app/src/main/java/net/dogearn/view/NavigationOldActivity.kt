@@ -1,37 +1,30 @@
 package net.dogearn.view
 
 import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import net.dogearn.MainActivity
 import net.dogearn.R
-import net.dogearn.config.BackgroundGetDataUser
-import net.dogearn.config.BackgroundServiceBalance
 import net.dogearn.config.BitCoinFormat
 import net.dogearn.config.Loading
 import net.dogearn.controller.DogeController
 import net.dogearn.controller.WebController
 import net.dogearn.model.Setting
 import net.dogearn.model.User
-import net.dogearn.view.fragment.HomeFragment
-import net.dogearn.view.fragment.InfoFragment
-import net.dogearn.view.fragment.SettingFragment
+import net.dogearn.view.fragmentOld.HomeOldFragment
+import net.dogearn.view.fragmentOld.InfoOldFragment
+import net.dogearn.view.fragmentOld.SettingOldFragment
 import org.json.JSONObject
 import java.math.BigDecimal
 import java.util.*
 import kotlin.concurrent.schedule
-import kotlin.system.exitProcess
 
-class NavigationActivity : AppCompatActivity() {
+class NavigationOldActivity : AppCompatActivity() {
   private lateinit var user: User
   private lateinit var config: Setting
   private lateinit var loading: Loading
@@ -42,13 +35,11 @@ class NavigationActivity : AppCompatActivity() {
   private lateinit var dogeChain: ImageButton
   private lateinit var info: ImageButton
   private lateinit var setting: ImageButton
-  private lateinit var intentServiceGetDataUser: Intent
-  private lateinit var intentServiceBalance: Intent
   private lateinit var goTo: Intent
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_navigation)
+    setContentView(R.layout.activity_navigation_old)
 
     loading = Loading(this)
     user = User(this)
@@ -66,51 +57,11 @@ class NavigationActivity : AppCompatActivity() {
     getBalance()
   }
 
-  override fun onStart() {
-    super.onStart()
-    Timer().schedule(1000) {
-      intentServiceBalance = Intent(applicationContext, BackgroundServiceBalance::class.java)
-      startService(intentServiceBalance)
-
-      LocalBroadcastManager.getInstance(applicationContext).registerReceiver(broadcastReceiverDoge, IntentFilter("net.dogearn.doge"))
-
-      intentServiceGetDataUser = Intent(applicationContext, BackgroundGetDataUser::class.java)
-      startService(intentServiceGetDataUser)
-
-      LocalBroadcastManager.getInstance(applicationContext).registerReceiver(broadcastReceiverWebLogout, IntentFilter("net.dogearn.web.logout"))
-    }
-  }
-
-  override fun onStop() {
-    LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiverWebLogout)
-    LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiverDoge)
-    stopService(intentServiceBalance)
-    stopService(intentServiceGetDataUser)
-    super.onStop()
-  }
-
   override fun onBackPressed() {
     if (supportFragmentManager.backStackEntryCount == 1) {
-      stopService(intentServiceBalance)
-      stopService(intentServiceGetDataUser)
       finishAffinity()
     } else {
       super.onBackPressed()
-    }
-  }
-
-  private var broadcastReceiverWebLogout: BroadcastReceiver = object : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
-      if (intent.getBooleanExtra("isLogout", false)) {
-        onLogout()
-      }
-    }
-  }
-  private var broadcastReceiverDoge: BroadcastReceiver = object : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
-      balanceValue = intent.getSerializableExtra("balanceValue") as BigDecimal
-      user.setString("balanceValue", balanceValue.toPlainString())
-      user.setString("balanceText", "${BitCoinFormat().decimalToDoge(balanceValue).toPlainString()} DOGE")
     }
   }
 
@@ -129,11 +80,8 @@ class NavigationActivity : AppCompatActivity() {
         user.setString("balanceText", "${BitCoinFormat().decimalToDoge(balanceValue).toPlainString()} DOGE")
         getDataUser()
       } else {
-        user.setString("balanceValue", "0")
-        user.setString("balanceText", "ERROR 500")
         runOnUiThread {
-          loading.closeDialog()
-          exitProcess(1)
+          onLogout()
         }
       }
     }
@@ -166,7 +114,7 @@ class NavigationActivity : AppCompatActivity() {
         user.setInteger("lot", response.getJSONObject("data").getInt("lot"))
 
         runOnUiThread {
-          val fragment = HomeFragment()
+          val fragment = HomeOldFragment()
           addFragment(fragment)
           loading.closeDialog()
         }
@@ -208,12 +156,12 @@ class NavigationActivity : AppCompatActivity() {
 
   private fun setNavigation() {
     home.setOnClickListener {
-      val fragment = HomeFragment()
+      val fragment = HomeOldFragment()
       addFragment(fragment)
     }
 
     setting.setOnClickListener {
-      val fragment = SettingFragment()
+      val fragment = SettingOldFragment()
       addFragment(fragment)
     }
 
@@ -225,7 +173,7 @@ class NavigationActivity : AppCompatActivity() {
     }
 
     info.setOnClickListener {
-      val fragment = InfoFragment()
+      val fragment = InfoOldFragment()
       addFragment(fragment)
     }
   }
