@@ -97,10 +97,10 @@ class BotManualActivity : AppCompatActivity() {
       if (inputBalance.text.isEmpty()) {
         Toast.makeText(this, "Amount cant not be empty", Toast.LENGTH_SHORT).show()
       } else {
-        payIn = bitCoinFormat.dogeToDecimal(inputBalance.text.toString().toBigDecimal())
-        if (payIn > maxBalance) {
+        if (bitCoinFormat.dogeToDecimal(inputBalance.text.toString().toBigDecimal()) > maxBalance) {
           Toast.makeText(this, "Doge you can input should not be more than ${bitCoinFormat.decimalToDoge(maxBalance).toPlainString()}", Toast.LENGTH_LONG).show()
         } else {
+          payIn = bitCoinFormat.dogeToDecimal(inputBalance.text.toString().toBigDecimal())
           onBetting()
         }
       }
@@ -233,7 +233,6 @@ class BotManualActivity : AppCompatActivity() {
 
             maxBalance = bitCoinFormat.dogeToDecimal(bitCoinFormat.decimalToDoge(payIn.multiply(percent.toBigDecimal())).multiply(payInMultiple))
             fundText.text = "Maximum : ${bitCoinFormat.decimalToDoge(maxBalance).toPlainString()}"
-            println(payInMultiple)
             inputBalance.isEnabled = true
           }
 
