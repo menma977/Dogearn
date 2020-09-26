@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.SettingFragment"
+    android:orientation="vertical">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorPrimaryDark"
+      android:padding="10dp"
+      android:gravity="center">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/imageViewBack"
+        android:backgroundTint="@color/White"
+        android:background="@drawable/ic_baseline_arrow_back"
+        android:contentDescription="@string/icon"/>
+
+    <Space
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="@string/setting"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="19sp"
+        android:textColor="@color/textSecondary"/>
+
+  </LinearLayout>
+
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="10dp"/>
+
+  <ScrollView
+      android:background="@drawable/card_default_3"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginEnd="20dp"
+      android:padding="10dp"
+      android:elevation="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="300dp"
+        android:orientation="vertical">
+
+      <LinearLayout
+          android:id="@+id/linearLayoutEditPassword"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/edit_password_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutEditSecondaryPassword"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/edit_password_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutEditPhone"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/edit_phone_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
+      <LinearLayout
+          android:id="@+id/linearLayoutLogout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:text="@string/logout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textColor="@color/textColorCustom"
+            android:textAlignment="center"/>
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/Dark"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="50dp"/>
+
+    </LinearLayout>
+
+  </ScrollView>
+
+</LinearLayout>
