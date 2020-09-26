@@ -71,22 +71,31 @@ class SendBalanceActivity : AppCompatActivity(), ZXingScannerView.ResultHandler 
 
   private fun validatePassword() {
     loading.openDialog()
-    if (balanceText.text.isEmpty()) {
-      Toast.makeText(this, "balance cant not be empty", Toast.LENGTH_SHORT).show()
-      loading.closeDialog()
-    } else {
-      Timer().schedule(1000) {
-        val body = HashMap<String, String>()
-        body["secondaryPassword"] = secondaryPasswordText.text.toString()
-        response = WebController.Post("user.password.validator", user.getString("token"), body).execute().get()
-        if (response.getInt("code") == 200) {
-          runOnUiThread {
-            onSendDoge()
-          }
-        } else {
-          runOnUiThread {
-            Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_SHORT).show()
-            loading.closeDialog()
+    when {
+      balanceText.text.isEmpty() -> {
+        Toast.makeText(this, "balance cant not be empty", Toast.LENGTH_SHORT).show()
+        loading.closeDialog()
+      }
+      walletText.text.isEmpty() -> {
+        Toast.makeText(this, "Wallet cant not be empty", Toast.LENGTH_SHORT).show()
+        loading.closeDialog()
+      }
+      else -> {
+        Timer().schedule(1000) {
+          val body = HashMap<String, String>()
+          body["Amount"] = bitCoinFormat.dogeToDecimal(balanceText.text.toString().toBigDecimal()).toPlainString()
+          body["Address"] = walletText.text.toString()
+          body["secondaryPassword"] = secondaryPasswordText.text.toString()
+          response = WebController.Post("user.password.validator", user.getString("token"), body).execute().get()
+          if (response.getInt("code") == 200) {
+            runOnUiThread {
+              onSendDoge()
+            }
+          } else {
+            runOnUiThread {
+              Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_SHORT).show()
+              loading.closeDialog()
+            }
           }
         }
       }
@@ -99,7 +108,7 @@ class SendBalanceActivity : AppCompatActivity(), ZXingScannerView.ResultHandler 
       val body = HashMap<String, String>()
       body["a"] = "Withdraw"
       body["s"] = user.getString("key")
-      body["Amount"] =  bitCoinFormat.dogeToDecimal(doge).toPlainString()
+      body["Amount"] = bitCoinFormat.dogeToDecimal(doge).toPlainString()
       body["Address"] = walletText.text.toString()
       body["Totp"] = "0"
       body["Currency"] = "doge"
