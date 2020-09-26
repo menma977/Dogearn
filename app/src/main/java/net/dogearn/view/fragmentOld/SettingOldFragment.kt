@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -35,8 +34,6 @@ class SettingOldFragment : Fragment() {
   private lateinit var setting: Setting
   private lateinit var goTo: Intent
   private lateinit var imageBack: ImageView
-  private lateinit var phone: TextView
-  private lateinit var email: TextView
   private lateinit var logout: LinearLayout
   private lateinit var response: JSONObject
   private lateinit var editPassword: LinearLayout
@@ -44,7 +41,7 @@ class SettingOldFragment : Fragment() {
   private lateinit var editPhone: LinearLayout
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    val root = inflater.inflate(R.layout.fragment_setting, container, false)
+    val root = inflater.inflate(R.layout.fragment_setting_old, container, false)
 
     parentActivity = activity as NavigationOldActivity
 
@@ -53,15 +50,10 @@ class SettingOldFragment : Fragment() {
     setting = Setting(parentActivity)
 
     imageBack = root.findViewById(R.id.imageViewBack)
-    phone = root.findViewById(R.id.textViewPhone)
-    email = root.findViewById(R.id.textViewEmail)
     logout = root.findViewById(R.id.linearLayoutLogout)
     editPassword = root.findViewById(R.id.linearLayoutEditPassword)
     editSecondaryPassword = root.findViewById(R.id.linearLayoutEditSecondaryPassword)
     editPhone = root.findViewById(R.id.linearLayoutEditPhone)
-
-    phone.text = user.getString("phone")
-    email.text = user.getString("email")
 
     editPassword.setOnClickListener {
       goTo = Intent(parentActivity, EditPasswordActivity::class.java)
@@ -123,8 +115,7 @@ class SettingOldFragment : Fragment() {
   /** declaration broadcastReceiver */
   private var broadcastReceiverWeb: BroadcastReceiver = object : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-      phone.text = user.getString("phone")
-      email.text = user.getString("email")
+
     }
   }
 }
