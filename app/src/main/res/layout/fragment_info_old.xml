@@ -56,13 +56,6 @@
         android:minHeight="300dp"
         android:orientation="vertical">
 
-
-      <ImageView
-          android:src="@drawable/logo_ii_landscape_typo"
-          android:layout_width="match_parent"
-          android:layout_height="50dp"
-          android:contentDescription="@string/logo"/>
-
       <Space
           android:layout_width="match_parent"
           android:layout_height="10dp"/>
